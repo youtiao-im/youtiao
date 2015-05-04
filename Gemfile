@@ -43,3 +43,30 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'devise'
+gem 'doorkeeper'
+gem 'pundit'
+
+gem 'slim'
+gem 'draper'
+
+gem 'seed-fu'
+gem 'foreigner'
+gem 'enumerize'
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'shoulda-matchers'
+  gem 'colored'
+  gem 'awesome_print'
+end
+
+group :development do
+  gem 'guard-rspec'
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'annotate'
+  gem 'quiet_assets'
+end
