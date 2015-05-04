@@ -3,7 +3,7 @@ class CreateFeedbacks < ActiveRecord::Migration
     create_table :feedbacks do |t|
       t.belongs_to :post, null: false, index: true
       t.foreign_key :posts, dependent: :delete
-      t.string :status, null: false
+      t.string :response, null: false
       t.belongs_to :creator, null: false, index: true
       t.timestamps null: false
 
