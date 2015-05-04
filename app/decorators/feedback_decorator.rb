@@ -1,0 +1,2 @@
+class FeedbackDecorator < ApplicationDecorator
+end
