@@ -58,7 +58,7 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
     context 'for a channel user' do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_user).channel
+        channel = FactoryGirl.create(:channel_user, user: user).channel
         set_valid_token_for user
         get :show, id: channel.to_param
         expect(response).to have_http_status(:ok)
