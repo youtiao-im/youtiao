@@ -1,23 +1,21 @@
 class PostPolicy < ApplicationPolicy
   def index?
-    record.channel.is_channel_publisher?(user)
-  end
-
-  def show?
-    record.channel.is_channel_publisher?(user)
+    # TODO
+    true
   end
 
   def create?
-    record.channel.is_channel_publisher?(user)
+    record.channel.publishers.exists?(id: user.id)
   end
 
   def feedback?
-    record.channel.has_user?(user)
+    show?
   end
 
   class Scope < Scope
     def resolve
-      scope
+      # TODO:
+      scope.all
     end
   end
 end

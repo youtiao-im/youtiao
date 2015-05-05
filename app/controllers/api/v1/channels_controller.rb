@@ -3,67 +3,39 @@ module Api
     class ChannelsController < ApiController
       before_action :set_channel, except: [:index, :create]
 
-      decorates_assigned :channels,
-                         context: ->(controller) {
-                           { current_user: controller.current_resource_owner }
-                         }
-      decorates_assigned :channel,
-                         context: ->(controller) {
-                           { current_user: controller.current_resource_owner }
-                         }
+      decorates_assigned :channels
+      decorates_assigned :channel
 
       def index
         @channels = policy_scope(Channel)
       end
 
       def show
-        if @channel.nil?
-          render status: :not_found
-        else
-          begin
-            authorize @channel
-          rescue NotAuthorizedError
-            render status: :forbidden
-          end
-        end
+        authorize @channel
       end
 
       def create
-        begin
-          @channel = Channel.create(safe_create_params)
-          ChannelUser.create(channel: @channel, user: current_resource_owner, role: :admin)
-          render :show
-        rescue ActiveRecord::StatementInvalid
-          render status: :bad_request
-        rescue ActiveRecord::RecordNotUnique
-          render status: :conflict
-        end
-      end
-
-      def update
-
+        @channel = Channel.new(safe_create_params)
+        authorize @channel
+        @channel.save!
+        ChannelUser.create!(channel: @channel, user: current_resource_owner,
+          role: :admin)
+        render :show
       end
 
       def subscribe
-        if @channel.nil?
-          render status: :not_found
-        else
-          begin
-            ChannelUser.create(channel: @channel, user: current_resource_owner, role: :subscriber)
-          rescue ActiveRecord::RecordNotUnique
-            render status: :ok
-          end
+        begin
+          ChannelUser.create(channel: @channel, user: current_resource_owner,
+            role: :subscriber)
+        rescue ActiveRecord::RecordNotUnique
         end
+        render nothing: true
       end
 
-
       private
+
       def set_channel
-        begin
-          @channel = Channel.find(params[:id])
-        rescue ActiveRecord::RecordNotFound
-          @channel = nil
-        end
+        @channel = Channel.find(params[:id])
       end
 
       def safe_create_params
