@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :channels, only: [:index, :show, :create, :update] do
+      resources :channels, only: [:index, :show, :create], shallow: true do
         member do
           post 'subscribe'
         end
