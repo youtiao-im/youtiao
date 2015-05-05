@@ -8,6 +8,12 @@ Rails.application.routes.draw do
         member do
           post 'subscribe'
         end
+
+        resources :posts, only: [:index, :show, :create] do
+          member do
+            post 'feedback'
+          end
+        end
       end
     end
   end

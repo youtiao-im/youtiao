@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150504063408) do
 
   create_table "feedbacks", force: :cascade do |t|
     t.integer  "post_id",    null: false
-    t.string   "response",   null: false
+    t.string   "sticker",    null: false
     t.integer  "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

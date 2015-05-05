@@ -14,7 +14,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       it 'responds with :not_found' do
         set_valid_token
         get :index, channel_id: 0
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -53,7 +53,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
         set_invalid_token
-        get :show, id: 0
+        get :show, channel_id: 0, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     context 'for a non-existing post' do
       it 'responds with :not_found' do
         set_valid_token
-        get :show, id: 0
+        get :show, channel_id: 0, id: 0
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -71,7 +71,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
         channel = FactoryGirl.create(:channel)
         post = FactoryGirl.create(:post, channel: channel)
         set_valid_token
-        get :show, id: post.to_param
+        get :show, channel_id: channel.to_param, id: post.to_param
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -82,7 +82,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
         channel = FactoryGirl.create(:channel_user, user: user).channel
         post = FactoryGirl.create(:post, channel: channel, creator: user)
         set_valid_token_for user
-        get :show, id: post.to_param
+        get :show, channel_id: channel.to_param, id: post.to_param
         expect(response).to have_http_status(:ok)
       end
 
@@ -91,7 +91,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
         channel = FactoryGirl.create(:channel_user, user: user).channel
         post = FactoryGirl.create(:post, channel: channel, creator: user)
         set_valid_token_for user
-        get :show, id: post.to_param
+        get :show, channel_id: channel.to_param, id: post.to_param
         expect(controller.post).to be_decorated
         expect(controller.post).to eq(post)
       end
@@ -102,7 +102,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
         set_invalid_token
-        post :create, channel_id: 0
+        post :create, FactoryGirl.build(:post).attributes.merge(
+            channel_id: 0)
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -110,7 +111,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     context 'for a non-existing channel' do
       it 'responds with :not_found' do
         set_valid_token
-        post :create, channel_id: 0
+        post :create, FactoryGirl.build(:post).attributes.merge(
+            channel_id: 0)
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -119,7 +121,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       it 'responds with :forbidden' do
         channel = FactoryGirl.create(:channel)
         set_valid_token
-        post :create, channel_id: channel.to_param
+        post :create, FactoryGirl.build(:post).attributes.merge(
+            channel_id: channel.to_param)
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -127,9 +130,10 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     context 'for not a channel publisher' do
       it 'responds with :forbidden' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_subscriber, user: user).channel
         set_valid_token_for user
-        post :create, channel_id: channel.to_param
+        channel = FactoryGirl.create(:channel_subscriber, user: user).channel
+        post :create, FactoryGirl.build(:post).attributes.merge(
+            channel_id: channel.to_param)
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -181,7 +185,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
         set_invalid_token
-        post :feedback, id: 0
+        post :feedback, channel_id: 0, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -189,16 +193,18 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     context 'for a non-existing post' do
       it 'responds with :not_found' do
         set_valid_token
-        post :feedback, id: 0
-        expect(response).to have_http_status(:unauthorized)
+        post :feedback, channel_id: 0, id: 0
+        expect(response).to have_http_status(:not_found)
       end
     end
 
     context 'for not a channel user' do
-      it 'responds with :forbidden' do
-        post = FactoryGirl.create(:post)
-        set_valid_token
-        post :feedback, id: post.to_param
+      it 'responds with :forbidden' , :focus => true do
+        user = FactoryGirl.create(:user)
+        channel = FactoryGirl.create(:channel)
+        channel_post = FactoryGirl.create(:post, channel: channel)
+        set_valid_token_for user
+        post :feedback, channel_id: channel.to_param, id: channel_post.to_param
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -207,9 +213,9 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       it 'responds with :bad_request' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_user, user: user).channel
-        post = FactoryGirl.create(:post, channel: channel)
+        channel_post = FactoryGirl.create(:post, channel: channel)
         set_valid_token_for user
-        post :feedback, id: post.to_param, sticker: nil
+        post :feedback, channel_id: channel.to_param, id: channel_post.to_param, sticker: nil
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -218,31 +224,31 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_user, user: user).channel
-        post = FactoryGirl.create(:post, channel: channel)
-        feedback = FactoryGirl.create(:feedback, post: post, creator: user)
+        channel_post = FactoryGirl.create(:post, channel: channel)
+        feedback = FactoryGirl.create(:feedback, post: channel_post, creator: user)
         set_valid_token_for user
-        post :feedback, id: post.to_param, sticker: :check
+        post :feedback, channel_id: channel.to_param, id: channel_post.to_param, sticker: :check
         expect(response).to have_http_status(:ok)
       end
 
       it 'does not create any new feedback' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_user, user: user).channel
-        post = FactoryGirl.create(:post, channel: channel)
-        feedback = FactoryGirl.create(:feedback, post: post, creator: user)
+        channel_post = FactoryGirl.create(:post, channel: channel)
+        feedback = FactoryGirl.create(:feedback, post: channel_post, creator: user)
         set_valid_token_for user
         expect {
-          post :feedback, id: post.to_param, sticker: :check
+          post :feedback, channel_id: channel.to_param, id: channel_post.to_param, sticker: :check
         }.to_not change(Feedback, :count)
       end
 
       it 'updates the existing feedback with the new data' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_user, user: user).channel
-        post = FactoryGirl.create(:post, channel: channel)
-        feedback = FactoryGirl.create(:feedback, post: post, creator: user)
+        channel_post = FactoryGirl.create(:post, channel: channel)
+        feedback = FactoryGirl.create(:feedback, post: channel_post, creator: user)
         set_valid_token_for user
-        post :feedback, id: post.to_param, sticker: :cross
+        post :feedback, channel_id: channel.to_param, id: channel_post.to_param, sticker: :cross
         expect(feedback.reload.sticker).to eq(:cross)
       end
     end
@@ -251,19 +257,19 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_user, user: user).channel
-        post = FactoryGirl.create(:post, channel: channel)
+        channel_post = FactoryGirl.create(:post, channel: channel)
         set_valid_token_for user
-        post :feedback, id: post.to_param, sticker: :check
+        post :feedback, channel_id: channel.to_param, id: channel_post.to_param, sticker: :check
         expect(response).to have_http_status(:ok)
       end
 
       it 'creates a new feedback' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_user, user: user).channel
-        post = FactoryGirl.create(:post, channel: channel)
+        channel_post = FactoryGirl.create(:post, channel: channel)
         set_valid_token_for user
         expect {
-          post :feedback, id: post.to_param, sticker: :check
+          post :feedback, channel_id: channel.to_param, id: channel_post.to_param, sticker: :check
         }.to change(Feedback, :count).by(1)
       end
     end
