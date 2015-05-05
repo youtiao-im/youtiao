@@ -54,6 +54,9 @@ gem 'seed-fu'
 gem 'foreigner'
 gem 'enumerize'
 
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
