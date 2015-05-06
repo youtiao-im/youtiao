@@ -19,16 +19,15 @@ module Api
         @channel = Channel.new(safe_create_params)
         authorize @channel
         @channel.save!
-        ChannelUser.create!(channel: @channel, user: current_resource_owner,
-          role: :admin)
+        ChannelUser.create!(channel: @channel, user: current_resource_owner, role: :admin)
         render :show
       end
 
       def subscribe
         begin
-          ChannelUser.create(channel: @channel, user: current_resource_owner,
-            role: :subscriber)
+          ChannelUser.create(channel: @channel, user: current_resource_owner, role: :subscriber)
         rescue ActiveRecord::RecordNotUnique
+          # ignore
         end
         render nothing: true
       end

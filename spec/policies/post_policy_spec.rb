@@ -23,8 +23,9 @@ RSpec.describe PostPolicy, type: :policy do
 
   context 'for a channel subscriber' do
     let(:record) { FactoryGirl.create(:post) }
-    let(:user) {
-      FactoryGirl.create(:channel_subscriber, channel: record.channel).user }
+    let(:user) do
+      FactoryGirl.create(:channel_subscriber, channel: record.channel).user
+    end
 
     it { should authorize(:index) }
     it { should authorize(:show) }
@@ -34,8 +35,9 @@ RSpec.describe PostPolicy, type: :policy do
 
   context 'for a channel publisher' do
     let(:record) { FactoryGirl.create(:post) }
-    let(:user) {
-      FactoryGirl.create(:channel_publisher, channel: record.channel).user }
+    let(:user) do
+      FactoryGirl.create(:channel_publisher, channel: record.channel).user
+    end
 
     it { should authorize(:index) }
     it { should authorize(:show) }
@@ -45,8 +47,9 @@ RSpec.describe PostPolicy, type: :policy do
 
   context 'for a channel admin' do
     let(:record) { FactoryGirl.create(:post) }
-    let(:user) {
-      FactoryGirl.create(:channel_admin, channel: record.channel).user }
+    let(:user) do
+      FactoryGirl.create(:channel_admin, channel: record.channel).user
+    end
 
     it { should authorize(:index) }
     it { should authorize(:show) }

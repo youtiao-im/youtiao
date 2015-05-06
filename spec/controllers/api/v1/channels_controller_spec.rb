@@ -20,7 +20,7 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
       it 'decorates all channels user subscribed as #channels' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_user, user: user).channel
-        another_channel = FactoryGirl.create(:channel)
+        FactoryGirl.create(:channel)
         set_valid_token_for user
         get :index
         expect(controller.channels).to be_decorated
@@ -76,6 +76,9 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
   end
 
   describe 'POST #create' do
+    let(:valid_params) { FactoryGirl.build(:channel).attributes }
+    let(:invalid_params) { FactoryGirl.build(:invalid_channel).attributes }
+
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
         set_invalid_token
@@ -87,7 +90,7 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
     context 'with invalid parameters' do
       it 'responds with :bad_request' do
         set_valid_token
-        post :create, FactoryGirl.build(:invalid_channel).attributes
+        post :create, invalid_params
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -95,27 +98,27 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
     context 'with valid parameters' do
       it 'responds with :ok' do
         set_valid_token
-        post :create, FactoryGirl.build(:channel).attributes
+        post :create, valid_params
         expect(response).to have_http_status(:ok)
       end
 
       it 'creates a new channel' do
         set_valid_token
-        expect {
-          post :create, FactoryGirl.build(:channel).attributes
-        }.to change(Channel, :count).by(1)
+        expect do
+          post :create, valid_params
+        end.to change(Channel, :count).by(1)
       end
 
       it 'adds user to the new channel as an admin' do
         user = FactoryGirl.create(:user)
         set_valid_token_for user
-        post :create, FactoryGirl.build(:channel).attributes
+        post :create, valid_params
         expect(Channel.last.channel_user(user).admin?).to be_truthy
       end
 
       it 'decorates the new channel as #channel' do
         set_valid_token
-        post :create, FactoryGirl.build(:channel).attributes
+        post :create, valid_params
         expect(controller.channel).to be_decorated
         expect(controller.channel).to eq(Channel.last)
       end
@@ -152,9 +155,9 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_user, user: user).channel
         set_valid_token_for user
-        expect {
+        expect do
           post :subscribe, id: channel.to_param
-        }.to_not change(ChannelUser, :count)
+        end.to_not change(ChannelUser, :count)
       end
 
       it 'decorates the channel as #channel' do
@@ -178,18 +181,17 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
       it 'creates a new channel user' do
         channel = FactoryGirl.create(:channel)
         set_valid_token
-        expect {
+        expect do
           post :subscribe, id: channel.to_param
-        }.to change(ChannelUser, :count).by(1)
+        end.to change(ChannelUser, :count).by(1)
       end
 
-      # TODO:
       it 'adds user to the channel as a subscriber' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel)
         set_valid_token_for user
         post :subscribe, id: channel.to_param
-        expect(channel.users).to eq([user])
+        expect(channel.channel_user(user).subscriber?).to be_truthy
       end
 
       it 'decorates the channel as #channel' do

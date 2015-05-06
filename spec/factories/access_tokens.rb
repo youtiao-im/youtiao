@@ -6,8 +6,7 @@ FactoryGirl.define do
     token { Faker::Internet.password(16) }
   end
 
-  factory :expired_access_token, parent: :access_token,
-          class: Doorkeeper::AccessToken do
+  factory :expired_access_token, parent: :access_token, class: Doorkeeper::AccessToken do
     expires_in 0
   end
 end

@@ -34,8 +34,7 @@ module Api
         end
 
         begin
-          Feedback.create(post: @post, creator: current_resource_owner,
-            sticker: params[:sticker])
+          Feedback.create(post: @post, creator: current_resource_owner, sticker: params[:sticker])
         rescue ActiveRecord::RecordNotUnique
           feedback = Feedback.find_by(post: @post, creator: current_resource_owner)
           feedback.sticker = params[:sticker]
