@@ -72,7 +72,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    doorkeeper (2.2.0)
+    doorkeeper (2.2.1)
       railties (>= 3.2)
     draper (2.1.0)
       actionpack (>= 3.0)
@@ -124,7 +124,7 @@ GEM
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    loofah (2.0.1)
+    loofah (2.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
     mail (2.6.3)
@@ -280,6 +280,7 @@ DEPENDENCIES
   pundit
   quiet_assets
   rails (= 4.2.1)
+  request_store
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe PostPolicy, type: :policy do
   subject { PostPolicy.new(user, record) }
 
+  before do
+    user.current_channel = record.channel
+  end
+
   # permissions ".scope" do
   #   pending "add some examples to (or delete) #{__FILE__}"
   # end
@@ -19,7 +23,8 @@ RSpec.describe PostPolicy, type: :policy do
 
   context 'for a channel subscriber' do
     let(:record) { FactoryGirl.create(:post) }
-    let(:user) { FactoryGirl.create(:channel_subscriber, channel: record.channel).user }
+    let(:user) {
+      FactoryGirl.create(:channel_subscriber, channel: record.channel).user }
 
     it { should authorize(:index) }
     it { should authorize(:show) }
@@ -29,7 +34,8 @@ RSpec.describe PostPolicy, type: :policy do
 
   context 'for a channel publisher' do
     let(:record) { FactoryGirl.create(:post) }
-    let(:user) { FactoryGirl.create(:channel_publisher, channel: record.channel).user }
+    let(:user) {
+      FactoryGirl.create(:channel_publisher, channel: record.channel).user }
 
     it { should authorize(:index) }
     it { should authorize(:show) }
@@ -39,7 +45,8 @@ RSpec.describe PostPolicy, type: :policy do
 
   context 'for a channel admin' do
     let(:record) { FactoryGirl.create(:post) }
-    let(:user) { FactoryGirl.create(:channel_admin, channel: record.channel).user }
+    let(:user) {
+      FactoryGirl.create(:channel_admin, channel: record.channel).user }
 
     it { should authorize(:index) }
     it { should authorize(:show) }

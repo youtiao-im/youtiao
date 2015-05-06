@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
   has_many :channels, through: :channel_users
   has_many :posts, as: :creator
   has_many :feedbacks, as: :creator
+
+  attr_accessor :current_channel
 end

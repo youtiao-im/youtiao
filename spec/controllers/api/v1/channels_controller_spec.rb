@@ -58,7 +58,7 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
     context 'for a channel user' do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_user).channel
+        channel = FactoryGirl.create(:channel_user, user: user).channel
         set_valid_token_for user
         get :show, id: channel.to_param
         expect(response).to have_http_status(:ok)
@@ -106,11 +106,11 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
         }.to change(Channel, :count).by(1)
       end
 
-      it 'adds user to the new channel as an administrator' do
+      it 'adds user to the new channel as an admin' do
         user = FactoryGirl.create(:user)
         set_valid_token_for user
         post :create, FactoryGirl.build(:channel).attributes
-        expect(Channel.last.administrators).to match_array([user])
+        expect(Channel.last.channel_user(user).admin?).to be_truthy
       end
 
       it 'decorates the new channel as #channel' do
@@ -183,12 +183,13 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
         }.to change(ChannelUser, :count).by(1)
       end
 
+      # TODO:
       it 'adds user to the channel as a subscriber' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel)
         set_valid_token_for user
         post :subscribe, id: channel.to_param
-        expect(channel.subscribers).to eq([user])
+        expect(channel.users).to eq([user])
       end
 
       it 'decorates the channel as #channel' do
