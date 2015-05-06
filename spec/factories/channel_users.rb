@@ -4,7 +4,7 @@ FactoryGirl.define do
     user
   end
 
-    factory :channel_admin, parent: :channel_user, class: ChannelUser do
+  factory :channel_admin, parent: :channel_user, class: ChannelUser do
     role :admin
   end
 
