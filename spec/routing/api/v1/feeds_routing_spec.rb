@@ -8,8 +8,8 @@ RSpec.describe Api::V1::FeedsController, type: :routing do
     end
 
     it 'routes to #show' do
-      expect(get: '/api/v1/feeds/1').to route_to(
-        'api/v1/feeds#show', id: '1')
+      expect(get: '/api/v1/channels/1/feeds/1').to route_to(
+        'api/v1/feeds#show', channel_id: '1', id: '1')
     end
 
     it 'routes to #create' do
@@ -18,8 +18,8 @@ RSpec.describe Api::V1::FeedsController, type: :routing do
     end
 
     it 'routes to #feedback' do
-      expect(post: '/api/v1/feeds/1/feedback').to route_to(
-        'api/v1/feeds#feedback', id: '1')
+      expect(post: '/api/v1/channels/1/feeds/1/feedback').to route_to(
+        'api/v1/feeds#feedback', channel_id: '1', id: '1')
     end
   end
 end

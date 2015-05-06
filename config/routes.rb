@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :channels, only: [:index, :show, :create], shallow: true do
+      resources :channels, only: [:index, :show, :create] do
         member do
           post 'subscribe'
         end
