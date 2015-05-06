@@ -71,4 +71,5 @@ group :development do
   gem 'annotate'
   gem 'quiet_assets'
   gem 'rubocop'
+  gem 'codeclimate-test-reporter'
 end
