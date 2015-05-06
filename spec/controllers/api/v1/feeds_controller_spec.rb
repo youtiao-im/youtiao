@@ -53,7 +53,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
         set_invalid_token
-        get :show, id: 0
+        get :show, channel_id: 0, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
     context 'for a non-existing feed' do
       it 'responds with :not_found' do
         set_valid_token
-        get :show, id: 0
+        get :show, channel_id: 0, id: 0
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
       it 'responds with :forbidden' do
         feed = FactoryGirl.create(:feed)
         set_valid_token
-        get :show, id: feed.to_param
+        get :show, channel_id: feed.channel.to_param, id: feed.to_param
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -81,7 +81,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         feed = FactoryGirl.create(:feed)
         FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
         set_valid_token_for user
-        get :show, id: feed.to_param
+        get :show, channel_id: feed.channel.to_param, id: feed.to_param
         expect(response).to have_http_status(:ok)
       end
 
@@ -90,7 +90,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         feed = FactoryGirl.create(:feed)
         FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
         set_valid_token_for user
-        get :show, id: feed.to_param
+        get :show, channel_id: feed.channel.to_param, id: feed.to_param
         expect(controller.feed).to be_decorated
         expect(controller.feed).to eq(feed)
       end
@@ -179,7 +179,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
         set_invalid_token
-        post :feedback, id: 0
+        post :feedback, channel_id: 0, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -187,7 +187,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
     context 'for a non-existing post' do
       it 'responds with :not_found' do
         set_valid_token
-        post :feedback, id: 0
+        post :feedback, channel_id: 0, id: 0
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -196,7 +196,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
       it 'responds with :forbidden' do
         feed = FactoryGirl.create(:feed)
         set_valid_token
-        post :feedback, id: feed.to_param
+        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -207,7 +207,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         feed = FactoryGirl.create(:feed)
         FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
         set_valid_token_for user
-        post :feedback, id: feed.to_param, sticker: nil
+        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: nil
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -219,7 +219,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
         FactoryGirl.create(:feedback, feed: feed, creator: user)
         set_valid_token_for user
-        post :feedback, id: feed.to_param, sticker: :check
+        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :check
         expect(response).to have_http_status(:ok)
       end
 
@@ -230,7 +230,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         FactoryGirl.create(:feedback, feed: feed, creator: user)
         set_valid_token_for user
         expect do
-          post :feedback, id: feed.to_param, sticker: :check
+          post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :check
         end.to_not change(Feedback, :count)
       end
 
@@ -240,7 +240,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
         feedback = FactoryGirl.create(:feedback, feed: feed, creator: user)
         set_valid_token_for user
-        post :feedback, id: feed.to_param, sticker: :cross
+        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :cross
         expect(feedback.reload.sticker).to eq(:cross)
       end
     end
@@ -251,7 +251,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         feed = FactoryGirl.create(:feed)
         FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
         set_valid_token_for user
-        post :feedback, id: feed.to_param, sticker: :check
+        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :check
         expect(response).to have_http_status(:ok)
       end
 
@@ -261,7 +261,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
         set_valid_token_for user
         expect do
-          post :feedback, id: feed.to_param, sticker: :check
+          post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :check
         end.to change(Feedback, :count).by(1)
       end
     end
