@@ -1,11 +1,11 @@
 FactoryGirl.define do
-  factory :feed do
+  factory :post do
     channel
     content { Faker::Hacker.say_something_smart }
     association :creator, factory: :user
   end
 
-  factory :invalid_feed, parent: :feed, class: Feed do
+  factory :invalid_post, parent: :post, class: Post do
     content nil
   end
 end

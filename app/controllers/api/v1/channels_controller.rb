@@ -18,14 +18,12 @@ module Api
       def create
         @channel = Channel.new(safe_create_params)
         authorize @channel
-        # TODO: move to service
         @channel.save!
         ChannelUser.create!(channel: @channel, user: current_resource_owner, role: :admin)
         render :show
       end
 
       def subscribe
-        # TODO: this is ugly
         begin
           ChannelUser.create(channel: @channel, user: current_resource_owner, role: :subscriber)
         rescue ActiveRecord::RecordNotUnique

@@ -1,4 +1,4 @@
-class FeedPolicy < ApplicationPolicy
+class PostPolicy < ApplicationPolicy
   def index?
     !user.current_channel.channel_user(user).nil?
   end
@@ -14,7 +14,7 @@ class FeedPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      user.current_channel.feeds
+      user.current_channel.posts
     end
   end
 end

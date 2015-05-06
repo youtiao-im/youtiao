@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe FeedPolicy, type: :policy do
-  subject { FeedPolicy.new(user, record) }
+RSpec.describe PostPolicy, type: :policy do
+  subject { PostPolicy.new(user, record) }
 
   before do
     user.current_channel = record.channel
@@ -12,7 +12,7 @@ RSpec.describe FeedPolicy, type: :policy do
   # end
 
   context 'for not a channel user' do
-    let(:record) { FactoryGirl.create(:feed) }
+    let(:record) { FactoryGirl.create(:post) }
     let(:user) { FactoryGirl.create(:user) }
 
     it { should_not authorize(:index) }
@@ -22,8 +22,10 @@ RSpec.describe FeedPolicy, type: :policy do
   end
 
   context 'for a channel subscriber' do
-    let(:record) { FactoryGirl.create(:feed) }
-    let(:user) { FactoryGirl.create(:channel_subscriber, channel: record.channel).user }
+    let(:record) { FactoryGirl.create(:post) }
+    let(:user) do
+      FactoryGirl.create(:channel_subscriber, channel: record.channel).user
+    end
 
     it { should authorize(:index) }
     it { should authorize(:show) }
@@ -32,8 +34,10 @@ RSpec.describe FeedPolicy, type: :policy do
   end
 
   context 'for a channel publisher' do
-    let(:record) { FactoryGirl.create(:feed) }
-    let(:user) { FactoryGirl.create(:channel_publisher, channel: record.channel).user }
+    let(:record) { FactoryGirl.create(:post) }
+    let(:user) do
+      FactoryGirl.create(:channel_publisher, channel: record.channel).user
+    end
 
     it { should authorize(:index) }
     it { should authorize(:show) }
@@ -42,8 +46,10 @@ RSpec.describe FeedPolicy, type: :policy do
   end
 
   context 'for a channel admin' do
-    let(:record) { FactoryGirl.create(:feed) }
-    let(:user) { FactoryGirl.create(:channel_admin, channel: record.channel).user }
+    let(:record) { FactoryGirl.create(:post) }
+    let(:user) do
+      FactoryGirl.create(:channel_admin, channel: record.channel).user
+    end
 
     it { should authorize(:index) }
     it { should authorize(:show) }

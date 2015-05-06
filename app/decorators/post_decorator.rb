@@ -1,0 +1,2 @@
+class PostDecorator < ApplicationDecorator
+end

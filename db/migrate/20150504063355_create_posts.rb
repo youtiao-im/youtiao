@@ -1,6 +1,6 @@
-class CreateFeeds < ActiveRecord::Migration
+class CreatePosts < ActiveRecord::Migration
   def change
-    create_table :feeds do |t|
+    create_table :posts do |t|
       t.belongs_to :channel, null: false, index: true
       t.foreign_key :channels, dependent: :delete
       t.string :content, null: false

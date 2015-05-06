@@ -1,2 +1,0 @@
-class FeedDecorator < ApplicationDecorator
-end

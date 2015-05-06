@@ -9,7 +9,7 @@ Rails.application.routes.draw do
           post 'subscribe'
         end
 
-        resources :feeds, only: [:index, :show, :create] do
+        resources :posts, only: [:index, :show, :create] do
           member do
             post 'feedback'
           end
