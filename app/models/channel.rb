@@ -6,6 +6,6 @@ class Channel < ActiveRecord::Base
   validates :name, presence: true
 
   def channel_user(user)
-    channel_users.where(user_id: user.id).first
+    channel_users.find_by_user_id(user.id)
   end
 end
