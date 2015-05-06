@@ -110,7 +110,7 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
         user = FactoryGirl.create(:user)
         set_valid_token_for user
         post :create, FactoryGirl.build(:channel).attributes
-        expect(Channel.last.admins).to match_array([user])
+        expect(Channel.last.channel_user(user).admin?).to be_truthy
       end
 
       it 'decorates the new channel as #channel' do

@@ -1,11 +1,11 @@
 class PostPolicy < ApplicationPolicy
   def index?
-    # TODO
-    true
+    !user.current_channel.channel_user(user).nil?
   end
 
   def create?
-    record.channel.publishers.exists?(id: user.id)
+    channel_user = record.channel.channel_user(user)
+    channel_user.nil? ? false : channel_user.admin? || channel_user.publisher?
   end
 
   def feedback?
@@ -14,8 +14,7 @@ class PostPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      # TODO:
-      scope.all
+      user.current_channel.posts
     end
   end
 end

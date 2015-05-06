@@ -8,11 +8,11 @@ module Api
       decorates_assigned :post
 
       def index
+        authorize Post.new
         @posts = policy_scope(Post)
       end
 
       def show
-        @post = Post.find(params[:id])
         authorize @post
       end
 
@@ -49,10 +49,12 @@ module Api
 
       def set_channel
         @channel = Channel.find(params[:channel_id])
+        current_resource_owner.current_channel = @channel
       end
 
       def set_post
         @post = Post.find(params[:id])
+        current_resource_owner.current_channel = @post.channel
       end
 
       def safe_create_params

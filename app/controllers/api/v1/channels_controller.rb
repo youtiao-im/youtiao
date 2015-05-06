@@ -7,6 +7,7 @@ module Api
       decorates_assigned :channel
 
       def index
+        authorize Channel.new
         @channels = policy_scope(Channel)
       end
 
