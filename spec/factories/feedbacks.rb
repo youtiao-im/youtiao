@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :feedback do
-    post
+    feed
     sticker :check
     association :creator, factory: :user
   end

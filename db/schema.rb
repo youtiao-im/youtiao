@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20150504063408) do
   end
 
   create_table "feedbacks", force: :cascade do |t|
-    t.integer  "post_id",    null: false
+    t.integer  "feed_id",    null: false
     t.string   "sticker",    null: false
     t.integer  "creator_id", null: false
     t.datetime "created_at", null: false
@@ -40,8 +40,19 @@ ActiveRecord::Schema.define(version: 20150504063408) do
   end
 
   add_index "feedbacks", ["creator_id"], name: "index_feedbacks_on_creator_id"
-  add_index "feedbacks", ["post_id", "creator_id"], name: "index_feedbacks_on_post_id_and_creator_id", unique: true
-  add_index "feedbacks", ["post_id"], name: "index_feedbacks_on_post_id"
+  add_index "feedbacks", ["feed_id", "creator_id"], name: "index_feedbacks_on_feed_id_and_creator_id", unique: true
+  add_index "feedbacks", ["feed_id"], name: "index_feedbacks_on_feed_id"
+
+  create_table "feeds", force: :cascade do |t|
+    t.integer  "channel_id", null: false
+    t.string   "content",    null: false
+    t.integer  "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "feeds", ["channel_id"], name: "index_feeds_on_channel_id"
+  add_index "feeds", ["creator_id"], name: "index_feeds_on_creator_id"
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -82,17 +93,6 @@ ActiveRecord::Schema.define(version: 20150504063408) do
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
-
-  create_table "posts", force: :cascade do |t|
-    t.integer  "channel_id", null: false
-    t.string   "content",    null: false
-    t.integer  "creator_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "posts", ["channel_id"], name: "index_posts_on_channel_id"
-  add_index "posts", ["creator_id"], name: "index_posts_on_creator_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

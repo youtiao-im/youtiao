@@ -1,0 +1,2 @@
+class FeedDecorator < ApplicationDecorator
+end
