@@ -19,14 +19,22 @@ This method lists all feeds in a channel.
 
 ```json
 [{
-    "id": 1,
-    "content": "hello",
+  "id": 1,
+  "content": "hello",
+  "creator_id": "1",
+  "feedbacks": [{
+    "sticker": "cross",
     "creator_id": "1"
+  }]
 }, {
-    "id": 2,
-    "content": "world",
+  "id": 2,
+  "content": "world",
+  "creator_id": "1",
+  "feedbacks": [{
+    "sticker": "check",
     "creator_id": "1"
-}, ...]
+  }]
+}]
 ```
 
 

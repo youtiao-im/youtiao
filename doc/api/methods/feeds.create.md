@@ -20,9 +20,10 @@ This method creates a new feed in a channel.
 
 ```json
 {
-    "id": 1,
-    "content": "hello",
-    "creator_id": "1"
+  "id": 1,
+  "content": "hello",
+  "creator_id": "1",
+  "feedbacks": []
 }
 ```
 
