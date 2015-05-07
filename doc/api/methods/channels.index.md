@@ -18,6 +18,13 @@ This method lists all channels that are accessible to the user.
 ## Response
 
 ```json
+[{
+    "id": 1,
+    "name": "foo"
+}, {
+    "id": 2,
+    "name": "bar"
+}, ...]
 ```
 
 

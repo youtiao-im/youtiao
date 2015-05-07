@@ -18,6 +18,14 @@ This method creates a new channel.
 ## Response
 
 ```json
+{
+    "id": 1,
+    "name": "foo",
+    "users": [{
+        "id": 1,
+        "role": "admin"
+    }, ...]
+}
 ```
 
 

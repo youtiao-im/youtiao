@@ -19,6 +19,11 @@ This method creates a new feed in a channel.
 ## Response
 
 ```json
+{
+    "id": 1,
+    "content": "hello",
+    "creator_id": "1"
+}
 ```
 
 

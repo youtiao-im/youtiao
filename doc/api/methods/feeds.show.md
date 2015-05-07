@@ -19,6 +19,11 @@ This method gets information about a feed.
 ## Response
 
 ```json
+{
+    "id": 1,
+    "content": "hello",
+    "creator_id": "1"
+}
 ```
 
 
