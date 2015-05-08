@@ -5,6 +5,12 @@ RSpec.describe FeedDecorator, type: :decorator do
   let(:feed) { FactoryGirl.create(:feed) }
   let(:user) { FactoryGirl.create(:user) }
 
+  describe '#creator_id' do
+    it 'returns id of creator' do
+      expect(subject.creator_id).to eq(feed.creator.to_param)
+    end
+  end
+
   describe '#checked?' do
     context 'when user has not stamped the feed' do
       it 'returns false' do
@@ -74,21 +80,21 @@ RSpec.describe FeedDecorator, type: :decorator do
   describe '#checked_by_ids' do
     it 'returns ids of all users checked the feed' do
       FactoryGirl.create(:check_stamp, feed: feed, user: user)
-      expect(subject.checked_by_ids).to match_array([user.id])
+      expect(subject.checked_by_ids).to match_array([user.to_param])
     end
   end
 
   describe '#crossed_by_ids' do
     it 'returns ids of all users crossed the feed' do
       FactoryGirl.create(:cross_stamp, feed: feed, user: user)
-      expect(subject.crossed_by_ids).to match_array([user.id])
+      expect(subject.crossed_by_ids).to match_array([user.to_param])
     end
   end
 
   describe '#questioned_by_ids' do
     it 'returns ids of all users qustioned the feed' do
       FactoryGirl.create(:question_stamp, feed: feed, user: user)
-      expect(subject.questioned_by_ids).to match_array([user.id])
+      expect(subject.questioned_by_ids).to match_array([user.to_param])
     end
   end
 end

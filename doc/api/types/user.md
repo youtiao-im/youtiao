@@ -2,7 +2,7 @@
 
 ```json
 {
-    "id": 1,
+    "id": "NyKaRwDb",
     "email": "foo@bar.com"
 }
 ```

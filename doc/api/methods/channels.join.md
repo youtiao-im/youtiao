@@ -6,9 +6,9 @@
 
 ## Arguments
 
-| Argument | Example | Required | Description |
-| -------- | ------- | -------- | ----------- |
-| `id`     | `1`     | Required | Channel id  |
+| Argument | Example    | Required | Description |
+| -------- | ---------- | -------- | ----------- |
+| `id`     | `kGzZ3eQg` | Required | Channel id  |
 
 ## Response
 

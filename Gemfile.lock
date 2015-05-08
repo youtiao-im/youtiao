@@ -117,6 +117,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    hashids (1.0.2)
     hitimes (1.2.2)
     i18n (0.7.0)
     jbuilder (2.2.13)
@@ -305,6 +306,7 @@ DEPENDENCIES
   faker
   foreigner
   guard-rspec
+  hashids
   jbuilder (~> 2.0)
   jquery-rails
   kaminari

@@ -6,10 +6,10 @@
 
 ## Arguments
 
-| Argument     | Example | Required | Description |
-| ------------ | ------- | -------- | ----------- |
-| `channel_id` | `1`     | Required | Channel id  |
-| `id`         | `1`     | Required | Feed id     |
+| Argument     | Example    | Required | Description |
+| ------------ | ---------- | -------- | ----------- |
+| `channel_id` | `kGzZ3eQg` | Required | Channel id  |
+| `id`         | `A75gyQR2` | Required | Feed id     |
 
 ## Response
 

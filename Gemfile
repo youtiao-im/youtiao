@@ -53,6 +53,7 @@ gem 'oj'
 gem 'draper'
 gem 'kaminari'
 gem 'api-pagination'
+gem 'hashids'
 
 gem 'seed-fu'
 gem 'foreigner'
