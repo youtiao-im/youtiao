@@ -51,6 +51,8 @@ gem 'slim'
 gem 'rabl'
 gem 'oj'
 gem 'draper'
+gem 'kaminari'
+gem 'api-pagination'
 
 gem 'seed-fu'
 gem 'foreigner'

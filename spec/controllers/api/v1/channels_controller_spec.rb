@@ -20,11 +20,19 @@ RSpec.describe Api::V1::ChannelsController, type: :controller do
       it 'decorates all channels user joined as #channels' do
         user = FactoryGirl.create(:user)
         channel = FactoryGirl.create(:channel_member, user: user).channel
-        FactoryGirl.create(:channel)
         use_valid_token_for user
         get :index
         expect(controller.channels).to be_decorated
         expect(controller.channels).to match_array([channel])
+      end
+
+      it 'sets pagination headers' do
+        user = FactoryGirl.create(:user)
+        FactoryGirl.create(:channel_member, user: user)
+        use_valid_token_for user
+        get :index
+        expect(response.headers['Total']).to eq('1')
+        expect(response.headers['Per-Page']).to eq('25')
       end
     end
   end

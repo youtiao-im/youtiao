@@ -6,9 +6,10 @@
 
 ## Arguments
 
-| Argument | Example | Required | Description       |
-| -------- | ------- | -------- | ----------------- |
-| `page`   | `1`     | Optional | Paginate channels |
+| Argument   | Example | Required | Description                 |
+| ---------- | ------- | -------- | --------------------------- |
+| `per_page` | `25`    | Optional | Number of channels per page |
+| `page`     | `1`     | Optional | Page number                 |
 
 ## Response
 

@@ -12,7 +12,7 @@ module Api
 
       def index
         authorize Channel.new
-        @channels = policy_scope(Channel)
+        @channels = paginate(policy_scope(Channel))
       end
 
       def show

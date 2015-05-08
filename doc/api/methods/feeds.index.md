@@ -6,9 +6,11 @@
 
 ## Arguments
 
-| Argument     | Example | Required | Description |
-| ------------ | ------- | -------- | ----------- |
-| `channel_id` | `1`     | Required | Channel id  |
+| Argument     | Example | Required | Description              |
+| ------------ | ------- | -------- | ------------------------ |
+| `channel_id` | `1`     | Required | Channel id               |
+| `per_page`   | `25`    | Optional | Number of feeds per page |
+| `page`       | `1`     | Optional | Page number              |
 
 ## Response
 
@@ -18,5 +20,4 @@
 
 | Error | Description        |
 | ----- | ------------------ |
-| `400` | Invalid parameters |
 | `404` | No such channel    |
