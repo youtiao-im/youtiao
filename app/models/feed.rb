@@ -13,6 +13,11 @@
 class Feed < ActiveRecord::Base
   belongs_to :channel
   belongs_to :creator, class_name: 'User'
+  has_many :stamps
 
   validates :content, presence: true
+
+  def stamp(user)
+    stamps.find_by_user_id(user.id)
+  end
 end
