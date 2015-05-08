@@ -3,8 +3,12 @@ module Api
     class ChannelsController < ApiController
       before_action :set_channel, except: [:index, :create]
 
-      decorates_assigned :channels
-      decorates_assigned :channel
+      decorates_assigned :channels, context: ->(controller) do
+        { current_user: controller.current_resource_owner }
+      end
+      decorates_assigned :channel, context: ->(controller) do
+        { current_user: controller.current_resource_owner }
+      end
 
       def index
         authorize Channel.new
