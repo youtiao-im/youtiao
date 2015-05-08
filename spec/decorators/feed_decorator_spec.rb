@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe FeedDecorator, type: :decorator do
-  subject { feed.decorate(context: { current_user: user}) }
+  subject { feed.decorate(context: { current_user: user }) }
   let(:feed) { FactoryGirl.create(:feed) }
   let(:user) { FactoryGirl.create(:user) }
 

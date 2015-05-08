@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ChannelDecorator, type: :decorator do
-  subject { channel.decorate(context: { current_user: user}) }
+  subject { channel.decorate(context: { current_user: user }) }
   let(:channel) { FactoryGirl.create(:channel) }
   let(:user) { FactoryGirl.create(:user) }
 

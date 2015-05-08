@@ -1,10 +1,10 @@
 class ChannelDecorator < ApplicationDecorator
   def owner?
-    channel_user.nil? ? false: channel_user.owner?
+    channel_user.nil? ? false : channel_user.owner?
   end
 
   def admin?
-    channel_user.nil? ? false: channel_user.admin?
+    channel_user.nil? ? false : channel_user.admin?
   end
 
   def owner_ids
