@@ -1,42 +1,18 @@
 # feeds.index
 
-This method lists all feeds in a channel.
-
-
 ## URL
 
 `GET https://api.youtiao.im/v1/channels/:channel_id/feeds`
 
-
 ## Arguments
 
-| Argument     | Example | Required | Description         |
-| ------------ | ------- | -------- | ------------------- |
-| `channel_id` | `1`     | Required | Id of the channel   |
-
+| Argument     | Example | Required | Description |
+| ------------ | ------- | -------- | ----------- |
+| `channel_id` | `1`     | Required | Channel id  |
 
 ## Response
 
-```json
-[{
-  "id": 1,
-  "content": "hello",
-  "creator_id": "1",
-  "feedbacks": [{
-    "sticker": "cross",
-    "creator_id": "1"
-  }]
-}, {
-  "id": 2,
-  "content": "world",
-  "creator_id": "1",
-  "feedbacks": [{
-    "sticker": "check",
-    "creator_id": "1"
-  }]
-}]
-```
-
+[feed](../types/feed.md) array
 
 ## Errors
 

@@ -5,10 +5,10 @@ class FeedPolicy < ApplicationPolicy
 
   def create?
     channel_user = record.channel.channel_user(user)
-    channel_user.nil? ? false : channel_user.admin? || channel_user.publisher?
+    channel_user.nil? ? false : channel_user.admin_access?
   end
 
-  def feedback?
+  def stamp?
     show?
   end
 

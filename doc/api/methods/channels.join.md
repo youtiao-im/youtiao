@@ -1,12 +1,8 @@
-# channels.subscribe
-
-This method subscribes to a channel.
-
+# channels.join
 
 ## URL
 
-`POST https://api.youtiao.im/v1/channels/:id/subscribe`
-
+`POST https://api.youtiao.im/v1/channels/:id/join`
 
 ## Arguments
 
@@ -14,23 +10,9 @@ This method subscribes to a channel.
 | -------- | ------- | -------- | ----------- |
 | `id`     | `1`     | Required | Channel id  |
 
-
 ## Response
 
-```json
-{
-  "id": 1,
-  "name": "foo",
-  "users": [{
-    "id": 1,
-    "role": "admin"
-  }, {
-    "id": 2,
-    "role": "subscriber"
-  }]
-}
-```
-
+[channel](../types/channel.md)
 
 ## Errors
 
