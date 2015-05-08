@@ -1,6 +1,10 @@
 class ApplicationDecorator < Draper::Decorator
   delegate_all
 
+  def id
+    object.class.encrypt_id(object.id)
+  end
+
   def created_at
     object.created_at.try(:to_i)
   end

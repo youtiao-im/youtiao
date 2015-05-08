@@ -5,6 +5,12 @@ RSpec.describe ChannelDecorator, type: :decorator do
   let(:channel) { FactoryGirl.create(:channel) }
   let(:user) { FactoryGirl.create(:user) }
 
+  describe '#creator_id' do
+    it 'returns id of creator' do
+      expect(subject.creator_id).to eq(channel.creator.to_param)
+    end
+  end
+
   describe '#owner?' do
     context 'when user has not joined the channel' do
       it 'returns false' do
@@ -52,21 +58,21 @@ RSpec.describe ChannelDecorator, type: :decorator do
   describe '#owner_ids' do
     it 'returns ids of all owners of the channel' do
       FactoryGirl.create(:channel_owner, channel: channel, user: user)
-      expect(subject.owner_ids).to match_array([user.id])
+      expect(subject.owner_ids).to match_array([user.to_param])
     end
   end
 
   describe '#admin_ids' do
     it 'returns ids of all admins of the channel' do
       FactoryGirl.create(:channel_admin, channel: channel, user: user)
-      expect(subject.admin_ids).to match_array([user.id])
+      expect(subject.admin_ids).to match_array([user.to_param])
     end
   end
 
   describe '#member_ids' do
     it 'returns ids of all members of the channel' do
       FactoryGirl.create(:channel_member, channel: channel, user: user)
-      expect(subject.member_ids).to match_array([user.id])
+      expect(subject.member_ids).to match_array([user.to_param])
     end
   end
 end

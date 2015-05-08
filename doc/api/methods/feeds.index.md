@@ -6,11 +6,11 @@
 
 ## Arguments
 
-| Argument     | Example | Required | Description              |
-| ------------ | ------- | -------- | ------------------------ |
-| `channel_id` | `1`     | Required | Channel id               |
-| `per_page`   | `25`    | Optional | Number of feeds per page |
-| `page`       | `1`     | Optional | Page number              |
+| Argument     | Example    | Required | Description              |
+| ------------ | ---------- | -------- | ------------------------ |
+| `channel_id` | `kGzZ3eQg` | Required | Channel id               |
+| `per_page`   | `25`       | Optional | Number of feeds per page |
+| `page`       | `1`        | Optional | Page number              |
 
 ## Response
 
