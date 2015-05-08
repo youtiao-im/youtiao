@@ -45,6 +45,16 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
         expect(controller.feeds).to be_decorated
         expect(controller.feeds).to match_array([feed])
       end
+
+      it 'sets pagination headers' do
+        user = FactoryGirl.create(:user)
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
+        get :index, channel_id: channel.to_param
+        expect(response.headers['Total']).to eq('1')
+        expect(response.headers['Per-Page']).to eq('25')
+      end
     end
   end
 

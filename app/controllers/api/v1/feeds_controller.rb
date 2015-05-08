@@ -13,7 +13,7 @@ module Api
 
       def index
         authorize Feed.new
-        @feeds = policy_scope(Feed)
+        @feeds = paginate(policy_scope(Feed))
       end
 
       def show
