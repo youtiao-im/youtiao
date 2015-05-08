@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504063408) do
+ActiveRecord::Schema.define(version: 20150508074828) do
 
   create_table "channel_users", force: :cascade do |t|
     t.integer  "channel_id", null: false
@@ -26,27 +26,18 @@ ActiveRecord::Schema.define(version: 20150504063408) do
   add_index "channel_users", ["user_id"], name: "index_channel_users_on_user_id"
 
   create_table "channels", force: :cascade do |t|
+    t.integer  "creator_id", null: false
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "feedbacks", force: :cascade do |t|
-    t.integer  "feed_id",    null: false
-    t.string   "sticker",    null: false
-    t.integer  "creator_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "feedbacks", ["creator_id"], name: "index_feedbacks_on_creator_id"
-  add_index "feedbacks", ["feed_id", "creator_id"], name: "index_feedbacks_on_feed_id_and_creator_id", unique: true
-  add_index "feedbacks", ["feed_id"], name: "index_feedbacks_on_feed_id"
+  add_index "channels", ["creator_id"], name: "index_channels_on_creator_id"
 
   create_table "feeds", force: :cascade do |t|
     t.integer  "channel_id", null: false
-    t.string   "content",    null: false
     t.integer  "creator_id", null: false
+    t.string   "content",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -93,6 +84,18 @@ ActiveRecord::Schema.define(version: 20150504063408) do
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
+
+  create_table "stamps", force: :cascade do |t|
+    t.integer  "feed_id",    null: false
+    t.integer  "user_id",    null: false
+    t.string   "kind",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stamps", ["feed_id", "user_id"], name: "index_stamps_on_feed_id_and_user_id", unique: true
+  add_index "stamps", ["feed_id"], name: "index_stamps_on_feed_id"
+  add_index "stamps", ["user_id"], name: "index_stamps_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

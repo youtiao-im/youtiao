@@ -4,7 +4,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
   describe 'GET #index' do
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
-        set_invalid_token
+        use_invalid_token
         get :index, channel_id: 0
         expect(response).to have_http_status(:unauthorized)
       end
@@ -12,36 +12,35 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
 
     context 'for a non-existing channel' do
       it 'responds with :not_found' do
-        set_valid_token
+        use_valid_token
         get :index, channel_id: 0
         expect(response).to have_http_status(:not_found)
       end
     end
 
-    context 'for not a channel user' do
+    context 'for a channel user not joined' do
       it 'responds with :forbidden' do
         channel = FactoryGirl.create(:channel)
-        set_valid_token
+        use_valid_token
         get :index, channel_id: channel.to_param
         expect(response).to have_http_status(:forbidden)
       end
     end
 
-    context 'for a channel user' do
+    context 'for a channel user joined' do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_user, user: user).channel
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        use_valid_token_for user
         get :index, channel_id: channel.to_param
         expect(response).to have_http_status(:ok)
       end
 
       it 'decorates all feeds of the channel as #feeds' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_user, user: user).channel
-        feed = FactoryGirl.create(:feed, channel: channel, creator: user)
-        FactoryGirl.create(:feed)
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        feed = FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
         get :index, channel_id: channel.to_param
         expect(controller.feeds).to be_decorated
         expect(controller.feeds).to match_array([feed])
@@ -52,7 +51,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
   describe 'GET #show' do
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
-        set_invalid_token
+        use_invalid_token
         get :show, channel_id: 0, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
@@ -60,36 +59,36 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
 
     context 'for a non-existing feed' do
       it 'responds with :not_found' do
-        set_valid_token
+        use_valid_token
         get :show, channel_id: 0, id: 0
         expect(response).to have_http_status(:not_found)
       end
     end
 
-    context 'for not a channel user' do
+    context 'for a feed from a channel user not joined' do
       it 'responds with :forbidden' do
         feed = FactoryGirl.create(:feed)
-        set_valid_token
+        use_valid_token
         get :show, channel_id: feed.channel.to_param, id: feed.to_param
         expect(response).to have_http_status(:forbidden)
       end
     end
 
-    context 'for a channel user' do
+    context 'for a feed from a channel user joined' do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
-        feed = FactoryGirl.create(:feed)
-        FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        feed = FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
         get :show, channel_id: feed.channel.to_param, id: feed.to_param
         expect(response).to have_http_status(:ok)
       end
 
       it 'decorates the feed as #feed' do
         user = FactoryGirl.create(:user)
-        feed = FactoryGirl.create(:feed)
-        FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        feed = FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
         get :show, channel_id: feed.channel.to_param, id: feed.to_param
         expect(controller.feed).to be_decorated
         expect(controller.feed).to eq(feed)
@@ -103,7 +102,7 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
 
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
-        set_invalid_token
+        use_invalid_token
         post :create, channel_id: 0
         expect(response).to have_http_status(:unauthorized)
       end
@@ -111,26 +110,26 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
 
     context 'for a non-existing channel' do
       it 'responds with :not_found' do
-        set_valid_token
+        use_valid_token
         post :create, channel_id: 0
         expect(response).to have_http_status(:not_found)
       end
     end
 
-    context 'for not a channel user' do
+    context 'for a channel user not joined' do
       it 'responds with :forbidden' do
         channel = FactoryGirl.create(:channel)
-        set_valid_token
+        use_valid_token
         post :create, channel_id: channel.to_param
         expect(response).to have_http_status(:forbidden)
       end
     end
 
-    context 'for not a channel publisher' do
+    context 'for a channel user is not an admin' do
       it 'responds with :forbidden' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_subscriber, user: user).channel
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        use_valid_token_for user
         post :create, channel_id: channel.to_param
         expect(response).to have_http_status(:forbidden)
       end
@@ -139,8 +138,8 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
     context 'with invalid parameters' do
       it 'responds with :bad_request' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_publisher, user: user).channel
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_admin, user: user).channel
+        use_valid_token_for user
         post :create, invalid_params.merge(channel_id: channel.to_param)
         expect(response).to have_http_status(:bad_request)
       end
@@ -149,16 +148,16 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
     context 'with valid parameters' do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_publisher, user: user).channel
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_admin, user: user).channel
+        use_valid_token_for user
         post :create, valid_params.merge(channel_id: channel.to_param)
         expect(response).to have_http_status(:ok)
       end
 
       it 'creates a new feed' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_publisher, user: user).channel
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_admin, user: user).channel
+        use_valid_token_for user
         expect do
           post :create, valid_params.merge(channel_id: channel.to_param)
         end.to change(Feed, :count).by(1)
@@ -166,8 +165,8 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
 
       it 'decorates the new feed as #feed' do
         user = FactoryGirl.create(:user)
-        channel = FactoryGirl.create(:channel_publisher, user: user).channel
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_admin, user: user).channel
+        use_valid_token_for user
         post :create, valid_params.merge(channel_id: channel.to_param)
         expect(controller.feed).to be_decorated
         expect(controller.feed).to eq(Feed.last)
@@ -175,94 +174,83 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
     end
   end
 
-  describe 'POST #feedback' do
+  describe 'POST #stamp' do
     context 'when access token is invalid' do
       it 'responds with :unauthorized' do
-        set_invalid_token
-        post :feedback, channel_id: 0, id: 0
+        use_invalid_token
+        post :stamp, channel_id: 0, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
 
     context 'for a non-existing post' do
       it 'responds with :not_found' do
-        set_valid_token
-        post :feedback, channel_id: 0, id: 0
+        use_valid_token
+        post :stamp, channel_id: 0, id: 0
         expect(response).to have_http_status(:not_found)
       end
     end
 
-    context 'for not a channel user' do
+    context 'for a feed from a channel user not joined' do
       it 'responds with :forbidden' do
         feed = FactoryGirl.create(:feed)
-        set_valid_token
-        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param
+        use_valid_token
+        post :stamp, channel_id: feed.channel.to_param, id: feed.to_param
         expect(response).to have_http_status(:forbidden)
       end
     end
 
-    context 'with empty :sticker parameter' do
-      it 'responds with :bad_request' do
-        user = FactoryGirl.create(:user)
-        feed = FactoryGirl.create(:feed)
-        FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
-        set_valid_token_for user
-        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: nil
-        expect(response).to have_http_status(:bad_request)
-      end
-    end
-
-    context 'when feedback already exists' do
+    context 'when user stamps the first time' do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
-        feed = FactoryGirl.create(:feed)
-        FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
-        FactoryGirl.create(:feedback, feed: feed, creator: user)
-        set_valid_token_for user
-        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :check
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        feed = FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
+        post :stamp, channel_id: feed.channel.to_param, id: feed.to_param, kind: :cross
         expect(response).to have_http_status(:ok)
       end
 
-      it 'does not create any new feedback' do
+      it 'creates a new stamp' do
         user = FactoryGirl.create(:user)
-        feed = FactoryGirl.create(:feed)
-        FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
-        FactoryGirl.create(:feedback, feed: feed, creator: user)
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        feed = FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
         expect do
-          post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :check
-        end.to_not change(Feedback, :count)
-      end
-
-      it 'updates the existing feedback with the new data' do
-        user = FactoryGirl.create(:user)
-        feed = FactoryGirl.create(:feed)
-        FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
-        feedback = FactoryGirl.create(:feedback, feed: feed, creator: user)
-        set_valid_token_for user
-        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :cross
-        expect(feedback.reload.sticker).to eq(:cross)
+          post :stamp, channel_id: feed.channel.to_param, id: feed.to_param, kind: :cross
+        end.to change(Stamp, :count).by(1)
       end
     end
 
-    context 'when feedback doest not exist' do
+    context 'when user stamps again' do
       it 'responds with :ok' do
         user = FactoryGirl.create(:user)
-        feed = FactoryGirl.create(:feed)
-        FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
-        set_valid_token_for user
-        post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :check
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        feed = FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
+        post :stamp, channel_id: feed.channel.to_param, id: feed.to_param, kind: :check
+        post :stamp, channel_id: feed.channel.to_param, id: feed.to_param, kind: :cross
         expect(response).to have_http_status(:ok)
       end
 
-      it 'creates a new feedback' do
+      it 'does not create any new stamp' do
         user = FactoryGirl.create(:user)
-        feed = FactoryGirl.create(:feed)
-        FactoryGirl.create(:channel_user, channel: feed.channel, user: user)
-        set_valid_token_for user
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        feed = FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
+        post :stamp, channel_id: feed.channel.to_param, id: feed.to_param, kind: :check
         expect do
-          post :feedback, channel_id: feed.channel.to_param, id: feed.to_param, sticker: :check
-        end.to change(Feedback, :count).by(1)
+          post :stamp, channel_id: feed.channel.to_param, id: feed.to_param, kind: :cross
+        end.to_not change(Stamp, :count)
+      end
+
+      it 'updates the existing stamp with the new data' do
+        user = FactoryGirl.create(:user)
+        channel = FactoryGirl.create(:channel_member, user: user).channel
+        feed = FactoryGirl.create(:feed, channel: channel)
+        use_valid_token_for user
+        post :stamp, channel_id: feed.channel.to_param, id: feed.to_param, kind: :check
+        post :stamp, channel_id: feed.channel.to_param, id: feed.to_param, kind: :cross
+        expect(Stamp.last.kind).to eq(:cross)
       end
     end
   end

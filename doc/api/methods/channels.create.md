@@ -1,33 +1,18 @@
 # channels.create
 
-This method creates a new channel.
-
-
 ## URL
 
 `POST https://api.youtiao.im/v1/channels`
 
-
 ## Arguments
 
-| Argument | Example | Required | Description         |
-| -------- | ------- | -------- | ------------------- |
-| `name`   | `foo`   | Required | Name of the channel |
-
+| Argument | Example | Required | Description  |
+| -------- | ------- | -------- | ------------ |
+| `name`   | `foo`   | Required | Channel name |
 
 ## Response
 
-```json
-{
-  "id": 1,
-  "name": "foo",
-  "users": [{
-    "id": 1,
-    "role": "admin"
-  }]
-}
-```
-
+[channel](../types/channel.md)
 
 ## Errors
 

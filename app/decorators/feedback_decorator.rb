@@ -1,2 +1,0 @@
-class FeedbackDecorator < ApplicationDecorator
-end

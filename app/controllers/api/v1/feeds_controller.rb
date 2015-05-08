@@ -25,21 +25,21 @@ module Api
         render :show
       end
 
-      def feedback
+      def stamp
         authorize @feed
 
         # TODO: simplify me
-        if params[:sticker].nil?
+        if params[:kind].nil?
           render status: :bad_request, nothing: true
           return
         end
 
         begin
-          Feedback.create(feed: @feed, creator: current_resource_owner, sticker: params[:sticker])
+          Stamp.create(feed: @feed, user: current_resource_owner, kind: params[:kind])
         rescue ActiveRecord::RecordNotUnique
-          feedback = Feedback.find_by(feed: @feed, creator: current_resource_owner)
-          feedback.sticker = params[:sticker]
-          feedback.save
+          stamp = Stamp.find_by(feed: @feed, user: current_resource_owner)
+          stamp.kind = params[:kind]
+          stamp.save
         end
 
         render nothing: true

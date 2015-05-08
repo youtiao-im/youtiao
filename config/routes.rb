@@ -6,12 +6,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :channels, only: [:index, :show, :create] do
         member do
-          post 'subscribe'
+          post 'join'
         end
 
         resources :feeds, only: [:index, :show, :create] do
           member do
-            post 'feedback'
+            post 'stamp'
           end
         end
       end

@@ -7,23 +7,23 @@ RSpec.describe ChannelPolicy, type: :policy do
   #   pending "add some examples to (or delete) #{__FILE__}"
   # end
 
-  context 'for not a channel user' do
+  context 'for a user not in the channel' do
     let(:record) { FactoryGirl.create(:channel) }
     let(:user) { FactoryGirl.create(:user) }
 
     it { should authorize(:index) }
     it { should_not authorize(:show) }
     it { should authorize(:create) }
-    it { should authorize(:subscribe) }
+    it { should authorize(:join) }
   end
 
-  context 'for a channel user' do
+  context 'for a channel member' do
     let(:record) { FactoryGirl.create(:channel) }
-    let(:user) { FactoryGirl.create(:channel_user, channel: record).user }
+    let(:user) { FactoryGirl.create(:channel_member, channel: record).user }
 
     it { should authorize(:index) }
     it { should authorize(:show) }
     it { should authorize(:create) }
-    it { should authorize(:subscribe) }
+    it { should authorize(:join) }
   end
 end

@@ -17,17 +17,18 @@ module Api
 
       def create
         @channel = Channel.new(safe_create_params)
+        @channel.creator = current_resource_owner
         authorize @channel
         # TODO: move to service
         @channel.save!
-        ChannelUser.create!(channel: @channel, user: current_resource_owner, role: :admin)
+        ChannelUser.create!(channel: @channel, user: current_resource_owner, role: :owner)
         render :show
       end
 
-      def subscribe
+      def join
         # TODO: this is ugly
         begin
-          ChannelUser.create(channel: @channel, user: current_resource_owner, role: :subscriber)
+          ChannelUser.create(channel: @channel, user: current_resource_owner, role: :member)
         rescue ActiveRecord::RecordNotUnique
           # ignore
         end

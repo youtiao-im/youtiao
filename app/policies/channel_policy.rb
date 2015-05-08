@@ -7,7 +7,7 @@ class ChannelPolicy < ApplicationPolicy
     true
   end
 
-  def subscribe?
+  def join?
     true
   end
 

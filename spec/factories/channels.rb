@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :channel do
+    association :creator, factory: :user
     name { Faker::Lorem.word }
   end
 

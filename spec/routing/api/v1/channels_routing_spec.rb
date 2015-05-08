@@ -17,9 +17,9 @@ RSpec.describe Api::V1::ChannelsController, type: :routing do
         'api/v1/channels#create')
     end
 
-    it 'routes to #subscribe' do
-      expect(post: '/api/v1/channels/1/subscribe').to route_to(
-        'api/v1/channels#subscribe', id: '1')
+    it 'routes to #join' do
+      expect(post: '/api/v1/channels/1/join').to route_to(
+        'api/v1/channels#join', id: '1')
     end
   end
 end

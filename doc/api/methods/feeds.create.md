@@ -1,32 +1,19 @@
 # feeds.create
 
-This method creates a new feed in a channel.
-
-
 ## URL
 
 `POST https://api.youtiao.im/v1/channels/:channel_id/feeds`
 
-
 ## Arguments
 
-| Argument     | Example | Required | Description         |
-| ------------ | ------- | -------- | ------------------- |
-| `channel_id` | `1`     | Required | Id of the channel   |
-| `content`    | `hello` | Required | Content of the feed |
-
+| Argument     | Example | Required | Description  |
+| ------------ | ------- | -------- | ------------ |
+| `channel_id` | `1`     | Required | Channel id   |
+| `content`    | `hello` | Required | Feed content |
 
 ## Response
 
-```json
-{
-  "id": 1,
-  "content": "hello",
-  "creator_id": "1",
-  "feedbacks": []
-}
-```
-
+[feed](../types/feed.md)
 
 ## Errors
 

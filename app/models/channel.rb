@@ -1,4 +1,5 @@
 class Channel < ActiveRecord::Base
+  belongs_to :creator, class_name: 'User'
   has_many :channel_users
   has_many :users, through: :channel_users
   has_many :feeds
