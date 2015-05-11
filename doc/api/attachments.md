@@ -1,8 +1,8 @@
 # Attachments
 
-## Attachment structure
+*MAY CHANGE LATER, USE WITH CAUTION NOW*
 
-*MAY CHANGE LATER*
+## Attachment structure
 
 Feeds can have zero or more attachments, defined as an array. Each hash in that array will contain multiple properties:
 
