@@ -16,8 +16,11 @@ Rails.application.routes.draw do
         end
       end
 
-      get 'uploads/qiniu/uptoken' => 'uploads#qiniu_uptoken'
-      post 'uploads/qiniu' => 'uploads#qiniu_commit'
+      resources :uploads, only: [:create] do
+        collection do
+          post 'commit'
+        end
+      end
     end
   end
 
