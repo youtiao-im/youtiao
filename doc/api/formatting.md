@@ -1,10 +1,10 @@
 # Formatting
 
-All text in Youtiao uses the same system of escaping: feed texts, feed comments, chat messages, etc.
+All messages in Youtiao use the same system of escaping: feed messages, feed comments, chat messages, etc.
 
 ## Escaping
 
-Texts can contain any displayable Unicode sequence of characters (all texts must use UTF-8 encoding), but need to be slightly escaped by clients. Before sending texts to the server, clients should make the following transforms:
+Texts can contain any displayable Unicode sequence of characters (all messages must use UTF-8 encoding), but need to be slightly escaped by clients. Before sending messages to the server, clients should make the following transforms:
 
 | Character | Escaped |
 | --------- | ------- |
@@ -12,19 +12,19 @@ Texts can contain any displayable Unicode sequence of characters (all texts must
 | `<`       | `&lt;`  |
 | `>`       | `&gt;`  |
 
-For example, if user types `Hello & <world>`, the text sent to server should be `Hello &amp; &lt;world&gt;`.
+For example, if user types `Hello & <world>`, the message sent to server should be `Hello &amp; &lt;world&gt;`.
 
-This is done so that texts can contain special escaped sequences, such as [URL links](#urls), [user or channel mentions](#mentions), [attachment references](#attachments), etc.
+This is done so that messages can contain special escaped sequences, such as [URL links](#urls), [user or channel mentions](#mentions), [attachment references](#attachments), etc.
 
 ## URLs
 
-For regular URL links, clients should just include the URL in the message; It is not the responsibility of individual clients to detect URLs within typed texts. For example, the following text can be sent to the server:
+For regular URL links, clients should just include the URL in the message. It is not the responsibility of individual clients to detect URLs within typed messages. For example, the following message can be sent to the server:
 
 ```
 This message contains a URL http://foo.com/, so does this one: www.foo.com.
 ```
 
-URL detection is performed by the server. We do this so that URL detection (a non-trivial operation) is performed consistently across multiple clients. The example text will be saved and served later to other clients as follows:
+URL detection is performed by the server. We do this so that URL detection (a non-trivial operation) is performed consistently across multiple clients. The example message will be saved and served later to other clients as follows:
 
 ```
 This message contains a URL <~http://foo.com/>, so does this one: <~http://www.foo.com|www.foo.com>.
@@ -34,7 +34,7 @@ In the first case, the URL is detected as-is. In the second, the full URL is inc
 
 ## Mentions
 
-To mention a user or a channel in text, a client should send the following text:
+To mention a user or a channel in message, a client should send the following message:
 
 ```
 Why not join <#kGzZ3eQg|Math>?
@@ -48,7 +48,7 @@ These escaped sequences are then served to any clients while requested, and clie
 
 You can upload files as attachments. [Learn how to add attachments to messages.](attachments.md)
 
-To refer to an attachment in text, a client should send the following text:
+To refer to an attachment in message, a client should send the following message:
 
 ```
 Here's a <+0|tutorial> about ruby.

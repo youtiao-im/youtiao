@@ -1,7 +1,7 @@
 # API reference
 
 * [Authorization](auth.md)
-* [Feed Formatting](formatting.md)
+* [Text Formatting](formatting.md)
 * [Methods](#methods)
 * [Types](#types)
 

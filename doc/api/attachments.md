@@ -9,7 +9,7 @@ Feeds can have zero or more attachments, defined as an array. Each hash in that 
     "attachments": [
         {
             "title": "Youtiao API Documentation",
-            "link": "https://youtiao.im/api.pdf"
+            "link": "https://youtiao.im/api.pdf",
             "image_url": "http://my-website.com/path/to/image.jpg"
         }
     ]
@@ -18,7 +18,7 @@ Feeds can have zero or more attachments, defined as an array. Each hash in that 
 
 ### title
 
-The `title` is a recognizable name for the attachment. When the attachment is referenced in text without an optional readable name, clients are recommended to display `title` as the readable name.
+The `title` is a recognizable name for the attachment. When the attachment is referenced in message without an optional readable name, clients are recommended to display `title` as the readable name.
 
 ### link
 
