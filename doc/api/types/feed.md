@@ -3,7 +3,7 @@
 ```json
 {
     "id": "A75gyQR2",
-    "content": "haha",
+    "text": "haha",
     "created_at": 1431055078,
     "updated_at": 1431055078,
     "creator_id": "NyKaRwDb",
@@ -17,12 +17,19 @@
     "crossed_by_ids": [],
     "questioned_by_ids": [],
 
+    "attachments": [
+        {
+            "title": "Nice title",
+            "link": "https://youtiao.im/api.pdf"
+        }
+    ],
+
     "comments": [
         {
             "id": "7g5Z9XEG",
-            "content": "great",
-            "creator": "NyKaRwDb"
+            "text": "great",
+            "creator_id": "NyKaRwDb"
         }
-    ],
+    ]
 }
 ```
