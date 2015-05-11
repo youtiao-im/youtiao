@@ -1,5 +1,7 @@
 # Attachments
 
+*MAY CHANGE LATER, USE WITH CAUTION NOW*
+
 ## Attachment structure
 
 Feeds can have zero or more attachments, defined as an array. Each hash in that array will contain multiple properties:
@@ -8,28 +10,15 @@ Feeds can have zero or more attachments, defined as an array. Each hash in that 
 {
     "attachments": [
         {
-            "title": "Youtiao API Documentation",
-            "link": "https://youtiao.im/api.pdf",
-            "image_url": "http://my-website.com/path/to/image.jpg"
+            "text": "Youtiao API Documentation",
+            "url": "https://youtiao.im/api.pdf"
         }
     ]
 }
 ```
 
-### title
-
-The `title` is a recognizable name for the attachment. When the attachment is referenced in message without an optional readable name, clients are recommended to display `title` as the readable name.
-
-### link
-
-This can be a URL to a file uploaded to Youtiao, or some external resource.
-
-### image_url
-
-A valid URL to an image file that will be displayed inside a message attachment. We currently support the following formats: JPEG and PNG.
-
-Large images will be resized to a maximum width of 400px or a maximum height of 500px, while still maintaining the original aspect ratio.
-
 ## Uploading
 
-**TODO: qiniu upload**
+Refer to [Qiniu documentation](http://developer.qiniu.com/) for further info.
+
+Roughly speaking, you need to acquire an *uptoken* from `POST https://api.youtiao.im/v1/uploads`, which is then used while uploading to Qiniu. Qiniu would respond with a URL of the uploaded file, which you should provide it as the attachment URL.

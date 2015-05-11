@@ -21,11 +21,17 @@ module Api
       end
 
       def create
+        # TODO: move to service
         @feed = Feed.new(safe_create_params)
         @feed.channel = @channel
         @feed.creator = current_resource_owner
         authorize @feed
         @feed.save!
+        unless params[:attachments].nil?
+          params[:attachments].each do |attachment|
+            @feed.attachments << Attachment.new(text: attachment[:text], url: attachment[:url])
+          end
+        end
         render :show
       end
 
@@ -62,7 +68,7 @@ module Api
       end
 
       def safe_create_params
-        params.permit(:content)
+        params.permit(:text)
       end
     end
   end

@@ -15,6 +15,12 @@ Rails.application.routes.draw do
           end
         end
       end
+
+      resources :uploads, only: [:create] do
+        collection do
+          post 'commit'
+        end
+      end
     end
   end
 

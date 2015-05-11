@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508074828) do
+ActiveRecord::Schema.define(version: 20150511102917) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "feed_id",    null: false
+    t.string   "text",       null: false
+    t.string   "url",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "attachments", ["feed_id"], name: "index_attachments_on_feed_id"
 
   create_table "channel_users", force: :cascade do |t|
     t.integer  "channel_id", null: false
@@ -37,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150508074828) do
   create_table "feeds", force: :cascade do |t|
     t.integer  "channel_id", null: false
     t.integer  "creator_id", null: false
-    t.string   "content",    null: false
+    t.string   "text",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
