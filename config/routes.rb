@@ -15,6 +15,9 @@ Rails.application.routes.draw do
           end
         end
       end
+
+      get 'uploads/qiniu/uptoken' => 'uploads#qiniu_uptoken'
+      post 'uploads/qiniu' => 'uploads#qiniu_commit'
     end
   end
 

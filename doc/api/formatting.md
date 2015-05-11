@@ -14,7 +14,7 @@ Texts can contain any displayable Unicode sequence of characters (all messages m
 
 For example, if user types `Hello & <world>`, the message sent to server should be `Hello &amp; &lt;world&gt;`.
 
-This is done so that messages can contain special escaped sequences, such as [URL links](#urls), [user or channel mentions](#mentions), [attachment references](#attachments), etc.
+This is done so that messages can contain special escaped sequences, such as [URL links](#urls), [user or channel mentions](#mentions), etc.
 
 ## URLs
 
@@ -43,18 +43,6 @@ Hey <@NyKaRwDb|bob>, did you see my file?
 ```
 
 These escaped sequences are then served to any clients while requested, and clients can format these links specially. The readable name can be included after the ID, by separating them with a pipe (`|`) character. Both of `<@NyKaRwDb>` and `<@NyKaRwDb|bob>` are valid.
-
-## Attachments
-
-You can upload files as attachments. [Learn how to add attachments to messages.](attachments.md)
-
-To refer to an attachment in message, a client should send the following message:
-
-```
-Here's a <+0|tutorial> about ruby.
-```
-
-The number following the plus (`+`) character is the index in attachment array. Notice here that you can also append an optional readable name after a pipe (`|`) character as in [user or channel mentions](#mentions).
 
 ## Emoji
 

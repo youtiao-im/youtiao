@@ -1,23 +1,19 @@
 # == Schema Information
 #
-# Table name: feeds
+# Table name: attachments
 #
 #  id         :integer          not null, primary key
-#  channel_id :integer          not null
-#  creator_id :integer          not null
+#  feed_id    :integer          not null
 #  text       :string           not null
+#  url        :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 FactoryGirl.define do
-  factory :feed do
-    channel
-    association :creator, factory: :user
+  factory :attachment do
+    feed
     text { Faker::Hacker.say_something_smart }
-  end
-
-  factory :invalid_feed, parent: :feed, class: Feed do
-    text nil
+    url { Faker::Internet.url }
   end
 end

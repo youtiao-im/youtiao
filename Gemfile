@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-# source 'https://ruby.taobao.org/'
+# source 'https://rubygems.org'
+source 'https://ruby.taobao.org/'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -56,10 +56,12 @@ gem 'api-pagination'
 gem 'hashids'
 
 gem 'seed-fu'
-gem 'foreigner'
+# gem 'foreigner'
 gem 'enumerize'
 
-gem 'request_store'
+# gem 'request_store'
+
+gem 'qiniu'
 
 group :development, :test do
   gem 'rspec-rails'

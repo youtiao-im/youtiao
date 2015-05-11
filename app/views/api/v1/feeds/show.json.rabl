@@ -1,7 +1,7 @@
 object feed
 
 attributes :id,
-           :content,
+           :text,
            :created_at,
            :updated_at,
            :creator_id,
@@ -12,3 +12,7 @@ attributes :id,
 attributes checked?: :is_checked,
            crossed?: :is_crossed,
            questioned?: :is_questioned
+
+child :attachments do
+  attributes :text, :url
+end
