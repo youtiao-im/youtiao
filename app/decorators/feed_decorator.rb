@@ -1,4 +1,8 @@
 class FeedDecorator < ApplicationDecorator
+  def channel_id
+    Channel.encrypt_id(object.channel_id)
+  end
+
   def creator_id
     User.encrypt_id(object.creator_id)
   end

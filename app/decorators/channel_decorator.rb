@@ -11,6 +11,10 @@ class ChannelDecorator < ApplicationDecorator
     channel_user.nil? ? false : channel_user.admin?
   end
 
+  def member?
+    channel_user.nil? ? false : channel_user.member?
+  end
+
   def owner_ids
     object.channel_users.where(role: :owner).pluck(:user_id).map do |user_id|
       User.encrypt_id(user_id)

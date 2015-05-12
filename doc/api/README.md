@@ -1,8 +1,8 @@
 # API reference
 
 * [Authorization](authorization.md)
-* [Message Formatting](formatting.md)
-* [Feed Attachments](attachments.md)
+* [Text Formatting](formatting.md)
+* [Attachments](attachments.md)
 * [Methods](#methods)
 * [Types](#types)
 
