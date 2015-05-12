@@ -55,6 +55,28 @@ RSpec.describe ChannelDecorator, type: :decorator do
     end
   end
 
+  describe '#member?' do
+    context 'when user has not joined the channel' do
+      it 'returns false' do
+        expect(subject.member?).to be_falsey
+      end
+    end
+
+    context 'when user is not a member of the channel' do
+      it 'returns false' do
+        FactoryGirl.create(:channel_admin, channel: channel, user: user)
+        expect(subject.member?).to be_falsey
+      end
+    end
+
+    context 'when user is a member of the channel' do
+      it 'returns true' do
+        FactoryGirl.create(:channel_member, channel: channel, user: user)
+        expect(subject.member?).to be_truthy
+      end
+    end
+  end
+
   describe '#owner_ids' do
     it 'returns ids of all owners of the channel' do
       FactoryGirl.create(:channel_owner, channel: channel, user: user)

@@ -5,6 +5,12 @@ RSpec.describe FeedDecorator, type: :decorator do
   let(:feed) { FactoryGirl.create(:feed) }
   let(:user) { FactoryGirl.create(:user) }
 
+  describe '#channel_id' do
+    it 'returns id of channel' do
+      expect(subject.channel_id).to eq(feed.channel.to_param)
+    end
+  end
+
   describe '#creator_id' do
     it 'returns id of creator' do
       expect(subject.creator_id).to eq(feed.creator.to_param)

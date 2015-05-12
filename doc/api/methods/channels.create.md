@@ -6,16 +6,30 @@
 
 ## Arguments
 
-| Argument | Example | Required | Description  |
-| -------- | ------- | -------- | ------------ |
-| `name`   | `foo`   | Required | Channel name |
+| Argument | Example          | Required | Description               |
+| -------- | ---------------- | -------- | ------------------------- |
+| `name`   | `Thousand Sunny` | Required | Name of channel to create |
 
 ## Response
 
-[channel](../types/channel.md)
+```json
+{
+    "id": "W3JBpyjd",
+    "name": "Thousand Sunny",
+    "created_at": 1431349817,
+    "updated_at": 1431349817,
+    "creator_id": "WM8Xnx7Q",
+    "owner_ids": [
+        "WM8Xnx7Q"
+    ],
+    "admin_ids": [],
+    "member_ids": [],
+    "is_owner": true,
+    "is_admin": false,
+    "is_member": false
+}
+```
 
 ## Errors
 
-| Error | Description        |
-| ----- | ------------------ |
-| `400` | Invalid parameters |
+**TODO:**

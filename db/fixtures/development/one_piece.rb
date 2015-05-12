@@ -13,7 +13,7 @@ User.seed_once(
 Channel.seed_once(
   :id,
   { id: 1, creator_id: 1, name: 'Going Merry' },
-  { id: 2, creator_id: 1, name: 'Thousand Sunny'})
+  { id: 2, creator_id: 1, name: 'Thousand Sunny' })
 
 ChannelUser.seed_once(
   :id,

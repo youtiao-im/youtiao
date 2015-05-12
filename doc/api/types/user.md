@@ -1,8 +1,10 @@
 # user type
 
+**TODO:**
+
 ```json
 {
-    "id": "NyKaRwDb",
-    "email": "foo@bar.com"
+    "id": "WM8Xnx7Q",
+    "email": "luffy@straw-hat.org"
 }
 ```

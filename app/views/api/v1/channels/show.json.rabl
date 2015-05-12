@@ -10,4 +10,5 @@ attributes :id,
            :member_ids
 
 attributes owner?: :is_owner,
-           admin?: :is_admin
+           admin?: :is_admin,
+           member?: :is_member
