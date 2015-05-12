@@ -1,6 +1,6 @@
 # Attachments
 
-*MAY CHANGE LATER, USE WITH CAUTION NOW*
+**TODO: MAY CHANGE LATER, USE WITH CAUTION NOW**
 
 ## Attachment structure
 

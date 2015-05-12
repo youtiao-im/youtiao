@@ -14,7 +14,7 @@
 
 ### Text formatting
 
-`text` are formatted as described in the [text formatting spec](../formatting.md).
+The `text` argument is formatted as described in the [text formatting spec](../formatting.md).
 
 ### Attachments
 
