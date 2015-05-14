@@ -1,0 +1,2 @@
+class MarkDecorator < ApplicationDecorator
+end

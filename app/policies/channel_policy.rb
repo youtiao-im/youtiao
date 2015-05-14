@@ -1,19 +1,14 @@
 class ChannelPolicy < ApplicationPolicy
-  def index?
-    true
+  def show?
+    # TODO: to model?
+    Membership.where(channel: record, user: user).exists?
   end
 
   def create?
     true
   end
 
-  def join?
-    true
-  end
-
-  class Scope < Scope
-    def resolve
-      user.channels
-    end
+  def admin?
+    Membership.where(channel: record, user: user, role: [:owner, :admin]).exists?
   end
 end

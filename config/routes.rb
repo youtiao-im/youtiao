@@ -3,22 +3,44 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api do
-    namespace :v1 do
-      resources :channels, only: [:index, :show, :create] do
-        member do
-          post 'join'
+    namespace :v1, shallow: true do
+      resource :user, only: [:show], controller: 'authenticated_users' do
+        resources :memberships,\
+                  only: [:index],\
+                  controller: 'authenticated_users/memberships' do
+          collection do
+            get 'channels/:channel_id', action: :show
+            put 'channels/:channel_id', action: :create
+          end
         end
 
-        resources :feeds, only: [:index, :show, :create] do
-          member do
-            post 'stamp'
+        resources :marks,\
+                  only: [:index],\
+                  controller: 'authenticated_users/marks' do
+          collection do
+            get 'feeds/:feed_id', action: :show
+            put 'feeds/:feed_id', action: :create
+            patch 'feeds/:feed_id', action: :update
           end
         end
       end
 
-      resources :uploads, only: [:create] do
-        collection do
-          post 'commit'
+      resources :channels, only: [:show, :create] do
+        resources :memberships,\
+                  only: [:index],\
+                  controller: 'channels/memberships' do
+          collection do
+            get 'users/:user_id', action: :show
+            put 'users/:user_id', action: :create
+          end
+        end
+
+        resources :feeds, only: [:index, :show, :create] do
+          resources :marks, only: [:index], controller: 'feeds/marks' do
+            collection do
+              get 'users/:user_id', action: :show
+            end
+          end
         end
       end
     end

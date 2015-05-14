@@ -1,29 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe ChannelPolicy, type: :policy do
-  subject { ChannelPolicy.new(user, record) }
+  subject { ChannelPolicy.new(user, channel) }
+  let(:user) { FactoryGirl.create(:user) }
 
-  # permissions ".scope" do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
+  context 'for a user not affiliated with channel' do
+    let(:channel) { FactoryGirl.create(:channel) }
 
-  context 'for a user not in the channel' do
-    let(:record) { FactoryGirl.create(:channel) }
-    let(:user) { FactoryGirl.create(:user) }
-
-    it { should authorize(:index) }
     it { should_not authorize(:show) }
     it { should authorize(:create) }
-    it { should authorize(:join) }
+    it { should_not authorize(:admin) }
   end
 
-  context 'for a channel member' do
-    let(:record) { FactoryGirl.create(:channel) }
-    let(:user) { FactoryGirl.create(:channel_member, channel: record).user }
+  context 'for a user affiliated with channel' do
+    let(:channel) { FactoryGirl.create(:channel) }
 
-    it { should authorize(:index) }
+    before do
+      FactoryGirl.create(:membership, channel: channel, user: user)
+    end
+
     it { should authorize(:show) }
     it { should authorize(:create) }
-    it { should authorize(:join) }
+    it { should_not authorize(:admin) }
+  end
+
+  context 'for a channel admin' do
+    let(:channel) { FactoryGirl.create(:channel) }
+
+    before do
+      FactoryGirl.create(:admin_membership, channel: channel, user: user)
+    end
+
+    it { should authorize(:show) }
+    it { should authorize(:create) }
+    it { should authorize(:admin) }
   end
 end

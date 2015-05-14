@@ -10,33 +10,18 @@ module Api
         { current_user: controller.current_resource_owner }
       end)
 
-      def index
-        authorize Channel.new
-        @channels = paginate(policy_scope(Channel))
-      end
-
       def show
         authorize @channel
       end
 
       def create
         @channel = Channel.new(safe_create_params)
-        @channel.creator = current_resource_owner
+        @channel.created_by = current_resource_owner
         authorize @channel
         # TODO: move to service
         @channel.save!
-        ChannelUser.create!(channel: @channel, user: current_resource_owner, role: :owner)
+        Membership.create!(channel: @channel, user: current_resource_owner, role: :owner)
         render :show
-      end
-
-      def join
-        # TODO: this is ugly
-        begin
-          ChannelUser.create(channel: @channel, user: current_resource_owner, role: :member)
-        rescue ActiveRecord::RecordNotUnique
-          # ignore
-        end
-        render nothing: true
       end
 
       private

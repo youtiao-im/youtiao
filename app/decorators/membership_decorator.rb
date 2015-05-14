@@ -1,0 +1,2 @@
+class MembershipDecorator < ApplicationDecorator
+end

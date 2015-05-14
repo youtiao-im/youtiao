@@ -4,8 +4,6 @@
 #
 #  id         :integer          not null, primary key
 #  feed_id    :integer          not null
-#  text       :string           not null
-#  url        :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

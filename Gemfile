@@ -1,5 +1,5 @@
-# source 'https://rubygems.org'
-source 'https://ruby.taobao.org/'
+source 'https://rubygems.org'
+# source 'https://ruby.taobao.org/'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -70,6 +70,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'colored'
   gem 'awesome_print'
+  # gem 'grape-entity-matchers'
 end
 
 group :development do
