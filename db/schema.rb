@@ -15,15 +15,45 @@ ActiveRecord::Schema.define(version: 20150511102917) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "feed_id",    null: false
-    t.string   "text",       null: false
-    t.string   "url",        null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "attachments", ["feed_id"], name: "index_attachments_on_feed_id"
 
-  create_table "channel_users", force: :cascade do |t|
+  create_table "channels", force: :cascade do |t|
+    t.string   "name",          null: false
+    t.integer  "created_by_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "channels", ["created_by_id"], name: "index_channels_on_created_by_id"
+
+  create_table "feeds", force: :cascade do |t|
+    t.integer  "channel_id",    null: false
+    t.string   "text",          null: false
+    t.integer  "created_by_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "feeds", ["channel_id"], name: "index_feeds_on_channel_id"
+  add_index "feeds", ["created_by_id"], name: "index_feeds_on_created_by_id"
+
+  create_table "marks", force: :cascade do |t|
+    t.integer  "feed_id",    null: false
+    t.integer  "user_id",    null: false
+    t.string   "symbol",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "marks", ["feed_id", "user_id"], name: "index_marks_on_feed_id_and_user_id", unique: true
+  add_index "marks", ["feed_id"], name: "index_marks_on_feed_id"
+  add_index "marks", ["user_id"], name: "index_marks_on_user_id"
+
+  create_table "memberships", force: :cascade do |t|
     t.integer  "channel_id", null: false
     t.integer  "user_id",    null: false
     t.string   "role",       null: false
@@ -31,29 +61,9 @@ ActiveRecord::Schema.define(version: 20150511102917) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "channel_users", ["channel_id", "user_id"], name: "index_channel_users_on_channel_id_and_user_id", unique: true
-  add_index "channel_users", ["channel_id"], name: "index_channel_users_on_channel_id"
-  add_index "channel_users", ["user_id"], name: "index_channel_users_on_user_id"
-
-  create_table "channels", force: :cascade do |t|
-    t.integer  "creator_id", null: false
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "channels", ["creator_id"], name: "index_channels_on_creator_id"
-
-  create_table "feeds", force: :cascade do |t|
-    t.integer  "channel_id", null: false
-    t.integer  "creator_id", null: false
-    t.string   "text",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "feeds", ["channel_id"], name: "index_feeds_on_channel_id"
-  add_index "feeds", ["creator_id"], name: "index_feeds_on_creator_id"
+  add_index "memberships", ["channel_id", "user_id"], name: "index_memberships_on_channel_id_and_user_id", unique: true
+  add_index "memberships", ["channel_id"], name: "index_memberships_on_channel_id"
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -94,18 +104,6 @@ ActiveRecord::Schema.define(version: 20150511102917) do
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
-
-  create_table "stamps", force: :cascade do |t|
-    t.integer  "feed_id",    null: false
-    t.integer  "user_id",    null: false
-    t.string   "kind",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "stamps", ["feed_id", "user_id"], name: "index_stamps_on_feed_id_and_user_id", unique: true
-  add_index "stamps", ["feed_id"], name: "index_stamps_on_feed_id"
-  add_index "stamps", ["user_id"], name: "index_stamps_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

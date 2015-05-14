@@ -27,8 +27,6 @@ class User < ActiveRecord::Base
          :trackable,
          :validatable
 
-  has_many :channel_users
-  has_many :channels, through: :channel_users
-
-  attr_accessor :current_channel
+  has_many :memberships
+  has_many :marks
 end

@@ -2,16 +2,16 @@
 #
 # Table name: channels
 #
-#  id         :integer          not null, primary key
-#  creator_id :integer          not null
-#  name       :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  created_by_id :integer          not null
+#  name          :string           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 FactoryGirl.define do
   factory :channel do
-    association :creator, factory: :user
+    association :created_by, factory: :user
     name { Faker::Lorem.word }
   end
 
