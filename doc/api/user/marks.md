@@ -1,9 +1,9 @@
 # Your Marks
 
-* [List](list)
-* [Get](get)
-* [Create](create)
-* [Update](update)
+* [List](#list)
+* [Get](#get)
+* [Create](#create)
+* [Update](#update)
 
 ## List
 

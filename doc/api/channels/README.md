@@ -1,7 +1,7 @@
 # Channels
 
-* [Get](get)
-* [Create](create)
+* [Get](#get)
+* [Create](#create)
 
 ## Get
 

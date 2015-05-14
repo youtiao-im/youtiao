@@ -1,8 +1,8 @@
 # Channel Feeds
 
-* [List](list)
-* [Get](get)
-* [Create](create)
+* [List](#list)
+* [Get](#get)
+* [Create](#create)
 
 ## List
 

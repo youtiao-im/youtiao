@@ -1,7 +1,7 @@
 # Channel Memberships
 
-* [List](list)
-* [Get](get)
+* [List](#list)
+* [Get](#get)
 
 ## List
 

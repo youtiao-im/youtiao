@@ -1,8 +1,8 @@
 # Your Memberships
 
-* [List](list)
-* [Get](get)
-* [Create](create)
+* [List](#list)
+* [Get](#get)
+* [Create](#create)
 
 ## List
 

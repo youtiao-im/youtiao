@@ -1,6 +1,6 @@
 # OAuth
 
-* [Password grant flow](password-grant-flow)
+* [Password grant flow](#password-grant-flow)
 
 ## Password grant flow
 

@@ -1,6 +1,6 @@
 # Authenticated User (You)
 
-* [Get](get)
+* [Get](#get)
 
 ## Get
 
