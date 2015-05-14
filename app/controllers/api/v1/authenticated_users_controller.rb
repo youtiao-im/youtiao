@@ -1,8 +1,10 @@
 module Api
   module V1
     class AuthenticatedUsersController < ApiController
+      decorates_assigned :user
+
       def show
-        render json: current_resource_owner
+        @user = current_resource_owner
       end
     end
   end

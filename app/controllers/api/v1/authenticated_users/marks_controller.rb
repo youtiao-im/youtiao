@@ -6,7 +6,7 @@ module Api
         decorates_assigned :mark
 
         def index
-          @marks = current_resource_owner.marks
+          @marks = paginate current_resource_owner.marks
         end
 
         def show

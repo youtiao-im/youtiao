@@ -70,7 +70,6 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'colored'
   gem 'awesome_print'
-  # gem 'grape-entity-matchers'
 end
 
 group :development do

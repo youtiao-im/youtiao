@@ -1,22 +1,9 @@
 # Channels
 
-* [List your channels](list-your-channels)
-* [Get a channel](get-a-channel)
-* [Create a channel](create-a-channel)
+* [Get](get)
+* [Create](create)
 
-## List your channels
-
-```
-GET /user/channels
-```
-
-### Response
-
-```json
-TODO: fill in json
-```
-
-## Get a channel
+## Get
 
 ```
 GET /channels/:channel_id
@@ -26,16 +13,14 @@ GET /channels/:channel_id
 
 ```json
 {
-    "id": "GPyYROY7",
+    "id": 1,
     "name": "Going Merry",
-    "created_at": 1431349817,
-    "updated_at": 1431349817,
-    "created_by": { TODO: },
-    "members_count": 7
+    "created_at": 1431596915,
+    "updated_at": 1431596915
 }
 ```
 
-## Create a channel
+## Create
 
 ```
 POST /channels
@@ -50,11 +35,18 @@ POST /channels
 ### Example
 
 ```json
-TODO: fill in json
+{
+    "name": "Going Merry"
+}
 ```
 
 ### Response
 
 ```json
-TODO: fill in json
+{
+    "id": 1,
+    "name": "Going Merry",
+    "created_at": 1431596915,
+    "updated_at": 1431596915
+}
 ```

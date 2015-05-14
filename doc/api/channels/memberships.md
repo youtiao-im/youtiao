@@ -1,11 +1,9 @@
-# Memberships
+# Channel Memberships
 
-* [List channel memberships](list-channel-memberships)
-* [Get a channel membership](get-a-channel-membership)
-* [Create a channel membership*](Create-a-channel-membership)
-* [List your channel memberships](list-your-channel-memberships)
+* [List](list)
+* [Get](get)
 
-## List channel memberships
+## List
 
 ```
 GET /channels/:channel_id/memberships
@@ -16,46 +14,63 @@ GET /channels/:channel_id/memberships
 ```json
 [
     {
-        "role": "admin",
-        "user": { TODO: }
+        "role": "owner",
+        "created_at": 1431596915,
+        "updated_at": 1431596915,
+        "user_id": 1
+    },
+    {
+        "role": "member",
+        "created_at": 1431596915,
+        "updated_at": 1431596915,
+        "user_id": 2
+    },
+    {
+        "role": "member",
+        "created_at": 1431596915,
+        "updated_at": 1431596915,
+        "user_id": 3
+    },
+    {
+        "role": "member",
+        "created_at": 1431596915,
+        "updated_at": 1431596915,
+        "user_id": 4
+    },
+    {
+        "role": "member",
+        "created_at": 1431596915,
+        "updated_at": 1431596915,
+        "user_id": 5
+    },
+    {
+        "role": "member",
+        "created_at": 1431596915,
+        "updated_at": 1431596915,
+        "user_id": 6
+    },
+    {
+        "role": "member",
+        "created_at": 1431596915,
+        "updated_at": 1431596915,
+        "user_id": 7
     }
 ]
 ```
 
-## Get a channel membership
+## Get
 
 ```
-GET /channels/:channel_id/memberships/:user_id
+GET /channels/:channel_id/memberships/users/:user_id
 ```
 
 ### Response
 
 ```json
 {
-    "role": "admin",
-    "user": { TODO: }
+    "role": "member",
+    "created_at": 1431596915,
+    "updated_at": 1431596915,
+    "user_id": 2
 }
-```
-
-## Create a channel membership
-
-```
-PUT /channels/:channel_id/memberships/:user_id
-```
-
-## List your channel memberships
-
-```
-GET /user/memberships/channels
-```
-
-### Response
-
-```json
-[
-    {
-        "role": "admin",
-        "channel": { TODO: }
-    }
-]
 ```

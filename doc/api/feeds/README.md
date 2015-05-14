@@ -1,10 +1,10 @@
-# Feeds
+# Channel Feeds
 
-* [List channel feeds](list-channel-feeds)
-* [Get a feed](get-a-feed)
-* [Create a feed to a channel](create-a-feed-to-a-channel)
+* [List](list)
+* [Get](get)
+* [Create](create)
 
-## List channel feeds
+## List
 
 ```
 GET /channels/:channel_id/feeds
@@ -13,10 +13,23 @@ GET /channels/:channel_id/feeds
 ### Response
 
 ```json
-TODO: fill in json
+[
+    {
+        "id": 1,
+        "text": "Advanture begins!",
+        "created_at": 1431596915,
+        "updated_at": 1431596915
+    },
+    {
+        "id": 2,
+        "text": "Do we need a musician on board?",
+        "created_at": 1431596915,
+        "updated_at": 1431596915
+    }
+]
 ```
 
-## Get a feed
+## Get
 
 ```
 GET /feeds/:feed_id
@@ -25,10 +38,15 @@ GET /feeds/:feed_id
 ### Response
 
 ```json
-TODO: fill in json
+{
+    "id": 1,
+    "text": "Advanture begins!",
+    "created_at": 1431596915,
+    "updated_at": 1431596915
+}
 ```
 
-## Create a feed to a channel
+## Create
 
 ```
 POST /channels/:channel_id/feeds
@@ -43,11 +61,18 @@ POST /channels/:channel_id/feeds
 ### Example
 
 ```json
-TODO: fill in json
+{
+    "text": "Advanture begins!"
+}
 ```
 
 ### Response
 
 ```json
-TODO: fill in json
+{
+    "id": 1,
+    "text": "Advanture begins!",
+    "created_at": 1431596915,
+    "updated_at": 1431596915
+}
 ```

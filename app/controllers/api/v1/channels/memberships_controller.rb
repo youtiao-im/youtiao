@@ -8,7 +8,7 @@ module Api
         def index
           @channel = Channel.find(params[:channel_id])
           authorize @channel, :show?
-          @memberships = @channel.memberships
+          @memberships = paginate @channel.memberships
         end
 
         def show

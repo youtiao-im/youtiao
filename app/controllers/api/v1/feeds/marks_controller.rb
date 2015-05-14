@@ -8,7 +8,7 @@ module Api
         def index
           @feed = Feed.find(params[:feed_id])
           authorize @feed.channel, :admin?
-          @marks = @feed.marks
+          @marks = paginate @feed.marks
         end
 
         def show
