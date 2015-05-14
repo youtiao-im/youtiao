@@ -27,7 +27,8 @@ module Api
           @feed = Feed.find(params[:feed_id])
           authorize @feed.channel, :show?
           @mark = Mark.pinpoint(@feed.id, current_resource_owner.id)
-          @mark.update(safe_update_params)
+          @mark.update_attributes(safe_update_params)
+          @mark.save!
           render :show
         end
 
