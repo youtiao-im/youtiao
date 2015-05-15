@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ChannelPolicy, type: :policy do
   subject { ChannelPolicy.new(user, channel) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   context 'for a user not affiliated with channel' do
-    let(:channel) { FactoryGirl.create(:channel) }
+    let(:channel) { create(:channel) }
 
     it { should_not authorize(:show) }
     it { should authorize(:create) }
@@ -13,10 +13,10 @@ RSpec.describe ChannelPolicy, type: :policy do
   end
 
   context 'for a user affiliated with channel' do
-    let(:channel) { FactoryGirl.create(:channel) }
+    let(:channel) { create(:channel) }
 
     before do
-      FactoryGirl.create(:membership, channel: channel, user: user)
+      create(:membership, channel: channel, user: user)
     end
 
     it { should authorize(:show) }
@@ -25,10 +25,10 @@ RSpec.describe ChannelPolicy, type: :policy do
   end
 
   context 'for a channel admin' do
-    let(:channel) { FactoryGirl.create(:channel) }
+    let(:channel) { create(:channel) }
 
     before do
-      FactoryGirl.create(:admin_membership, channel: channel, user: user)
+      create(:admin_membership, channel: channel, user: user)
     end
 
     it { should authorize(:show) }
