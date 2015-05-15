@@ -50,8 +50,10 @@ gem 'pundit'
 gem 'slim'
 gem 'draper'
 gem 'kaminari'
-gem 'api-pagination'
 gem 'hashids'
+
+gem 'api-pagination'
+gem 'versionist'
 
 gem 'seed-fu'
 # gem 'foreigner'
