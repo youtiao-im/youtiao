@@ -2,11 +2,15 @@ Rails.application.routes.draw do
   use_doorkeeper
   devise_for :users
 
-  namespace :api do
-    namespace :v1, shallow: true do
+  namespace :api, shallow: true do
+    api_version module: 'v1',
+                header: { name: 'Accept',
+                          value: 'application/vnd.youtiao.im+json; version=1' },
+                path: { value: 'v1' },
+                default: true do
       resource :user, only: [:show], controller: 'authenticated_users' do
-        resources :memberships,\
-                  only: [:index],\
+        resources :memberships,
+                  only: [:index],
                   controller: 'authenticated_users/memberships' do
           collection do
             get 'channels/:channel_id', action: :show
@@ -14,8 +18,8 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :marks,\
-                  only: [:index],\
+        resources :marks,
+                  only: [:index],
                   controller: 'authenticated_users/marks' do
           collection do
             get 'feeds/:feed_id', action: :show
@@ -26,8 +30,8 @@ Rails.application.routes.draw do
       end
 
       resources :channels, only: [:show, :create] do
-        resources :memberships,\
-                  only: [:index],\
+        resources :memberships,
+                  only: [:index],
                   controller: 'channels/memberships' do
           collection do
             get 'users/:user_id', action: :show
