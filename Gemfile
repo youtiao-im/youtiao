@@ -48,8 +48,6 @@ gem 'doorkeeper'
 gem 'pundit'
 
 gem 'slim'
-gem 'rabl'
-gem 'oj'
 gem 'draper'
 gem 'kaminari'
 gem 'api-pagination'

@@ -2,6 +2,8 @@ module Api
   module V1
     module AuthenticatedUsers
       class MembershipsController < ApiController
+        before_action :set_channel, except: [:index]
+
         decorates_assigned :memberships
         decorates_assigned :membership
 
@@ -11,17 +13,22 @@ module Api
 
         def show
           @membership = Membership.pinpoint(
-            params[:channel_id], current_resource_owner.id)
+            @channel.id, current_resource_owner.id)
         end
 
         def create
-          @channel = Channel.find(params[:channel_id])
           @membership = Membership.new
           @membership.channel = @channel
           @membership.user = current_resource_owner
           @membership.role = :member
           @membership.save!
           render :show
+        end
+
+        private
+
+        def set_channel
+          @channel = Channel.find(Channel.decrypt_id(params[:channel_id]))
         end
       end
     end
