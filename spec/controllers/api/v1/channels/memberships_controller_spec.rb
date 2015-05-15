@@ -51,8 +51,8 @@ RSpec.describe Api::V1::Channels::MembershipsController, type: :controller do
 
           it 'sets pagination headers' do
             get :index, channel_id: channel.to_param
-            expect(response.headers['Total']).to_not be_nil
-            expect(response.headers['Per-Page']).to_not be_nil
+            expect(response.headers['X-Total']).to_not be_nil
+            expect(response.headers['X-Per-Page']).to_not be_nil
           end
         end
       end
