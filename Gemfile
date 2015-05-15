@@ -48,8 +48,6 @@ gem 'doorkeeper'
 gem 'pundit'
 
 gem 'slim'
-gem 'rabl'
-gem 'oj'
 gem 'draper'
 gem 'kaminari'
 gem 'api-pagination'
@@ -70,6 +68,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'colored'
   gem 'awesome_print'
+  gem 'json_expressions'
 end
 
 group :development do
