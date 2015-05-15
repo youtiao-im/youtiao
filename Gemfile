@@ -68,6 +68,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'colored'
   gem 'awesome_print'
+  gem 'json_expressions'
 end
 
 group :development do

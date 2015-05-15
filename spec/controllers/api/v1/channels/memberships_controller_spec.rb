@@ -88,7 +88,7 @@ RSpec.describe Api::V1::Channels::MembershipsController, type: :controller do
         end
 
         context 'when user is affiliated with channel' do
-          let(:another_user) { another_user = create(:user) }
+          let(:another_user) { create(:user) }
 
           before do
             create(:membership, channel: channel, user: user)
