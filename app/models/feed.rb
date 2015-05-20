@@ -24,4 +24,12 @@ class Feed < ActiveRecord::Base
   has_many :stars
 
   validates :text, presence: true
+
+  def mark_by(user)
+    marks.find_by_user_id(user.id)
+  end
+
+  def star_by(user)
+    stars.find_by_user_id(user.id)
+  end
 end

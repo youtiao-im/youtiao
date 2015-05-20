@@ -21,8 +21,17 @@ GET /channels/:channel_id/feeds
         "crosses_count": 0,
         "questions_count": 0,
         "comments_count": 2,
-        "created_at": 1432100855,
-        "updated_at": 1432100855,
+        "created_at": 1432105686,
+        "updated_at": 1432105686,
+        "mark": {
+            "symbol": "check",
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
+        "star": {
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
         "created_by": {
             "id": "WM8Xnx7Q",
             "email": "luffy@straw-hat.org"
@@ -35,8 +44,13 @@ GET /channels/:channel_id/feeds
         "crosses_count": 1,
         "questions_count": 2,
         "comments_count": 1,
-        "created_at": 1432100855,
-        "updated_at": 1432100855,
+        "created_at": 1432105686,
+        "updated_at": 1432105686,
+        "mark": {
+            "symbol": "cross",
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
         "created_by": {
             "id": "WM8Xnx7Q",
             "email": "luffy@straw-hat.org"
@@ -61,8 +75,17 @@ GET /feeds/:feed_id
     "crosses_count": 0,
     "questions_count": 0,
     "comments_count": 2,
-    "created_at": 1432100855,
-    "updated_at": 1432100855,
+    "created_at": 1432105686,
+    "updated_at": 1432105686,
+    "mark": {
+        "symbol": "check",
+        "created_at": 1432105686,
+        "updated_at": 1432105686
+    },
+    "star": {
+        "created_at": 1432105686,
+        "updated_at": 1432105686
+    },
     "created_by": {
         "id": "WM8Xnx7Q",
         "email": "luffy@straw-hat.org"
@@ -100,8 +123,8 @@ POST /channels/:channel_id/feeds
     "crosses_count": 0,
     "questions_count": 0,
     "comments_count": 0,
-    "created_at": 1432100855,
-    "updated_at": 1432100855,
+    "created_at": 1432105686,
+    "updated_at": 1432105686,
     "created_by": {
         "id": "WM8Xnx7Q",
         "email": "luffy@straw-hat.org"

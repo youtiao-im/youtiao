@@ -4,8 +4,12 @@ module Api
       class StarsController < ApiController
         before_action :set_feed, except: [:index]
 
-        decorates_assigned :stars
-        decorates_assigned :star
+        decorates_assigned :stars, context: (lambda do |controller|
+          { current_user: controller.current_resource_owner }
+        end)
+        decorates_assigned :star, context: (lambda do |controller|
+          { current_user: controller.current_resource_owner }
+        end)
 
         def index
           @stars = paginate current_resource_owner.stars
