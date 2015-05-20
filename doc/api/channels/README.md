@@ -13,10 +13,15 @@ GET /channels/:channel_id
 
 ```json
 {
-    "id": 1,
+    "id": "GPyYROY7",
     "name": "Going Merry",
-    "created_at": 1431596915,
-    "updated_at": 1431596915
+    "memberships_count": 7,
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "created_by": {
+        "id": "WM8Xnx7Q",
+        "email": "luffy@straw-hat.org"
+    }
 }
 ```
 
@@ -44,9 +49,14 @@ POST /channels
 
 ```json
 {
-    "id": 1,
+    "id": "GPyYROY7",
     "name": "Going Merry",
-    "created_at": 1431596915,
-    "updated_at": 1431596915
+    "memberships_count": 1,
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "created_by": {
+        "id": "WM8Xnx7Q",
+        "email": "luffy@straw-hat.org"
+    }
 }
 ```

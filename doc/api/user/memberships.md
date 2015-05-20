@@ -15,16 +15,36 @@ GET /user/memberships
 ```json
 [
     {
-        "role": "member",
-        "created_at": 1431596915,
-        "updated_at": 1431596915,
-        "channel_id": 1
+        "role": "owner",
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "channel": {
+            "id": "GPyYROY7",
+            "name": "Going Merry",
+            "memberships_count": 7,
+            "created_at": 1432100855,
+            "updated_at": 1432100855,
+            "created_by": {
+                "id": "WM8Xnx7Q",
+                "email": "luffy@straw-hat.org"
+            }
+        }
     },
     {
-        "role": "member",
-        "created_at": 1431596915,
-        "updated_at": 1431596915,
-        "channel_id": 2
+        "role": "owner",
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "channel": {
+            "id": "W3JBpyjd",
+            "name": "Thousand Sunny",
+            "memberships_count": 9,
+            "created_at": 1432100855,
+            "updated_at": 1432100855,
+            "created_by": {
+                "id": "WM8Xnx7Q",
+                "email": "luffy@straw-hat.org"
+            }
+        }
     }
 ]
 ```
@@ -39,10 +59,20 @@ GET /user/memberships/channels/:channel_id
 
 ```json
 {
-    "role": "member",
-    "created_at": 1431596915,
-    "updated_at": 1431596915,
-    "channel_id": 1
+    "role": "owner",
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "channel": {
+        "id": "GPyYROY7",
+        "name": "Going Merry",
+        "memberships_count": 7,
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "created_by": {
+            "id": "WM8Xnx7Q",
+            "email": "luffy@straw-hat.org"
+        }
+    }
 }
 ```
 
@@ -57,8 +87,18 @@ PUT /user/memberships/channels/:channel_id
 ```json
 {
     "role": "member",
-    "created_at": 1431596915,
-    "updated_at": 1431596915,
-    "channel_id": 1
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "channel": {
+        "id": "GPyYROY7",
+        "name": "Going Merry",
+        "memberships_count": 7,
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "created_by": {
+            "id": "WM8Xnx7Q",
+            "email": "luffy@straw-hat.org"
+        }
+    }
 }
 ```

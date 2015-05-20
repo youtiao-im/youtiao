@@ -12,8 +12,8 @@
 
 FactoryGirl.define do
   factory :channel do
-    association :created_by, factory: :user
     name { Faker::Lorem.word }
+    association :created_by, factory: :user
   end
 
   factory :invalid_channel, parent: :channel, class: Channel do

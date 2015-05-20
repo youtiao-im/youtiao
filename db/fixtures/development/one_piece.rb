@@ -60,3 +60,9 @@ Mark.seed_once(
   { id: 16, feed_id: 3, user_id: 7, symbol: :check },
   { id: 17, feed_id: 3, user_id: 8, symbol: :check },
   { id: 18, feed_id: 3, user_id: 9, symbol: :check })
+
+Comment.seed_once(
+  :id,
+  { id: 1, feed_id: 1, text: 'Hell yeah!', created_by_id: 2 },
+  { id: 2, feed_id: 1, text: 'Need a map?', created_by_id: 4 },
+  { id: 3, feed_id: 2, text: 'I have a candidate.', created_by_id: 5 })

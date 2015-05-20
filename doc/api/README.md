@@ -11,3 +11,4 @@
   * [Memberships](channels/memberships.md)
 * [Feeds](feeds/README.md)
   * [Marks](feeds/marks.md)
+* [Comments](comments/README.md)

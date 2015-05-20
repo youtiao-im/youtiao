@@ -22,6 +22,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
               checks_count: Fixnum,
               crosses_count: Fixnum,
               questions_count: Fixnum,
+              comments_count: Fixnum,
               created_at: feed.created_at.to_i,
               updated_at: feed.updated_at.to_i,
               created_by: {
@@ -50,6 +51,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
           checks_count: Fixnum,
           crosses_count: Fixnum,
           questions_count: Fixnum,
+          comments_count: Fixnum,
           created_at: feed.created_at.to_i,
           updated_at: feed.updated_at.to_i,
           created_by: {
@@ -76,6 +78,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
           checks_count: Fixnum,
           crosses_count: Fixnum,
           questions_count: Fixnum,
+          comments_count: Fixnum,
           created_at: feed.created_at.to_i,
           updated_at: feed.updated_at.to_i,
           created_by: {
@@ -103,6 +106,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
           checks_count: Fixnum,
           crosses_count: Fixnum,
           questions_count: Fixnum,
+          comments_count: Fixnum,
           created_at: feed.created_at.to_i,
           updated_at: feed.updated_at.to_i,
           created_by: {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511102917) do
+ActiveRecord::Schema.define(version: 20150520051538) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "feed_id",    null: false
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20150511102917) do
 
   add_index "channels", ["created_by_id"], name: "index_channels_on_created_by_id"
 
+  create_table "comments", force: :cascade do |t|
+    t.integer  "feed_id",       null: false
+    t.string   "text",          null: false
+    t.integer  "created_by_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "comments", ["created_by_id"], name: "index_comments_on_created_by_id"
+  add_index "comments", ["feed_id"], name: "index_comments_on_feed_id"
+
   create_table "feeds", force: :cascade do |t|
     t.integer  "channel_id",                  null: false
     t.string   "text",                        null: false
@@ -38,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150511102917) do
     t.integer  "checks_count",    default: 0, null: false
     t.integer  "crosses_count",   default: 0, null: false
     t.integer  "questions_count", default: 0, null: false
+    t.integer  "comments_count",  default: 0, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end

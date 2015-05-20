@@ -45,6 +45,8 @@ Rails.application.routes.draw do
               get 'users/:user_id', action: :show
             end
           end
+
+          resources :comments, only: [:index, :show, :create]
         end
       end
     end
