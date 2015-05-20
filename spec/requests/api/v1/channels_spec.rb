@@ -13,6 +13,7 @@ RSpec.describe 'Api::V1::Channels', type: :request do
       expect(response.body).to match_json_expression(
         id: channel.to_param,
         name: channel.name,
+        memberships_count: Fixnum,
         created_at: channel.created_at.to_i,
         updated_at: channel.updated_at.to_i,
         created_by: {
@@ -30,6 +31,7 @@ RSpec.describe 'Api::V1::Channels', type: :request do
       expect(response.body).to match_json_expression(
         id: String,
         name: String,
+        memberships_count: Fixnum,
         created_at: Fixnum,
         updated_at: Fixnum,
         created_by: {

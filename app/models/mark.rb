@@ -19,6 +19,10 @@ class Mark < ActiveRecord::Base
 
   validates :symbol, presence: true
 
+  counter_culture :feed, column_name: (lambda do |model|
+    "#{model.symbol.pluralize}_count"
+  end)
+
   def self.pinpoint(feed_id, user_id)
     membership = find_by_feed_id_and_user_id(feed_id, user_id)
     fail ActiveRecord::RecordNotFound if membership.nil?

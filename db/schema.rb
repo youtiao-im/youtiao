@@ -22,20 +22,24 @@ ActiveRecord::Schema.define(version: 20150511102917) do
   add_index "attachments", ["feed_id"], name: "index_attachments_on_feed_id"
 
   create_table "channels", force: :cascade do |t|
-    t.string   "name",          null: false
-    t.integer  "created_by_id", null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "name",                          null: false
+    t.integer  "created_by_id",                 null: false
+    t.integer  "memberships_count", default: 0, null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "channels", ["created_by_id"], name: "index_channels_on_created_by_id"
 
   create_table "feeds", force: :cascade do |t|
-    t.integer  "channel_id",    null: false
-    t.string   "text",          null: false
-    t.integer  "created_by_id", null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "channel_id",                  null: false
+    t.string   "text",                        null: false
+    t.integer  "created_by_id",               null: false
+    t.integer  "checks_count",    default: 0, null: false
+    t.integer  "crosses_count",   default: 0, null: false
+    t.integer  "questions_count", default: 0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "feeds", ["channel_id"], name: "index_feeds_on_channel_id"

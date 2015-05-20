@@ -19,6 +19,9 @@ RSpec.describe 'Api::V1::Feeds', type: :request do
           {
             id: feed.to_param,
             text: feed.text,
+            checks_count: Fixnum,
+            crosses_count: Fixnum,
+            questions_count: Fixnum,
             created_at: feed.created_at.to_i,
             updated_at: feed.updated_at.to_i,
             created_by: {
@@ -39,6 +42,9 @@ RSpec.describe 'Api::V1::Feeds', type: :request do
       expect(response.body).to match_json_expression(
         id: feed.to_param,
         text: feed.text,
+        checks_count: Fixnum,
+        crosses_count: Fixnum,
+        questions_count: Fixnum,
         created_at: feed.created_at.to_i,
         updated_at: feed.updated_at.to_i,
         created_by: {
@@ -57,6 +63,9 @@ RSpec.describe 'Api::V1::Feeds', type: :request do
       expect(response.body).to match_json_expression(
         id: String,
         text: String,
+        checks_count: Fixnum,
+        crosses_count: Fixnum,
+        questions_count: Fixnum,
         created_at: Fixnum,
         updated_at: Fixnum,
         created_by: {
