@@ -10,6 +10,7 @@
 #  crosses_count   :integer          default(0), not null
 #  questions_count :integer          default(0), not null
 #  comments_count  :integer          default(0), not null
+#  stars_count     :integer          default(0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -22,4 +23,5 @@ RSpec.describe Feed, type: :model do
   it { should have_many :attachments }
   it { should have_many :marks }
   it { should have_many :comments }
+  it { should have_many :stars }
 end

@@ -10,6 +10,7 @@
 #  crosses_count   :integer          default(0), not null
 #  questions_count :integer          default(0), not null
 #  comments_count  :integer          default(0), not null
+#  stars_count     :integer          default(0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

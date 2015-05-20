@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Api::V1::Feeds::Marks', type: :request do
   let(:user) { create(:user) }
-  let(:channel) { create(:channel) }
-  let(:feed) { create(:feed, channel: channel) }
+  let(:feed) { create(:feed) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
 
   before do
-    create(:admin_membership, channel: channel, user: user)
+    create(:admin_membership, channel: feed.channel, user: user)
   end
 
   describe 'GET /api/v1/feeds/:feed_id/marks' do

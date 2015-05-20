@@ -67,8 +67,8 @@ GET /user/marks
             "created_at": 1432100855,
             "updated_at": 1432100855,
             "created_by": {
-                "id": "GDbvXq2O",
-                "email": "zoro@straw-hat.org"
+                "id": "WM8Xnx7Q",
+                "email": "luffy@straw-hat.org"
             }
         }
     }

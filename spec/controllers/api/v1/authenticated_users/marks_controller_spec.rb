@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::AuthenticatedUsers::MarksController,\
+RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
                type: :controller do
   let(:user) { create(:user) }
   let(:feed) { create(:feed) }

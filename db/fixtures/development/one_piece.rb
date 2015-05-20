@@ -38,7 +38,7 @@ Feed.seed_once(
   :id,
   { id: 1, channel_id: 1, text: 'Advanture begins!', created_by_id: 1 },
   { id: 2, channel_id: 1, text: 'Do we need a musician on board?', created_by_id: 1 },
-  { id: 3, channel_id: 2, text: '3D2Y', created_by_id: 2 })
+  { id: 3, channel_id: 2, text: '3D2Y', created_by_id: 1 })
 
 Mark.seed_once(
   :id,
@@ -66,3 +66,20 @@ Comment.seed_once(
   { id: 1, feed_id: 1, text: 'Hell yeah!', created_by_id: 2 },
   { id: 2, feed_id: 1, text: 'Need a map?', created_by_id: 4 },
   { id: 3, feed_id: 2, text: 'I have a candidate.', created_by_id: 5 })
+
+Star.seed_once(
+  :id,
+  { id: 1, feed_id: 1, user_id: 2 },
+  { id: 2, feed_id: 1, user_id: 3 },
+  { id: 3, feed_id: 1, user_id: 4 },
+  { id: 4, feed_id: 1, user_id: 5 },
+  { id: 5, feed_id: 1, user_id: 6 },
+  { id: 6, feed_id: 1, user_id: 7 },
+  { id: 7, feed_id: 3, user_id: 2 },
+  { id: 8, feed_id: 3, user_id: 3 },
+  { id: 9, feed_id: 3, user_id: 4 },
+  { id: 10, feed_id: 3, user_id: 5 },
+  { id: 11, feed_id: 3, user_id: 6 },
+  { id: 12, feed_id: 3, user_id: 7 },
+  { id: 13, feed_id: 3, user_id: 8 },
+  { id: 14, feed_id: 3, user_id: 9 })

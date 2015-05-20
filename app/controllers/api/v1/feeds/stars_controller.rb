@@ -1,20 +1,20 @@
 module Api
   module V1
     module Feeds
-      class MarksController < ApiController
+      class StarsController < ApiController
         before_action :set_feed
 
-        decorates_assigned :marks
-        decorates_assigned :mark
+        decorates_assigned :stars
+        decorates_assigned :star
 
         def index
           authorize @feed.channel, :admin?
-          @marks = paginate @feed.marks
+          @stars = paginate @feed.stars
         end
 
         def show
           authorize @feed.channel, :admin?
-          @mark = Mark.pinpoint(@feed.id, decrypted_user_id)
+          @star = Star.pinpoint(@feed.id, decrypted_user_id)
         end
 
         private
