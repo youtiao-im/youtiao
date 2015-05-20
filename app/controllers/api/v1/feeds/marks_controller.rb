@@ -3,7 +3,6 @@ module Api
     module Feeds
       class MarksController < ApiController
         before_action :set_feed
-        # before_action :set_user, except: [:index]
 
         decorates_assigned :marks
         decorates_assigned :mark

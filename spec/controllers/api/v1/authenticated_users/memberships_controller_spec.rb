@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::AuthenticatedUsers::MembershipsController,\
+RSpec.describe Api::V1::AuthenticatedUsers::MembershipsController,
                type: :controller do
   let(:user) { create(:user) }
   let(:channel) { create(:channel) }

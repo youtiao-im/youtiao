@@ -17,21 +17,60 @@ GET /user/marks
 [
     {
         "symbol": "check",
-        "created_at": 1431596915,
-        "updated_at": 1431596915,
-        "feed_id": 1
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "feed": {
+            "id": "YjM4QRwb",
+            "text": "Advanture begins!",
+            "checks_count": 4,
+            "crosses_count": 0,
+            "questions_count": 0,
+            "comments_count": 2,
+            "created_at": 1432100855,
+            "updated_at": 1432100855,
+            "created_by": {
+                "id": "WM8Xnx7Q",
+                "email": "luffy@straw-hat.org"
+            }
+        }
     },
     {
         "symbol": "cross",
-        "created_at": 1431596915,
-        "updated_at": 1431596915,
-        "feed_id": 2
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "feed": {
+            "id": "DxrAPRBZ",
+            "text": "Do we need a musician on board?",
+            "checks_count": 3,
+            "crosses_count": 1,
+            "questions_count": 2,
+            "comments_count": 1,
+            "created_at": 1432100855,
+            "updated_at": 1432100855,
+            "created_by": {
+                "id": "WM8Xnx7Q",
+                "email": "luffy@straw-hat.org"
+            }
+        }
     },
     {
         "symbol": "check",
-        "created_at": 1431596915,
-        "updated_at": 1431596915,
-        "feed_id": 3
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "feed": {
+            "id": "lYMBoRda",
+            "text": "3D2Y",
+            "checks_count": 8,
+            "crosses_count": 0,
+            "questions_count": 0,
+            "comments_count": 0,
+            "created_at": 1432100855,
+            "updated_at": 1432100855,
+            "created_by": {
+                "id": "WM8Xnx7Q",
+                "email": "luffy@straw-hat.org"
+            }
+        }
     }
 ]
 ```
@@ -47,9 +86,22 @@ GET /user/marks/feeds/:feed_id
 ```json
 {
     "symbol": "check",
-    "created_at": 1431596915,
-    "updated_at": 1431596915,
-    "feed_id": 1
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "feed": {
+        "id": "YjM4QRwb",
+        "text": "Advanture begins!",
+        "checks_count": 4,
+        "crosses_count": 0,
+        "questions_count": 0,
+        "comments_count": 2,
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "created_by": {
+            "id": "WM8Xnx7Q",
+            "email": "luffy@straw-hat.org"
+        }
+    }
 }
 ```
 
@@ -65,14 +117,35 @@ PUT /user/marks/feeds/:feed_id
 | -------- | ---------- | ------------------------------------- |
 | `symbol` | `string`   | **Required**. The symbol of the mark. |
 
+### Example
+
+```json
+{
+    "symbol": "check"
+}
+```
+
 ### Response
 
 ```json
 {
     "symbol": "check",
-    "created_at": 1431596915,
-    "updated_at": 1431596915,
-    "feed_id": 1
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "feed": {
+        "id": "YjM4QRwb",
+        "text": "Advanture begins!",
+        "checks_count": 4,
+        "crosses_count": 0,
+        "questions_count": 0,
+        "comments_count": 2,
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "created_by": {
+            "id": "WM8Xnx7Q",
+            "email": "luffy@straw-hat.org"
+        }
+    }
 }
 ```
 
@@ -101,8 +174,21 @@ PATCH /user/marks/feeds/:feed_id
 ```json
 {
     "symbol": "cross",
-    "created_at": 1431596915,
-    "updated_at": 1431596915,
-    "feed_id": 1
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "feed": {
+        "id": "YjM4QRwb",
+        "text": "Advanture begins!",
+        "checks_count": 3,
+        "crosses_count": 1,
+        "questions_count": 0,
+        "comments_count": 2,
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "created_by": {
+            "id": "WM8Xnx7Q",
+            "email": "luffy@straw-hat.org"
+        }
+    }
 }
 ```

@@ -1,4 +1,4 @@
-# Channel Feeds
+# Feeds
 
 * [List](#list)
 * [Get](#get)
@@ -15,16 +15,32 @@ GET /channels/:channel_id/feeds
 ```json
 [
     {
-        "id": 1,
+        "id": "YjM4QRwb",
         "text": "Advanture begins!",
-        "created_at": 1431596915,
-        "updated_at": 1431596915
+        "checks_count": 4,
+        "crosses_count": 0,
+        "questions_count": 0,
+        "comments_count": 2,
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "created_by": {
+            "id": "WM8Xnx7Q",
+            "email": "luffy@straw-hat.org"
+        }
     },
     {
-        "id": 2,
+        "id": "DxrAPRBZ",
         "text": "Do we need a musician on board?",
-        "created_at": 1431596915,
-        "updated_at": 1431596915
+        "checks_count": 3,
+        "crosses_count": 1,
+        "questions_count": 2,
+        "comments_count": 1,
+        "created_at": 1432100855,
+        "updated_at": 1432100855,
+        "created_by": {
+            "id": "WM8Xnx7Q",
+            "email": "luffy@straw-hat.org"
+        }
     }
 ]
 ```
@@ -39,10 +55,18 @@ GET /feeds/:feed_id
 
 ```json
 {
-    "id": 1,
+    "id": "YjM4QRwb",
     "text": "Advanture begins!",
-    "created_at": 1431596915,
-    "updated_at": 1431596915
+    "checks_count": 4,
+    "crosses_count": 0,
+    "questions_count": 0,
+    "comments_count": 2,
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "created_by": {
+        "id": "WM8Xnx7Q",
+        "email": "luffy@straw-hat.org"
+    }
 }
 ```
 
@@ -70,9 +94,17 @@ POST /channels/:channel_id/feeds
 
 ```json
 {
-    "id": 1,
+    "id": "YjM4QRwb",
     "text": "Advanture begins!",
-    "created_at": 1431596915,
-    "updated_at": 1431596915
+    "checks_count": 0,
+    "crosses_count": 0,
+    "questions_count": 0,
+    "comments_count": 0,
+    "created_at": 1432100855,
+    "updated_at": 1432100855,
+    "created_by": {
+        "id": "WM8Xnx7Q",
+        "email": "luffy@straw-hat.org"
+    }
 }
 ```

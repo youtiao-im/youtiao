@@ -159,8 +159,6 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
             end
 
             context 'with valid attributes' do
-              let(:valid_params) { FactoryGirl.build(:feed).attributes }
-
               it 'responds with :ok' do
                 post :create, { channel_id: channel.to_param }.merge(
                   attributes_for(:feed))

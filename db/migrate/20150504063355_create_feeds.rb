@@ -7,6 +7,8 @@ class CreateFeeds < ActiveRecord::Migration
       t.integer :checks_count, null: false, default: 0
       t.integer :crosses_count, null: false, default: 0
       t.integer :questions_count, null: false, default: 0
+      t.integer :comments_count, null: false, default: 0
+      t.integer :stars_count, null: false, default: 0
       t.timestamps null: false
     end
   end

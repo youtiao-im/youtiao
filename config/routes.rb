@@ -27,6 +27,15 @@ Rails.application.routes.draw do
             patch 'feeds/:feed_id', action: :update
           end
         end
+
+        resources :stars,
+                  only: [:index],
+                  controller: 'authenticated_users/stars' do
+          collection do
+            get 'feeds/:feed_id', action: :show
+            put 'feeds/:feed_id', action: :create
+          end
+        end
       end
 
       resources :channels, only: [:show, :create] do
@@ -41,6 +50,14 @@ Rails.application.routes.draw do
 
         resources :feeds, only: [:index, :show, :create] do
           resources :marks, only: [:index], controller: 'feeds/marks' do
+            collection do
+              get 'users/:user_id', action: :show
+            end
+          end
+
+          resources :comments, only: [:index, :show, :create]
+
+          resources :stars, only: [:index], controller: 'feeds/stars' do
             collection do
               get 'users/:user_id', action: :show
             end

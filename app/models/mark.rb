@@ -24,8 +24,8 @@ class Mark < ActiveRecord::Base
   end)
 
   def self.pinpoint(feed_id, user_id)
-    membership = find_by_feed_id_and_user_id(feed_id, user_id)
-    fail ActiveRecord::RecordNotFound if membership.nil?
-    membership
+    mark = find_by_feed_id_and_user_id(feed_id, user_id)
+    fail ActiveRecord::RecordNotFound if mark.nil?
+    mark
   end
 end
