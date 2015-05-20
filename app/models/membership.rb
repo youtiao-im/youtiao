@@ -19,6 +19,8 @@ class Membership < ActiveRecord::Base
 
   validates :role, presence: true
 
+  counter_culture :channel
+
   def self.pinpoint(channel_id, user_id)
     membership = find_by_channel_id_and_user_id(channel_id, user_id)
     fail ActiveRecord::RecordNotFound if membership.nil?

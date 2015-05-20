@@ -2,11 +2,12 @@
 #
 # Table name: channels
 #
-#  id            :integer          not null, primary key
-#  created_by_id :integer          not null
-#  name          :string           not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                :integer          not null, primary key
+#  name              :string           not null
+#  created_by_id     :integer          not null
+#  memberships_count :integer          default(0), not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
 FactoryGirl.define do

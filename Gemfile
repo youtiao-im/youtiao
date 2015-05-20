@@ -58,6 +58,7 @@ gem 'versionist'
 gem 'seed-fu'
 # gem 'foreigner'
 gem 'enumerize'
+gem 'counter_culture'
 
 # gem 'request_store'
 

@@ -19,6 +19,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Memberships', type: :request do
             channel: {
               id: channel.to_param,
               name: channel.name,
+              memberships_count: Fixnum,
               created_at: channel.created_at.to_i,
               updated_at: channel.updated_at.to_i,
               created_by: {
@@ -44,6 +45,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Memberships', type: :request do
         channel: {
           id: channel.to_param,
           name: channel.name,
+          memberships_count: Fixnum,
           created_at: channel.created_at.to_i,
           updated_at: channel.updated_at.to_i,
           created_by: {
@@ -66,6 +68,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Memberships', type: :request do
         channel: {
           id: channel.to_param,
           name: channel.name,
+          memberships_count: Fixnum,
           created_at: channel.created_at.to_i,
           updated_at: channel.updated_at.to_i,
           created_by: {
