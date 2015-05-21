@@ -1,3 +1,5 @@
+require 'text_formatter'
+
 module Api
   module V1
     class FeedsController < ApiController
@@ -26,6 +28,7 @@ module Api
         @feed = Feed.new(safe_create_params)
         @feed.channel = @channel
         @feed.created_by = current_resource_owner
+        @feed.text = TextFormatter.auto_link(@feed.text)
         @feed.save!
         unless params[:attachments].nil?
           params[:attachments].each do |attachment|

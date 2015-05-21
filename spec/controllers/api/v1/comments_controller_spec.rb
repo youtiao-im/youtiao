@@ -165,11 +165,20 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
               end.to change(Comment, :count).by(1)
             end
 
-            it 'decorates the new feed as #feed' do
+            it 'decorates the new comment as #comment' do
               post :create, { feed_id: feed.to_param }.merge(
                 attributes_for(:comment))
               expect(controller.comment).to be_decorated
               expect(controller.comment).to eq(Comment.last)
+            end
+
+            it 'auto-links urls in comment text' do
+              post :create, { feed_id: feed.to_param }.merge(
+                attributes_for(:comment)).merge(
+                  text: 'Hello youtiao.im, and http://youtiao.im.')
+              expect(Comment.last.text).to eq(
+                'Hello <~http://youtiao.im|youtiao.im>, and '\
+                '<~http://youtiao.im>.')
             end
           end
         end
