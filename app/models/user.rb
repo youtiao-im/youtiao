@@ -30,4 +30,12 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :marks
   has_many :stars
+
+  def self.current
+    RequestStore.store[:current_user]
+  end
+
+  def self.current=(user)
+    RequestStore.store[:current_user] = user
+  end
 end

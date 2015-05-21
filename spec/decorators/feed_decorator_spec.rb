@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe FeedDecorator, type: :decorator do
-  subject { feed.decorate(context: { current_user: user }) }
+  subject { feed.decorate }
   let(:feed) { create(:feed) }
   let(:user) { create(:user) }
+
+  before do
+    User.current = user
+  end
 
   describe '#mark' do
     context 'when feed is not marked by user' do

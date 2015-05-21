@@ -4,15 +4,12 @@ module Api
       class MarksController < ApiController
         before_action :set_feed, except: [:index]
 
-        decorates_assigned :marks, context: (lambda do |controller|
-          { current_user: controller.current_resource_owner }
-        end)
-        decorates_assigned :mark, context: (lambda do |controller|
-          { current_user: controller.current_resource_owner }
-        end)
+        decorates_assigned :marks
+        decorates_assigned :mark
 
         def index
-          @marks = paginate current_resource_owner.marks
+          @marks = paginate current_resource_owner.marks.includes(
+            :feed, feed: [:created_by, :mark, :star])
         end
 
         def show

@@ -8,7 +8,8 @@ module Api
         decorates_assigned :membership
 
         def index
-          @memberships = paginate current_resource_owner.memberships
+          @memberships = paginate current_resource_owner.memberships.includes(
+            :channel, channel: :created_by)
         end
 
         def show

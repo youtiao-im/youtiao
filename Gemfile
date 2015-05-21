@@ -62,7 +62,7 @@ gem 'seed-fu'
 gem 'enumerize'
 gem 'counter_culture'
 
-# gem 'request_store'
+gem 'request_store'
 
 gem 'qiniu'
 
