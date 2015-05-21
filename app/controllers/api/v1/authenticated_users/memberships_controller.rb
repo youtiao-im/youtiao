@@ -21,7 +21,7 @@ module Api
           @membership.channel = @channel
           @membership.user = current_resource_owner
           @membership.role = :member
-          @membership.save!
+          @membership = Memberships::Create.run!(@membership.attributes)
           render :show
         end
 

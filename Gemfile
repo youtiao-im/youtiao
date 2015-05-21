@@ -55,6 +55,8 @@ gem 'hashids'
 gem 'api-pagination'
 gem 'versionist'
 
+gem 'mutations'
+
 gem 'seed-fu'
 # gem 'foreigner'
 gem 'enumerize'

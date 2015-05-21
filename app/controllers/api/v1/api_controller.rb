@@ -5,7 +5,8 @@ module Api
 
       rescue_from ActionController::ParameterMissing,
                   ActiveRecord::RecordInvalid,
-                  ActionController::BadRequest do |exception|
+                  ActionController::BadRequest,
+                  Mutations::ValidationException do |exception|
         render json: exception, status: :bad_request
       end
 
