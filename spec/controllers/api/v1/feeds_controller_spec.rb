@@ -178,6 +178,15 @@ RSpec.describe Api::V1::FeedsController, type: :controller do
                 expect(controller.feed).to be_decorated
                 expect(controller.feed).to eq(Feed.last)
               end
+
+              it 'auto-links urls in feed text' do
+                post :create, { channel_id: channel.to_param }.merge(
+                  attributes_for(:feed)).merge(
+                    text: 'Hello youtiao.im, and http://youtiao.im/about#us.')
+                expect(Feed.last.text).to eq(
+                  'Hello <~http://youtiao.im|youtiao.im>, and '\
+                  '<~http://youtiao.im/about#us>.')
+              end
             end
           end
         end

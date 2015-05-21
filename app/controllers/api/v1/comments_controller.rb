@@ -1,3 +1,5 @@
+require 'text_formatter'
+
 module Api
   module V1
     class CommentsController < ApiController
@@ -21,6 +23,7 @@ module Api
         authorize @feed.channel, :show?
         @comment = Comment.new(safe_create_params)
         @comment.feed = @feed
+        @comment.text = TextFormatter.auto_link(@comment.text)
         @comment.created_by = current_resource_owner
         @comment.save!
         render :show
