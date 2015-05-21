@@ -17,8 +17,8 @@ GET /user/marks
 [
     {
         "symbol": "check",
-        "created_at": 1432100855,
-        "updated_at": 1432100855,
+        "created_at": 1432105686,
+        "updated_at": 1432105686,
         "feed": {
             "id": "YjM4QRwb",
             "text": "Advanture begins!",
@@ -26,8 +26,17 @@ GET /user/marks
             "crosses_count": 0,
             "questions_count": 0,
             "comments_count": 2,
-            "created_at": 1432100855,
-            "updated_at": 1432100855,
+            "created_at": 1432105686,
+            "updated_at": 1432105686,
+            "mark": {
+                "symbol": "check",
+                "created_at": 1432105686,
+                "updated_at": 1432105686
+            },
+            "star": {
+                "created_at": 1432105686,
+                "updated_at": 1432105686
+            },
             "created_by": {
                 "id": "WM8Xnx7Q",
                 "email": "luffy@straw-hat.org"
@@ -36,8 +45,8 @@ GET /user/marks
     },
     {
         "symbol": "cross",
-        "created_at": 1432100855,
-        "updated_at": 1432100855,
+        "created_at": 1432105686,
+        "updated_at": 1432105686,
         "feed": {
             "id": "DxrAPRBZ",
             "text": "Do we need a musician on board?",
@@ -45,8 +54,13 @@ GET /user/marks
             "crosses_count": 1,
             "questions_count": 2,
             "comments_count": 1,
-            "created_at": 1432100855,
-            "updated_at": 1432100855,
+            "created_at": 1432105686,
+            "updated_at": 1432105686,
+            "mark": {
+                "symbol": "cross",
+                "created_at": 1432105686,
+                "updated_at": 1432105686
+            },
             "created_by": {
                 "id": "WM8Xnx7Q",
                 "email": "luffy@straw-hat.org"
@@ -55,8 +69,8 @@ GET /user/marks
     },
     {
         "symbol": "check",
-        "created_at": 1432100855,
-        "updated_at": 1432100855,
+        "created_at": 1432105686,
+        "updated_at": 1432105686,
         "feed": {
             "id": "lYMBoRda",
             "text": "3D2Y",
@@ -64,8 +78,17 @@ GET /user/marks
             "crosses_count": 0,
             "questions_count": 0,
             "comments_count": 0,
-            "created_at": 1432100855,
-            "updated_at": 1432100855,
+            "created_at": 1432105686,
+            "updated_at": 1432105686,
+            "mark": {
+                "symbol": "check",
+                "created_at": 1432105686,
+                "updated_at": 1432105686
+            },
+            "star": {
+                "created_at": 1432105686,
+                "updated_at": 1432105686
+            },
             "created_by": {
                 "id": "WM8Xnx7Q",
                 "email": "luffy@straw-hat.org"
@@ -86,8 +109,8 @@ GET /user/marks/feeds/:feed_id
 ```json
 {
     "symbol": "check",
-    "created_at": 1432100855,
-    "updated_at": 1432100855,
+    "created_at": 1432105686,
+    "updated_at": 1432105686,
     "feed": {
         "id": "YjM4QRwb",
         "text": "Advanture begins!",
@@ -95,8 +118,17 @@ GET /user/marks/feeds/:feed_id
         "crosses_count": 0,
         "questions_count": 0,
         "comments_count": 2,
-        "created_at": 1432100855,
-        "updated_at": 1432100855,
+        "created_at": 1432105686,
+        "updated_at": 1432105686,
+        "mark": {
+            "symbol": "check",
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
+        "star": {
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
         "created_by": {
             "id": "WM8Xnx7Q",
             "email": "luffy@straw-hat.org"
@@ -130,8 +162,8 @@ PUT /user/marks/feeds/:feed_id
 ```json
 {
     "symbol": "check",
-    "created_at": 1432100855,
-    "updated_at": 1432100855,
+    "created_at": 1432105686,
+    "updated_at": 1432105686,
     "feed": {
         "id": "YjM4QRwb",
         "text": "Advanture begins!",
@@ -139,8 +171,17 @@ PUT /user/marks/feeds/:feed_id
         "crosses_count": 0,
         "questions_count": 0,
         "comments_count": 2,
-        "created_at": 1432100855,
-        "updated_at": 1432100855,
+        "created_at": 1432105686,
+        "updated_at": 1432105686,
+        "mark": {
+            "symbol": "check",
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
+        "star": {
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
         "created_by": {
             "id": "WM8Xnx7Q",
             "email": "luffy@straw-hat.org"
@@ -174,17 +215,26 @@ PATCH /user/marks/feeds/:feed_id
 ```json
 {
     "symbol": "cross",
-    "created_at": 1432100855,
-    "updated_at": 1432100855,
+    "created_at": 1432105686,
+    "updated_at": 1432105686,
     "feed": {
         "id": "YjM4QRwb",
         "text": "Advanture begins!",
-        "checks_count": 3,
-        "crosses_count": 1,
+        "checks_count": 4,
+        "crosses_count": 0,
         "questions_count": 0,
         "comments_count": 2,
-        "created_at": 1432100855,
-        "updated_at": 1432100855,
+        "created_at": 1432105686,
+        "updated_at": 1432105686,
+        "mark": {
+            "symbol": "cross",
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
+        "star": {
+            "created_at": 1432105686,
+            "updated_at": 1432105686
+        },
         "created_by": {
             "id": "WM8Xnx7Q",
             "email": "luffy@straw-hat.org"

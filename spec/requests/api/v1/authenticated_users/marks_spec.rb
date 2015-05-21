@@ -25,6 +25,11 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
               comments_count: Fixnum,
               created_at: feed.created_at.to_i,
               updated_at: feed.updated_at.to_i,
+              mark: {
+                symbol: mark.symbol,
+                created_at: mark.created_at.to_i,
+                updated_at: mark.updated_at.to_i
+              },
               created_by: {
                 id: feed.created_by.to_param,
                 email: feed.created_by.email
@@ -54,6 +59,11 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
           comments_count: Fixnum,
           created_at: feed.created_at.to_i,
           updated_at: feed.updated_at.to_i,
+          mark: {
+            symbol: mark.symbol,
+            created_at: mark.created_at.to_i,
+            updated_at: mark.updated_at.to_i
+          },
           created_by: {
             id: feed.created_by.to_param,
             email: feed.created_by.email
@@ -81,6 +91,11 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
           comments_count: Fixnum,
           created_at: feed.created_at.to_i,
           updated_at: feed.updated_at.to_i,
+          mark: {
+            symbol: String,
+            created_at: Fixnum,
+            updated_at: Fixnum
+          },
           created_by: {
             id: feed.created_by.to_param,
             email: feed.created_by.email
@@ -109,6 +124,11 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
           comments_count: Fixnum,
           created_at: feed.created_at.to_i,
           updated_at: feed.updated_at.to_i,
+          mark: {
+            symbol: String,
+            created_at: mark.created_at.to_i,
+            updated_at: Fixnum
+          },
           created_by: {
             id: feed.created_by.to_param,
             email: feed.created_by.email

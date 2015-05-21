@@ -24,6 +24,10 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Stars', type: :request do
               comments_count: Fixnum,
               created_at: feed.created_at.to_i,
               updated_at: feed.updated_at.to_i,
+              star: {
+                created_at: star.created_at.to_i,
+                updated_at: star.updated_at.to_i
+              },
               created_by: {
                 id: feed.created_by.to_param,
                 email: feed.created_by.email
@@ -52,6 +56,10 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Stars', type: :request do
           comments_count: Fixnum,
           created_at: feed.created_at.to_i,
           updated_at: feed.updated_at.to_i,
+          star: {
+            created_at: star.created_at.to_i,
+            updated_at: star.updated_at.to_i
+          },
           created_by: {
             id: feed.created_by.to_param,
             email: feed.created_by.email
@@ -78,6 +86,10 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Stars', type: :request do
           comments_count: Fixnum,
           created_at: feed.created_at.to_i,
           updated_at: feed.updated_at.to_i,
+          star: {
+            created_at: Fixnum,
+            updated_at: Fixnum
+          },
           created_by: {
             id: feed.created_by.to_param,
             email: feed.created_by.email
