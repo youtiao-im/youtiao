@@ -24,7 +24,7 @@ module Api
           @star = Star.new
           @star.feed = @feed
           @star.user = current_resource_owner
-          @star.save!
+          @star = Stars::Create.run!(@star.attributes)
           render :show
         end
 

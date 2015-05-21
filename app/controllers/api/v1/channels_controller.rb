@@ -14,9 +14,7 @@ module Api
         @channel = Channel.new(safe_create_params)
         @channel.created_by = current_resource_owner
         authorize @channel
-        # TODO: move to service
-        @channel.save!
-        Membership.create!(channel: @channel, user: current_resource_owner, role: :owner)
+        @channel = Channels::Create.run!(@channel.attributes)
         render :show
       end
 

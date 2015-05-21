@@ -24,15 +24,14 @@ module Api
           @mark = Mark.new(safe_create_params)
           @mark.feed = @feed
           @mark.user = current_resource_owner
-          @mark.save!
+          @mark = Marks::Create.run!(@mark.attributes)
           render :show
         end
 
         def update
           authorize @feed.channel, :show?
           @mark = Mark.pinpoint(@feed.id, current_resource_owner.id)
-          @mark.update_attributes(safe_update_params)
-          @mark.save!
+          @mark = Marks::Update.run!(safe_update_params.merge(mark: @mark))
           render :show
         end
 

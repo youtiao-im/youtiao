@@ -17,12 +17,11 @@ module Api
       end
 
       def create
-        # TODO: move to service
         authorize @feed.channel, :show?
         @comment = Comment.new(safe_create_params)
         @comment.feed = @feed
         @comment.created_by = current_resource_owner
-        @comment.save!
+        @comment = Comments::Create.run!(@comment.attributes)
         render :show
       end
 
