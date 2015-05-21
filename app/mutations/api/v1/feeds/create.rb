@@ -1,3 +1,5 @@
+require 'text_formatter'
+
 module Api
   module V1
     module Feeds
@@ -9,6 +11,7 @@ module Api
         end
 
         def execute
+          self.text = TextFormatter.auto_link(text)
           Feed.create!(inputs)
         end
       end

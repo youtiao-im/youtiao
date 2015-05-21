@@ -1,3 +1,5 @@
+require 'text_formatter'
+
 module Api
   module V1
     class FeedsController < ApiController
