@@ -19,17 +19,11 @@ class Feed < ActiveRecord::Base
   belongs_to :channel
   belongs_to :created_by, class_name: 'User'
   has_many :attachments
-  has_many :marks
   has_many :comments
+  has_many :marks
+  has_one :mark, -> { where(user_id: User.current.id) }
   has_many :stars
+  has_one :star, -> { where(user_id: User.current.id) }
 
   validates :text, presence: true
-
-  def mark_by(user)
-    marks.find_by_user_id(user.id)
-  end
-
-  def star_by(user)
-    stars.find_by_user_id(user.id)
-  end
 end

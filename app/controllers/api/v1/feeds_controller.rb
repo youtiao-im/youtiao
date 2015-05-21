@@ -1,21 +1,15 @@
-require 'text_formatter'
-
 module Api
   module V1
     class FeedsController < ApiController
       before_action :set_channel, only: [:index, :create]
       before_action :set_feed, except: [:index, :create]
 
-      decorates_assigned :feeds, context: (lambda do |controller|
-        { current_user: controller.current_resource_owner }
-      end)
-      decorates_assigned :feed, context: (lambda do |controller|
-        { current_user: controller.current_resource_owner }
-      end)
+      decorates_assigned :feeds
+      decorates_assigned :feed
 
       def index
         authorize @channel, :show?
-        @feeds = paginate @channel.feeds
+        @feeds = paginate @channel.feeds.includes(:created_by, :mark, :star)
       end
 
       def show

@@ -9,7 +9,7 @@ module Api
 
         def index
           authorize @channel, :show?
-          @memberships = paginate @channel.memberships
+          @memberships = paginate @channel.memberships.includes(:user)
         end
 
         def show

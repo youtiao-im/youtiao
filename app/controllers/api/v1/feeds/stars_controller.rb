@@ -9,7 +9,7 @@ module Api
 
         def index
           authorize @feed.channel, :admin?
-          @stars = paginate @feed.stars
+          @stars = paginate @feed.stars.includes(:user)
         end
 
         def show

@@ -1,5 +1,3 @@
-require 'text_formatter'
-
 module Api
   module V1
     class CommentsController < ApiController
@@ -11,7 +9,7 @@ module Api
 
       def index
         authorize @feed.channel, :show?
-        @comments = paginate @feed.comments
+        @comments = paginate @feed.comments.includes(:created_by)
       end
 
       def show

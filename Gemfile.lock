@@ -351,6 +351,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.2.1)
   rails_best_practices
+  request_store
   rspec-rails
   rubocop
   sass-rails (~> 5.0)
