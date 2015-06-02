@@ -9,6 +9,10 @@ Rails.application.routes.draw do
                 path: { value: 'v1' },
                 default: true do
       resource :user, only: [:show], controller: 'authenticated_users' do
+        resources :feeds,
+                  only: [:index],
+                  controller: 'authenticated_users/feeds'
+
         resources :memberships,
                   only: [:index],
                   controller: 'authenticated_users/memberships' do

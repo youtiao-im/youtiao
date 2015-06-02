@@ -38,4 +38,8 @@ class User < ActiveRecord::Base
   def self.current=(user)
     RequestStore.store[:current_user] = user
   end
+
+  def feeds
+    Feed.where(channel_id: memberships.pluck(:channel_id))
+  end
 end
