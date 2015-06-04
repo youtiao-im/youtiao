@@ -1,10 +1,10 @@
 # Your Marks
 
-* [List](#list)
-* [Get](#get)
-* [Set](#set)
+* [List marked feeds](#list-marked-feeds)
+* [Get a marked feed](#get-a-marked-feed)
+* [Mark a feed](#mark-a-feed)
 
-## List
+## List marked feeds
 
 ```
 GET /user/marks/feeds
@@ -44,7 +44,7 @@ GET /user/marks/feeds
 ]
 ```
 
-## Get
+## Get a marked feed
 
 ```
 GET /user/marks/feeds/:feed_id
@@ -82,7 +82,7 @@ GET /user/marks/feeds/:feed_id
 }
 ```
 
-## Set
+## Mark a feed
 
 ```
 PUT /user/marks/feeds/:feed_id

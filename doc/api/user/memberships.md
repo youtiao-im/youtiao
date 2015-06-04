@@ -1,10 +1,10 @@
 # Your Memberships
 
-* [List](#list)
-* [Get](#get)
-* [Create](#create)
+* [List joined channels](#list-joined-channel)
+* [Get a joined channel](#get-a-joined-channel)
+* [Join a channel](#join-a-channel)
 
-## List
+## List joined channels
 
 ```
 GET /user/memberships/channels
@@ -35,7 +35,7 @@ GET /user/memberships/channels
 ]
 ```
 
-## Get
+## Get a joined channel
 
 ```
 GET /user/memberships/channels/:channel_id
@@ -64,10 +64,10 @@ GET /user/memberships/channels/:channel_id
 }
 ```
 
-## Create
+## Join a channel
 
 ```
-PUT /user/memberships/channels/:channel_id
+POST /user/memberships/channels/:channel_id
 ```
 
 ### Response
