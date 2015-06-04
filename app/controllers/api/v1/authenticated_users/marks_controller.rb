@@ -9,26 +9,19 @@ module Api
 
         def index
           @marks = paginate current_resource_owner.marks.includes(
-            :feed, feed: [:created_by, :mark, :star])
+            :feed, feed: [:channel, :created_by])
         end
 
         def show
           @mark = Mark.pinpoint(@feed.id, current_resource_owner.id)
         end
 
-        def create
+        def set
           authorize @feed.channel, :show?
-          @mark = Mark.new(safe_create_params)
-          @mark.feed = @feed
-          @mark.user = current_resource_owner
-          @mark = Marks::Create.run!(@mark.attributes)
-          render :show
-        end
-
-        def update
-          authorize @feed.channel, :show?
-          @mark = Mark.pinpoint(@feed.id, current_resource_owner.id)
-          @mark = Marks::Update.run!(safe_update_params.merge(mark: @mark))
+          @mark = Marks::Set.run!(
+            safe_create_params.merge(
+              feed_id: @feed.id, user_id: current_resource_owner.id))
+          @mark.feed.reload
           render :show
         end
 
@@ -39,10 +32,6 @@ module Api
         end
 
         def safe_create_params
-          params.permit(:symbol)
-        end
-
-        def safe_update_params
           params.permit(:symbol)
         end
       end

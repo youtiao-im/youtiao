@@ -9,7 +9,7 @@ module Api
 
         def index
           @memberships = paginate current_resource_owner.memberships.includes(
-            :channel, channel: :created_by)
+            :channel)
         end
 
         def show

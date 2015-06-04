@@ -4,23 +4,34 @@ RSpec.describe 'Api::V1::Channels', type: :request do
   let(:user) { create(:user) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
 
+  let(:json_expression) do
+    {
+      id: String,
+      name: String,
+      memberships_count: Fixnum,
+      created_at: Fixnum,
+      updated_at: Fixnum,
+      created_by: {
+        id: String,
+        email: String,
+        created_at: Fixnum,
+        updated_at: Fixnum
+      },
+      membership: {
+        role: String,
+        created_at: Fixnum,
+        updated_at: Fixnum
+      }
+    }
+  end
+
   describe 'GET /api/v1/channels/:id' do
     it 'returns the requested channel' do
       channel = create(:channel)
       create(:membership, channel: channel, user: user)
       get "/api/v1/channels/#{channel.to_param}", {},
           'Authorization' => "Bearer #{access_token}"
-      expect(response.body).to match_json_expression(
-        id: channel.to_param,
-        name: channel.name,
-        memberships_count: Fixnum,
-        created_at: channel.created_at.to_i,
-        updated_at: channel.updated_at.to_i,
-        created_by: {
-          id: channel.created_by.to_param,
-          email: channel.created_by.email
-        }
-      )
+      expect(response.body).to match_json_expression(json_expression)
     end
   end
 
@@ -28,17 +39,7 @@ RSpec.describe 'Api::V1::Channels', type: :request do
     it 'returns the created channel' do
       post '/api/v1/channels', attributes_for(:channel),
            'Authorization' => "Bearer #{access_token}"
-      expect(response.body).to match_json_expression(
-        id: String,
-        name: String,
-        memberships_count: Fixnum,
-        created_at: Fixnum,
-        updated_at: Fixnum,
-        created_by: {
-          id: user.to_param,
-          email: user.email
-        }
-      )
+      expect(response.body).to match_json_expression(json_expression)
     end
   end
 end

@@ -6,7 +6,7 @@ module Api
 
         def index
           @feeds = paginate current_resource_owner.feeds.includes(
-            :channel, :mark, :star, :created_by, channel: :created_by)
+            :channel, :mark, :created_by)
         end
       end
     end

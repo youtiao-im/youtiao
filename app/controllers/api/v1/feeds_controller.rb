@@ -9,7 +9,7 @@ module Api
 
       def index
         authorize @channel, :show?
-        @feeds = paginate @channel.feeds.includes(:created_by, :mark, :star)
+        @feeds = paginate @channel.feeds.includes(:created_by, :mark)
       end
 
       def show

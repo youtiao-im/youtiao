@@ -1,1 +1,1 @@
-json.partial! 'api/v1/authenticated_users/marks/mark', mark: mark
+json.partial! 'api/v1/authenticated_users/marks/feed', mark: mark

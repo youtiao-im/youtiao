@@ -13,6 +13,7 @@
 class Channel < ActiveRecord::Base
   belongs_to :created_by, class_name: 'User'
   has_many :memberships
+  has_one :membership, -> { where(user_id: User.current.id) }
   has_many :feeds
 
   validates :name, presence: true

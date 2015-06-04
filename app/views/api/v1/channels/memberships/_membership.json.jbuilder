@@ -1,5 +1,5 @@
-json.call membership, :role, :created_at, :updated_at
+json.partial! 'api/v1/models/membership', membership: membership
 
 json.user do
-  json.partial! 'api/v1/users/user', user: membership.user
+  json.partial! 'api/v1/models/user', user: membership.user
 end

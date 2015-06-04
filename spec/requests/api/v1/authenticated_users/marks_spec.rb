@@ -5,136 +5,60 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
   let(:feed) { create(:feed) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
 
-  describe 'GET /api/v1/user/marks' do
+  let(:json_expression) do
+    {
+      id: String,
+      text: String,
+      checks_count: Fixnum,
+      crosses_count: Fixnum,
+      comments_count: Fixnum,
+      created_at: Fixnum,
+      updated_at: Fixnum,
+      mark: {
+        symbol: String,
+        created_at: Fixnum,
+        updated_at: Fixnum
+      },
+      created_by: {
+        id: String,
+        email: String,
+        created_at: Fixnum,
+        updated_at: Fixnum
+      },
+      channel: {
+        id: String,
+        name: String,
+        memberships_count: Fixnum,
+        created_at: Fixnum,
+        updated_at: Fixnum
+      }
+    }
+  end
+
+  describe 'GET /api/v1/user/marks/feeds' do
     it 'returns marks of user' do
-      mark = create(:mark, feed: feed, user: user)
-      get '/api/v1/user/marks', {},
+      create(:mark, feed: feed, user: user)
+      get '/api/v1/user/marks/feeds', {},
           'Authorization' => "Bearer #{access_token}"
-      expect(response.body).to match_json_expression(
-        [
-          {
-            symbol: mark.symbol,
-            created_at: mark.created_at.to_i,
-            updated_at: mark.updated_at.to_i,
-            feed: {
-              id: feed.to_param,
-              text: feed.text,
-              checks_count: Fixnum,
-              crosses_count: Fixnum,
-              questions_count: Fixnum,
-              comments_count: Fixnum,
-              created_at: feed.created_at.to_i,
-              updated_at: feed.updated_at.to_i,
-              mark: {
-                symbol: mark.symbol,
-                created_at: mark.created_at.to_i,
-                updated_at: mark.updated_at.to_i
-              },
-              created_by: {
-                id: feed.created_by.to_param,
-                email: feed.created_by.email
-              }
-            }
-          }
-        ]
-      )
+      expect(response.body).to match_json_expression([json_expression])
     end
   end
 
   describe 'GET /api/v1/user/marks/feeds/:feed_id' do
     it 'returns the requested mark' do
-      mark = create(:mark, feed: feed, user: user)
+      create(:mark, feed: feed, user: user)
       get "/api/v1/user/marks/feeds/#{feed.to_param}", {},
           'Authorization' => "Bearer #{access_token}"
-      expect(response.body).to match_json_expression(
-        symbol: mark.symbol,
-        created_at: mark.created_at.to_i,
-        updated_at: mark.updated_at.to_i,
-        feed: {
-          id: feed.to_param,
-          text: feed.text,
-          checks_count: Fixnum,
-          crosses_count: Fixnum,
-          questions_count: Fixnum,
-          comments_count: Fixnum,
-          created_at: feed.created_at.to_i,
-          updated_at: feed.updated_at.to_i,
-          mark: {
-            symbol: mark.symbol,
-            created_at: mark.created_at.to_i,
-            updated_at: mark.updated_at.to_i
-          },
-          created_by: {
-            id: feed.created_by.to_param,
-            email: feed.created_by.email
-          }
-        }
-      )
+      expect(response.body).to match_json_expression(json_expression)
     end
   end
 
   describe 'PUT /api/v1/user/marks/feeds/:feed_id' do
-    it 'returns the created mark' do
+    it 'returns the created/updated mark' do
       create(:membership, channel: feed.channel, user: user)
       put "/api/v1/user/marks/feeds/#{feed.to_param}", attributes_for(:mark),
           'Authorization' => "Bearer #{access_token}"
-      expect(response.body).to match_json_expression(
-        symbol: String,
-        created_at: Fixnum,
-        updated_at: Fixnum,
-        feed: {
-          id: feed.to_param,
-          text: feed.text,
-          checks_count: Fixnum,
-          crosses_count: Fixnum,
-          questions_count: Fixnum,
-          comments_count: Fixnum,
-          created_at: feed.created_at.to_i,
-          updated_at: feed.updated_at.to_i,
-          mark: {
-            symbol: String,
-            created_at: Fixnum,
-            updated_at: Fixnum
-          },
-          created_by: {
-            id: feed.created_by.to_param,
-            email: feed.created_by.email
-          }
-        }
-      )
-    end
-  end
-
-  describe 'PATCH /api/v1/user/marks/feeds/:feed_id' do
-    it 'returns the updated mark' do
-      create(:membership, channel: feed.channel, user: user)
-      mark = create(:mark, feed: feed, user: user)
-      patch "/api/v1/user/marks/feeds/#{feed.to_param}", attributes_for(:mark),
-            'Authorization' => "Bearer #{access_token}"
-      expect(response.body).to match_json_expression(
-        symbol: String,
-        created_at: mark.created_at.to_i,
-        updated_at: Fixnum,
-        feed: {
-          id: feed.to_param,
-          text: feed.text,
-          checks_count: Fixnum,
-          crosses_count: Fixnum,
-          questions_count: Fixnum,
-          comments_count: Fixnum,
-          created_at: feed.created_at.to_i,
-          updated_at: feed.updated_at.to_i,
-          mark: {
-            symbol: String,
-            created_at: mark.created_at.to_i,
-            updated_at: Fixnum
-          },
-          created_by: {
-            id: feed.created_by.to_param,
-            email: feed.created_by.email
-          }
-        }
-      )
+      expect(response.body).to match_json_expression(json_expression)
     end
   end
 end

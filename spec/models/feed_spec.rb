@@ -22,6 +22,6 @@ RSpec.describe Feed, type: :model do
   it { should belong_to :created_by }
   it { should have_many :attachments }
   it { should have_many :marks }
+  it { should have_one :mark }
   it { should have_many :comments }
-  it { should have_many :stars }
 end

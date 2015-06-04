@@ -24,20 +24,4 @@ RSpec.describe FeedDecorator, type: :decorator do
       end
     end
   end
-
-  describe '#star' do
-    context 'when feed is not starred by user' do
-      it 'returns nil' do
-        expect(subject.star).to be_nil
-      end
-    end
-
-    context 'when feed is starred by user' do
-      it 'returns the star decorated' do
-        star = create(:star, feed: feed, user: user)
-        expect(subject.star).to be_decorated
-        expect(subject.star).to eq(star)
-      end
-    end
-  end
 end

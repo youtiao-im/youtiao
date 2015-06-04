@@ -28,8 +28,4 @@ FactoryGirl.define do
   factory :cross_mark, parent: :mark, class: Mark do
     symbol :cross
   end
-
-  factory :question_mark, parent: :mark, class: Mark do
-    symbol :question
-  end
 end

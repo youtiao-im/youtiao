@@ -14,30 +14,22 @@ Rails.application.routes.draw do
                   controller: 'authenticated_users/feeds'
 
         resources :memberships,
-                  only: [:index],
+                  only: [],
                   controller: 'authenticated_users/memberships' do
           collection do
+            get 'channels', action: :index
             get 'channels/:channel_id', action: :show
-            put 'channels/:channel_id', action: :create
+            post 'channels/:channel_id', action: :create
           end
         end
 
         resources :marks,
-                  only: [:index],
+                  only: [],
                   controller: 'authenticated_users/marks' do
           collection do
+            get 'feeds', action: :index
             get 'feeds/:feed_id', action: :show
-            put 'feeds/:feed_id', action: :create
-            patch 'feeds/:feed_id', action: :update
-          end
-        end
-
-        resources :stars,
-                  only: [:index],
-                  controller: 'authenticated_users/stars' do
-          collection do
-            get 'feeds/:feed_id', action: :show
-            put 'feeds/:feed_id', action: :create
+            put 'feeds/:feed_id', action: :set
           end
         end
       end
@@ -48,7 +40,6 @@ Rails.application.routes.draw do
                   controller: 'channels/memberships' do
           collection do
             get 'users/:user_id', action: :show
-            put 'users/:user_id', action: :create
           end
         end
 
@@ -60,12 +51,6 @@ Rails.application.routes.draw do
           end
 
           resources :comments, only: [:index, :show, :create]
-
-          resources :stars, only: [:index], controller: 'feeds/stars' do
-            collection do
-              get 'users/:user_id', action: :show
-            end
-          end
         end
       end
     end
