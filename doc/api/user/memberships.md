@@ -1,6 +1,6 @@
 # Your Memberships
 
-* [List joined channels](#list-joined-channel)
+* [List joined channels](#list-joined-channels)
 * [Get a joined channel](#get-a-joined-channel)
 * [Join a channel](#join-a-channel)
 
