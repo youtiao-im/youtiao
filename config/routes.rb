@@ -3,10 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api, shallow: true do
-    api_version module: 'v1',
-                header: { name: 'Accept',
-                          value: 'application/vnd.youtiao.im+json; version=1' },
-                path: { value: 'v1' } do
+    api_version module: 'v1', path: { value: 'v1' } do
       resource :user, only: [:show], controller: :authenticated_users
 
       resources :channels, only: [:show, :create] do

@@ -1,33 +1,10 @@
 # Overview
 
-* [Current Version](#current-version)
 * [Root Endpoint](#root-endpoint)
 * [Authentication](#authentication)
 * [Pagination](#pagination)
 
-## Current Version
-
-You must explicitly specify the version while sending requests.
-
-We encourage you to request the version via the `Accept` header.
-
-```
-Accept: application/vnd.youtiao.im+json; version=1
-```
-
-Or you can alternatively prefix the version info in URL
-
-```
-https://api.youtiao.im/v1
-```
-
 ## Root Endpoint
-
-```
-https://api.youtiao.im
-```
-
-Notice here if you're specifying api version in URL, the root endpoint would then be
 
 ```
 https://api.youtiao.im/v1
