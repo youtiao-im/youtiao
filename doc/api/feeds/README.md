@@ -19,41 +19,39 @@ GET /channels/:channel_id/feeds
         "text": "Advanture begins!",
         "checks_count": 4,
         "crosses_count": 0,
-        "questions_count": 0,
         "comments_count": 2,
-        "created_at": 1432105686,
-        "updated_at": 1432105686,
-        "mark": {
-            "symbol": "check",
-            "created_at": 1432105686,
-            "updated_at": 1432105686
-        },
-        "star": {
-            "created_at": 1432105686,
-            "updated_at": 1432105686
-        },
+        "created_at": 1433483148,
+        "updated_at": 1433483148,
         "created_by": {
             "id": "WM8Xnx7Q",
-            "email": "luffy@straw-hat.org"
+            "email": "luffy@straw-hat.org",
+            "created_at": 1433483148,
+            "updated_at": 1433483148
+        },
+        "mark": {
+            "symbol": "check",
+            "created_at": 1433483148,
+            "updated_at": 1433483148
         }
     },
     {
         "id": "DxrAPRBZ",
         "text": "Do we need a musician on board?",
         "checks_count": 3,
-        "crosses_count": 1,
-        "questions_count": 2,
+        "crosses_count": 3,
         "comments_count": 1,
-        "created_at": 1432105686,
-        "updated_at": 1432105686,
-        "mark": {
-            "symbol": "cross",
-            "created_at": 1432105686,
-            "updated_at": 1432105686
-        },
+        "created_at": 1433483148,
+        "updated_at": 1433483148,
         "created_by": {
             "id": "WM8Xnx7Q",
-            "email": "luffy@straw-hat.org"
+            "email": "luffy@straw-hat.org",
+            "created_at": 1433483148,
+            "updated_at": 1433483148
+        },
+        "mark": {
+            "symbol": "cross",
+            "created_at": 1433483148,
+            "updated_at": 1433483148
         }
     }
 ]
@@ -73,22 +71,19 @@ GET /feeds/:feed_id
     "text": "Advanture begins!",
     "checks_count": 4,
     "crosses_count": 0,
-    "questions_count": 0,
     "comments_count": 2,
-    "created_at": 1432105686,
-    "updated_at": 1432105686,
-    "mark": {
-        "symbol": "check",
-        "created_at": 1432105686,
-        "updated_at": 1432105686
-    },
-    "star": {
-        "created_at": 1432105686,
-        "updated_at": 1432105686
-    },
+    "created_at": 1433483148,
+    "updated_at": 1433483148,
     "created_by": {
         "id": "WM8Xnx7Q",
-        "email": "luffy@straw-hat.org"
+        "email": "luffy@straw-hat.org",
+        "created_at": 1433483148,
+        "updated_at": 1433483148
+    },
+    "mark": {
+        "symbol": "check",
+        "created_at": 1433483148,
+        "updated_at": 1433483148
     }
 }
 ```
@@ -121,13 +116,14 @@ POST /channels/:channel_id/feeds
     "text": "Advanture begins!",
     "checks_count": 0,
     "crosses_count": 0,
-    "questions_count": 0,
     "comments_count": 0,
-    "created_at": 1432105686,
-    "updated_at": 1432105686,
+    "created_at": 1433483148,
+    "updated_at": 1433483148,
     "created_by": {
         "id": "WM8Xnx7Q",
-        "email": "luffy@straw-hat.org"
+        "email": "luffy@straw-hat.org",
+        "created_at": 1433483148,
+        "updated_at": 1433483148
     }
 }
 ```

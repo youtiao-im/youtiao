@@ -1,1 +1,1 @@
-json.call user, :id, :email
+json.partial! 'api/v1/shared/user', user: user

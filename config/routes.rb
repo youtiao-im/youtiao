@@ -3,68 +3,43 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api, shallow: true do
-    api_version module: 'v1',
-                header: { name: 'Accept',
-                          value: 'application/vnd.youtiao.im+json; version=1' },
-                path: { value: 'v1' },
-                default: true do
-      resource :user, only: [:show], controller: 'authenticated_users' do
-        resources :feeds,
-                  only: [:index],
-                  controller: 'authenticated_users/feeds'
+    api_version module: 'v1', path: { value: 'v1' } do
+      resource :user, only: [:show], controller: :authenticated_users
 
-        resources :memberships,
-                  only: [:index],
-                  controller: 'authenticated_users/memberships' do
+      resources :channels, only: [:show, :create] do
+        resources :feeds, only: [:index, :show, :create] do
+          resources :comments, only: [:index, :show, :create]
+        end
+      end
+
+      scope :user, module: :authenticated_users do
+        resources :feeds, only: [:index]
+
+        resources :membered_channels, only: [:index, :show] do
           collection do
-            get 'channels/:channel_id', action: :show
-            put 'channels/:channel_id', action: :create
+            put ':id', action: :create
           end
         end
 
-        resources :marks,
-                  only: [:index],
-                  controller: 'authenticated_users/marks' do
+        resources :marked_feeds, only: [:index, :show] do
           collection do
-            get 'feeds/:feed_id', action: :show
-            put 'feeds/:feed_id', action: :create
-            patch 'feeds/:feed_id', action: :update
-          end
-        end
-
-        resources :stars,
-                  only: [:index],
-                  controller: 'authenticated_users/stars' do
-          collection do
-            get 'feeds/:feed_id', action: :show
-            put 'feeds/:feed_id', action: :create
+            put ':id', action: :create_or_update
           end
         end
       end
 
-      resources :channels, only: [:show, :create] do
-        resources :memberships,
-                  only: [:index],
-                  controller: 'channels/memberships' do
+      scope 'channels/:channel_id', module: :channels do
+        resources :memberships, only: [:index] do
           collection do
             get 'users/:user_id', action: :show
-            put 'users/:user_id', action: :create
           end
         end
+      end
 
-        resources :feeds, only: [:index, :show, :create] do
-          resources :marks, only: [:index], controller: 'feeds/marks' do
-            collection do
-              get 'users/:user_id', action: :show
-            end
-          end
-
-          resources :comments, only: [:index, :show, :create]
-
-          resources :stars, only: [:index], controller: 'feeds/stars' do
-            collection do
-              get 'users/:user_id', action: :show
-            end
+      scope 'feeds/:feed_id', module: :feeds do
+        resources :marks, only: [:index] do
+          collection do
+            get 'users/:user_id', action: :show
           end
         end
       end

@@ -15,7 +15,7 @@ class Mark < ActiveRecord::Base
   belongs_to :user
 
   extend Enumerize
-  enumerize :symbol, in: [:check, :cross, :question], predicates: true
+  enumerize :symbol, in: [:check, :cross], predicates: true
 
   validates :symbol, presence: true
 

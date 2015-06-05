@@ -22,8 +22,6 @@ class Feed < ActiveRecord::Base
   has_many :comments
   has_many :marks
   has_one :mark, -> { where(user_id: User.current.id) }
-  has_many :stars
-  has_one :star, -> { where(user_id: User.current.id) }
 
   validates :text, presence: true
 end
