@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::AuthenticatedUsers::Memberships', type: :request do
+RSpec.describe 'Api::V1::AuthenticatedUsers::MemberedChannels', type: :request do
   let(:user) { create(:user) }
   let(:channel) { create(:channel) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
@@ -27,7 +27,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Memberships', type: :request do
   end
 
   describe 'GET /api/v1/user/membered_channels' do
-    it 'returns channels user membered' do
+    it 'returns channels membered by current user' do
       create(:membership, channel: channel, user: user)
       get '/api/v1/user/membered_channels', {},
           'Authorization' => "Bearer #{access_token}"
@@ -36,7 +36,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Memberships', type: :request do
   end
 
   describe 'GET /api/v1/user/membered_channels/:id' do
-    it 'returns the membered channel' do
+    it 'returns the requested membered channel' do
       create(:membership, channel: channel, user: user)
       get "/api/v1/user/membered_channels/#{channel.to_param}", {},
           'Authorization' => "Bearer #{access_token}"
@@ -45,9 +45,9 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Memberships', type: :request do
   end
 
   describe 'PUT /api/v1/user/membered_channels/:id' do
-    it 'returns the membered channel' do
+    it 'returns the created membered channel' do
       put "/api/v1/user/membered_channels/#{channel.to_param}", {},
-           'Authorization' => "Bearer #{access_token}"
+          'Authorization' => "Bearer #{access_token}"
       expect(response.body).to match_json_expression(json_expression)
     end
   end

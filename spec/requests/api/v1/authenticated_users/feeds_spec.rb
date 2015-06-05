@@ -35,7 +35,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Feeds', type: :request do
   end
 
   describe 'GET /api/v1/user/feeds' do
-    it 'returns feeds to user' do
+    it 'returns feeds of current user' do
       create(:feed, channel: channel)
       get '/api/v1/user/feeds', {}, 'Authorization' => "Bearer #{access_token}"
       expect(response.body).to match_json_expression([json_expression])

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
+RSpec.describe 'Api::V1::AuthenticatedUsers::MarkedFeeds', type: :request do
   let(:user) { create(:user) }
   let(:feed) { create(:feed) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
@@ -36,7 +36,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
   end
 
   describe 'GET /api/v1/user/marked_feeds' do
-    it 'returns feeds user marked' do
+    it 'returns feeds marked by current user' do
       create(:mark, feed: feed, user: user)
       get '/api/v1/user/marked_feeds', {},
           'Authorization' => "Bearer #{access_token}"
@@ -45,7 +45,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
   end
 
   describe 'GET /api/v1/user/marked_feeds/:id' do
-    it 'returns the marked feed' do
+    it 'returns the requested marked feed' do
       create(:mark, feed: feed, user: user)
       get "/api/v1/user/marked_feeds/#{feed.to_param}", {},
           'Authorization' => "Bearer #{access_token}"
@@ -54,7 +54,7 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Marks', type: :request do
   end
 
   describe 'PUT /api/v1/user/marked_feeds/:feed_id' do
-    it 'returns the marked feed' do
+    it 'returns the created or updated marked feed' do
       create(:membership, channel: feed.channel, user: user)
       put "/api/v1/user/marked_feeds/#{feed.to_param}", attributes_for(:mark),
           'Authorization' => "Bearer #{access_token}"
