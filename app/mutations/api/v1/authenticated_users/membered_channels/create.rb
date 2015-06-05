@@ -1,7 +1,7 @@
 module Api
   module V1
     module AuthenticatedUsers
-      module Memberships
+      module MemberedChannels
         class Create < Mutations::Command
           required do
             integer :channel_id

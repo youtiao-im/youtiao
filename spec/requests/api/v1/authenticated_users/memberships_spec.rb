@@ -26,27 +26,27 @@ RSpec.describe 'Api::V1::AuthenticatedUsers::Memberships', type: :request do
     }
   end
 
-  describe 'GET /api/v1/user/memberships/channels' do
-    it 'returns memberships of user' do
+  describe 'GET /api/v1/user/membered_channels' do
+    it 'returns channels user membered' do
       create(:membership, channel: channel, user: user)
-      get '/api/v1/user/memberships/channels', {},
+      get '/api/v1/user/membered_channels', {},
           'Authorization' => "Bearer #{access_token}"
       expect(response.body).to match_json_expression([json_expression])
     end
   end
 
-  describe 'GET /api/v1/user/memberships/channels/:channel_id' do
-    it 'returns the requested membership' do
+  describe 'GET /api/v1/user/membered_channels/:id' do
+    it 'returns the membered channel' do
       create(:membership, channel: channel, user: user)
-      get "/api/v1/user/memberships/channels/#{channel.to_param}", {},
+      get "/api/v1/user/membered_channels/#{channel.to_param}", {},
           'Authorization' => "Bearer #{access_token}"
       expect(response.body).to match_json_expression(json_expression)
     end
   end
 
-  describe 'POST /api/v1/user/memberships/channels/:channel_id' do
-    it 'returns the created membership' do
-      post "/api/v1/user/memberships/channels/#{channel.to_param}", {},
+  describe 'PUT /api/v1/user/membered_channels/:id' do
+    it 'returns the membered channel' do
+      put "/api/v1/user/membered_channels/#{channel.to_param}", {},
            'Authorization' => "Bearer #{access_token}"
       expect(response.body).to match_json_expression(json_expression)
     end

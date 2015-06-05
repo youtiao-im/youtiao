@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::AuthenticatedUsers::MembershipsController,
+RSpec.describe Api::V1::AuthenticatedUsers::MemberedChannelsController,
                type: :controller do
   let(:user) { create(:user) }
   let(:channel) { create(:channel) }
@@ -41,7 +41,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MembershipsController,
   describe 'GET #show' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
-        get :show, channel_id: 0
+        get :show, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -53,7 +53,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MembershipsController,
 
       context 'for a channel not affiliated with user' do
         it 'responds with :not_found' do
-          get :show, channel_id: channel.to_param
+          get :show, id: channel.to_param
           expect(response).to have_http_status(:not_found)
         end
       end
@@ -64,12 +64,12 @@ RSpec.describe Api::V1::AuthenticatedUsers::MembershipsController,
         end
 
         it 'responds with :ok' do
-          get :show, channel_id: channel.to_param
+          get :show, id: channel.to_param
           expect(response).to have_http_status(:ok)
         end
 
         it 'decorates membership as #membership' do
-          get :show, channel_id: channel.to_param
+          get :show, id: channel.to_param
           expect(controller.membership).to be_decorated
           expect(controller.membership).to eq(
             Membership.pinpoint(channel.id, user.id))
@@ -81,7 +81,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MembershipsController,
   describe 'PUT #create' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
-        put :create, channel_id: 0
+        put :create, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -94,25 +94,25 @@ RSpec.describe Api::V1::AuthenticatedUsers::MembershipsController,
       context 'for a channel affiliated with user' do
         it 'responds with :conflict' do
           create(:membership, channel: channel, user: user)
-          put :create, channel_id: channel.to_param
+          put :create, id: channel.to_param
           expect(response).to have_http_status(:conflict)
         end
       end
 
       context 'for a channel not affiliated with user' do
         it 'responds with :ok' do
-          put :create, channel_id: channel.to_param
+          put :create, id: channel.to_param
           expect(response).to have_http_status(:ok)
         end
 
         it 'creates a new membership' do
           expect do
-            put :create, channel_id: channel.to_param
+            put :create, id: channel.to_param
           end.to change(Membership, :count).by(1)
         end
 
         it 'decorates the created membership as #membership' do
-          put :create, channel_id: channel.to_param
+          put :create, id: channel.to_param
           expect(controller.membership).to be_decorated
           expect(controller.membership).to eq(Membership.last)
         end

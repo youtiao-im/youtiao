@@ -1,13 +1,13 @@
-# Feeds
+# Your Marked Feeds
 
 * [List](#list)
 * [Get](#get)
-* [Create](#create)
+* [Create or update](#create-or-update)
 
 ## List
 
 ```
-GET /channels/:channel_id/feeds
+GET /user/marked_feeds
 ```
 
 ### Response
@@ -22,6 +22,13 @@ GET /channels/:channel_id/feeds
         "comments_count": 2,
         "created_at": 1433483148,
         "updated_at": 1433483148,
+        "channel": {
+            "id": "GPyYROY7",
+            "name": "Going Merry",
+            "memberships_count": 7,
+            "created_at": 1433483148,
+            "updated_at": 1433483148
+        },
         "created_by": {
             "id": "WM8Xnx7Q",
             "email": "luffy@straw-hat.org",
@@ -42,6 +49,13 @@ GET /channels/:channel_id/feeds
         "comments_count": 1,
         "created_at": 1433483148,
         "updated_at": 1433483148,
+        "channel": {
+            "id": "GPyYROY7",
+            "name": "Going Merry",
+            "memberships_count": 7,
+            "created_at": 1433483148,
+            "updated_at": 1433483148
+        },
         "created_by": {
             "id": "WM8Xnx7Q",
             "email": "luffy@straw-hat.org",
@@ -53,6 +67,33 @@ GET /channels/:channel_id/feeds
             "created_at": 1433483148,
             "updated_at": 1433483148
         }
+    },
+    {
+        "id": "lYMBoRda",
+        "text": "3D2Y",
+        "checks_count": 8,
+        "crosses_count": 0,
+        "comments_count": 0,
+        "created_at": 1433483148,
+        "updated_at": 1433483148,
+        "channel": {
+            "id": "W3JBpyjd",
+            "name": "Thousand Sunny",
+            "memberships_count": 9,
+            "created_at": 1433483148,
+            "updated_at": 1433483148
+        },
+        "created_by": {
+            "id": "WM8Xnx7Q",
+            "email": "luffy@straw-hat.org",
+            "created_at": 1433483148,
+            "updated_at": 1433483148
+        },
+        "mark": {
+            "symbol": "check",
+            "created_at": 1433483148,
+            "updated_at": 1433483148
+        }
     }
 ]
 ```
@@ -60,7 +101,7 @@ GET /channels/:channel_id/feeds
 ## Get
 
 ```
-GET /feeds/:feed_id
+GET /user/marked_feeds/:feed_id
 ```
 
 ### Response
@@ -74,6 +115,13 @@ GET /feeds/:feed_id
     "comments_count": 2,
     "created_at": 1433483148,
     "updated_at": 1433483148,
+    "channel": {
+        "id": "GPyYROY7",
+        "name": "Going Merry",
+        "memberships_count": 7,
+        "created_at": 1433483148,
+        "updated_at": 1433483148
+    },
     "created_by": {
         "id": "WM8Xnx7Q",
         "email": "luffy@straw-hat.org",
@@ -88,23 +136,23 @@ GET /feeds/:feed_id
 }
 ```
 
-## Create
+## Create or update
 
 ```
-POST /channels/:channel_id/feeds
+PUT /user/marked_feeds/:feed_id
 ```
 
 ### Parameters
 
-| Name     | Type       | Description                         |
-| -------- | ---------- | ----------------------------------- |
-| `text`   | `string`   | **Required**. The text of the feed. |
+| Name     | Type       | Description                           |
+| -------- | ---------- | ------------------------------------- |
+| `symbol` | `string`   | **Required**. The symbol of the mark. |
 
 ### Example
 
 ```json
 {
-    "text": "Advanture begins!"
+    "symbol": "check"
 }
 ```
 
@@ -114,14 +162,26 @@ POST /channels/:channel_id/feeds
 {
     "id": "YjM4QRwb",
     "text": "Advanture begins!",
-    "checks_count": 0,
+    "checks_count": 4,
     "crosses_count": 0,
-    "comments_count": 0,
+    "comments_count": 2,
     "created_at": 1433483148,
     "updated_at": 1433483148,
+    "channel": {
+        "id": "GPyYROY7",
+        "name": "Going Merry",
+        "memberships_count": 7,
+        "created_at": 1433483148,
+        "updated_at": 1433483148
+    },
     "created_by": {
         "id": "WM8Xnx7Q",
         "email": "luffy@straw-hat.org",
+        "created_at": 1433483148,
+        "updated_at": 1433483148
+    },
+    "mark": {
+        "symbol": "check",
         "created_at": 1433483148,
         "updated_at": 1433483148
     }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
+RSpec.describe Api::V1::AuthenticatedUsers::MarkedFeedsController,
                type: :controller do
   let(:user) { create(:user) }
   let(:feed) { create(:feed) }
@@ -41,7 +41,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
   describe 'GET #show' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
-        get :show, feed_id: 0
+        get :show, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -53,7 +53,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
 
       context 'for a feed not exists' do
         it 'responds with :not_found' do
-          get :show, feed_id: 0
+          get :show, id: 0
           expect(response).to have_http_status(:not_found)
         end
       end
@@ -61,7 +61,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
       context 'for a feed exists' do
         context 'when feed is not marked by user' do
           it 'responds with :not_found' do
-            get :show, feed_id: feed.to_param
+            get :show, id: feed.to_param
             expect(response).to have_http_status(:not_found)
           end
         end
@@ -72,12 +72,12 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
           end
 
           it 'responds with :ok' do
-            get :show, feed_id: feed.to_param
+            get :show, id: feed.to_param
             expect(response).to have_http_status(:ok)
           end
 
           it 'decorates mark as #mark' do
-            get :show, feed_id: feed.to_param
+            get :show, id: feed.to_param
             expect(controller.mark).to be_decorated
             expect(controller.mark).to eq(Mark.pinpoint(feed.id, user.id))
           end
@@ -86,10 +86,10 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
     end
   end
 
-  describe 'PUT #set' do
+  describe 'PUT #create_or_update' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
-        put :set, feed_id: 0
+        put :create_or_update, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -101,7 +101,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
 
       context 'for a feed not exists' do
         it 'responds with :not_found' do
-          put :set, feed_id: 0
+          put :create_or_update, id: 0
           expect(response).to have_http_status(:not_found)
         end
       end
@@ -109,7 +109,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
       context 'for a feed exists' do
         context 'when feed belongs to a channel not affiliated with user' do
           it 'responds with :forbidden' do
-            put :set, feed_id: feed.to_param
+            put :create_or_update, id: feed.to_param
             expect(response).to have_http_status(:forbidden)
           end
         end
@@ -121,7 +121,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
 
           context 'with invalid attributes' do
             it 'responds with :bad_request' do
-              put :set, { feed_id: feed.to_param }.merge(
+              put :create_or_update, { id: feed.to_param }.merge(
                 attributes_for(:invalid_mark))
               expect(response).to have_http_status(:bad_request)
             end
@@ -131,7 +131,7 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
             context 'when feed is marked by user' do
               it 'responds with :ok' do
                 create(:mark, feed: feed, user: user)
-                put :set, { feed_id: feed.to_param }.merge(
+                put :create_or_update, { id: feed.to_param }.merge(
                   attributes_for(:mark))
                 expect(response).to have_http_status(:ok)
               end
@@ -139,14 +139,14 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
               it 'updates the existing mark' do
                 create(:mark, feed: feed, user: user)
                 expect do
-                  put :set, { feed_id: feed.to_param }.merge(
+                  put :create_or_update, { id: feed.to_param }.merge(
                     attributes_for(:mark))
                 end.to_not change(Mark, :count)
               end
 
               it 'decorates the updated mark as #mark' do
                 mark = create(:mark, feed: feed, user: user)
-                put :set, { feed_id: feed.to_param }.merge(
+                put :create_or_update, { id: feed.to_param }.merge(
                   attributes_for(:mark))
                 expect(controller.mark).to be_decorated
                 expect(controller.mark).to eq(mark.reload)
@@ -155,20 +155,20 @@ RSpec.describe Api::V1::AuthenticatedUsers::MarksController,
 
             context 'when feed is not marked by user' do
               it 'responds with :ok' do
-                put :set, { feed_id: feed.to_param }.merge(
+                put :create_or_update, { id: feed.to_param }.merge(
                   attributes_for(:mark))
                 expect(response).to have_http_status(:ok)
               end
 
               it 'creates a new mark' do
                 expect do
-                  put :set, { feed_id: feed.to_param }.merge(
+                  put :create_or_update, { id: feed.to_param }.merge(
                     attributes_for(:mark))
                 end.to change(Mark, :count).by(1)
               end
 
               it 'decorates the created mark as #mark' do
-                put :set, { feed_id: feed.to_param }.merge(
+                put :create_or_update, { id: feed.to_param }.merge(
                   attributes_for(:mark))
                 expect(controller.mark).to be_decorated
                 expect(controller.mark).to eq(Mark.last)

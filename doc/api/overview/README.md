@@ -7,7 +7,7 @@
 
 ## Current Version
 
-By default, all requests receive the **v1** version of the API. You should always explicitly specify the version while sending requests.
+You must explicitly specify the version while sending requests.
 
 We encourage you to request the version via the `Accept` header.
 

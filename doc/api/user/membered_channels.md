@@ -1,4 +1,4 @@
-# Feeds
+# Your Membered Channels
 
 * [List](#list)
 * [Get](#get)
@@ -7,7 +7,7 @@
 ## List
 
 ```
-GET /channels/:channel_id/feeds
+GET /user/membered_channels
 ```
 
 ### Response
@@ -15,11 +15,9 @@ GET /channels/:channel_id/feeds
 ```json
 [
     {
-        "id": "YjM4QRwb",
-        "text": "Advanture begins!",
-        "checks_count": 4,
-        "crosses_count": 0,
-        "comments_count": 2,
+        "id": "GPyYROY7",
+        "name": "Going Merry",
+        "memberships_count": 7,
         "created_at": 1433483148,
         "updated_at": 1433483148,
         "created_by": {
@@ -28,18 +26,16 @@ GET /channels/:channel_id/feeds
             "created_at": 1433483148,
             "updated_at": 1433483148
         },
-        "mark": {
-            "symbol": "check",
+        "membership": {
+            "role": "member",
             "created_at": 1433483148,
             "updated_at": 1433483148
         }
     },
     {
-        "id": "DxrAPRBZ",
-        "text": "Do we need a musician on board?",
-        "checks_count": 3,
-        "crosses_count": 3,
-        "comments_count": 1,
+        "id": "W3JBpyjd",
+        "name": "Thousand Sunny",
+        "memberships_count": 9,
         "created_at": 1433483148,
         "updated_at": 1433483148,
         "created_by": {
@@ -48,8 +44,8 @@ GET /channels/:channel_id/feeds
             "created_at": 1433483148,
             "updated_at": 1433483148
         },
-        "mark": {
-            "symbol": "cross",
+        "membership": {
+            "role": "member",
             "created_at": 1433483148,
             "updated_at": 1433483148
         }
@@ -60,18 +56,16 @@ GET /channels/:channel_id/feeds
 ## Get
 
 ```
-GET /feeds/:feed_id
+GET /user/membered_channels/:channel_id
 ```
 
 ### Response
 
 ```json
 {
-    "id": "YjM4QRwb",
-    "text": "Advanture begins!",
-    "checks_count": 4,
-    "crosses_count": 0,
-    "comments_count": 2,
+    "id": "GPyYROY7",
+    "name": "Going Merry",
+    "memberships_count": 7,
     "created_at": 1433483148,
     "updated_at": 1433483148,
     "created_by": {
@@ -80,8 +74,8 @@ GET /feeds/:feed_id
         "created_at": 1433483148,
         "updated_at": 1433483148
     },
-    "mark": {
-        "symbol": "check",
+    "membership": {
+        "role": "member",
         "created_at": 1433483148,
         "updated_at": 1433483148
     }
@@ -91,37 +85,26 @@ GET /feeds/:feed_id
 ## Create
 
 ```
-POST /channels/:channel_id/feeds
-```
-
-### Parameters
-
-| Name     | Type       | Description                         |
-| -------- | ---------- | ----------------------------------- |
-| `text`   | `string`   | **Required**. The text of the feed. |
-
-### Example
-
-```json
-{
-    "text": "Advanture begins!"
-}
+PUT /user/membered_channels/:channel_id
 ```
 
 ### Response
 
 ```json
 {
-    "id": "YjM4QRwb",
-    "text": "Advanture begins!",
-    "checks_count": 0,
-    "crosses_count": 0,
-    "comments_count": 0,
+    "id": "GPyYROY7",
+    "name": "Going Merry",
+    "memberships_count": 7,
     "created_at": 1433483148,
     "updated_at": 1433483148,
     "created_by": {
         "id": "WM8Xnx7Q",
         "email": "luffy@straw-hat.org",
+        "created_at": 1433483148,
+        "updated_at": 1433483148
+    },
+    "membership": {
+        "role": "member",
         "created_at": 1433483148,
         "updated_at": 1433483148
     }

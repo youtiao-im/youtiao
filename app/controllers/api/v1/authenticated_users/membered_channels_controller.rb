@@ -1,7 +1,7 @@
 module Api
   module V1
     module AuthenticatedUsers
-      class MembershipsController < ApiController
+      class MemberedChannelsController < ApiController
         before_action :set_channel, except: [:index]
 
         decorates_assigned :memberships
@@ -9,7 +9,7 @@ module Api
 
         def index
           @memberships = paginate current_resource_owner.memberships.includes(
-            :channel)
+            :channel, channel: :created_by)
         end
 
         def show
@@ -22,14 +22,14 @@ module Api
           @membership.channel = @channel
           @membership.user = current_resource_owner
           @membership.role = :member
-          @membership = Memberships::Create.run!(@membership.attributes)
+          @membership = MemberedChannels::Create.run!(@membership.attributes)
           render :show
         end
 
         private
 
         def set_channel
-          @channel = Channel.find(Channel.decrypt_id(params[:channel_id]))
+          @channel = Channel.find(Channel.decrypt_id(params[:id]))
         end
       end
     end

@@ -1,7 +1,7 @@
 module Api
   module V1
     module AuthenticatedUsers
-      class MarksController < ApiController
+      class MarkedFeedsController < ApiController
         before_action :set_feed, except: [:index]
 
         decorates_assigned :marks
@@ -16,11 +16,12 @@ module Api
           @mark = Mark.pinpoint(@feed.id, current_resource_owner.id)
         end
 
-        def set
+        def create_or_update
           authorize @feed.channel, :show?
-          @mark = Marks::Set.run!(
-            safe_create_params.merge(
-              feed_id: @feed.id, user_id: current_resource_owner.id))
+          @mark = Mark.new(safe_create_or_update_params)
+          @mark.feed = @feed
+          @mark.user = current_resource_owner
+          @mark = MarkedFeeds::CreateOrUpdate.run!(@mark.attributes)
           @mark.feed.reload
           render :show
         end
@@ -28,10 +29,10 @@ module Api
         private
 
         def set_feed
-          @feed = Feed.find(Feed.decrypt_id(params[:feed_id]))
+          @feed = Feed.find(Feed.decrypt_id(params[:id]))
         end
 
-        def safe_create_params
+        def safe_create_or_update_params
           params.permit(:symbol)
         end
       end

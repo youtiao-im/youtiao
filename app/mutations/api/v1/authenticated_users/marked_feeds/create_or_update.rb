@@ -1,8 +1,8 @@
 module Api
   module V1
     module AuthenticatedUsers
-      module Marks
-        class Set < Mutations::Command
+      module MarkedFeeds
+        class CreateOrUpdate < Mutations::Command
           required do
             integer :feed_id
             integer :user_id
