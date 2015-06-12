@@ -48,17 +48,6 @@ ActiveRecord::Schema.define(version: 20150612051526) do
     t.integer  "memberships_count", default: 0, null: false
   end
 
-  create_table "marks", force: :cascade do |t|
-    t.integer  "bulletin_id",     null: false
-    t.string   "symbol",          null: false
-    t.integer  "created_by_id",   null: false
-    t.string   "created_by_type", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "marks", ["bulletin_id", "created_by_id"], name: "index_marks_on_bulletin_id_and_created_by_id", unique: true, using: :btree
-
   create_table "memberships", force: :cascade do |t|
     t.integer  "group_id",   null: false
     t.integer  "user_id",    null: false
@@ -120,6 +109,17 @@ ActiveRecord::Schema.define(version: 20150612051526) do
   end
 
   add_index "read_marks", ["user_id", "readable_type", "readable_id"], name: "index_read_marks_on_user_id_and_readable_type_and_readable_id", using: :btree
+
+  create_table "stamps", force: :cascade do |t|
+    t.integer  "bulletin_id",     null: false
+    t.string   "symbol",          null: false
+    t.integer  "created_by_id",   null: false
+    t.string   "created_by_type", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "stamps", ["bulletin_id", "created_by_id"], name: "index_stamps_on_bulletin_id_and_created_by_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

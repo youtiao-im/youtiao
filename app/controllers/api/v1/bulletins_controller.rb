@@ -5,7 +5,7 @@ class Api::V1::BulletinsController < Api::V1::ApiController
   def index
     scope = current_resource_owner.bulletins
     @bulletins = paginate scope.order(id: :desc).includes(
-      :group, :created_by, :current_mark, created_by: :user)
+      :group, :created_by, :current_stamp, created_by: :user)
   end
 
   def show
@@ -23,13 +23,13 @@ class Api::V1::BulletinsController < Api::V1::ApiController
     render :show
   end
 
-  def mark
+  def stamp
     @bulletin = Bulletin.find(params[:id])
     authorize @bulletin.group, :show?
-    mark = Mark.new(params.permit(:symbol))
-    mark.bulletin = @bulletin
-    mark.created_by = @bulletin.group.current_membership
-    Marks::CreateOrUpdate.run!(mark.attributes)
+    stamp = Stamp.new(params.permit(:symbol))
+    stamp.bulletin = @bulletin
+    stamp.created_by = @bulletin.group.current_membership
+    Stamps::CreateOrUpdate.run!(stamp.attributes)
     @bulletin.reload
     render :show
   end

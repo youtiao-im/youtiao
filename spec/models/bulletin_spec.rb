@@ -19,7 +19,7 @@ require 'rails_helper'
 RSpec.describe Bulletin, type: :model do
   it { should belong_to :group }
   it { should belong_to :created_by }
-  it { should have_many :marks }
+  it { should have_many :stamps }
   it { should have_many :comments }
-  it { should have_one :current_mark }
+  it { should have_one :current_stamp }
 end

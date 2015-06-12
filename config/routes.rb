@@ -13,10 +13,10 @@ Rails.application.routes.draw do
 
         resources :bulletins, only: [:index, :create, :show] do
           member do
-            post :mark
+            post :stamp
           end
 
-          resources :marks, only: [:index]
+          resources :stamps, only: [:index]
           resources :comments, only: [:index, :show, :create]
         end
       end

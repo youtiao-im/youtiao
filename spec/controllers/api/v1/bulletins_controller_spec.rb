@@ -157,10 +157,10 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
     end
   end
 
-  describe 'POST #mark' do
+  describe 'POST #stamp' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
-        post :mark, id: 0
+        post :stamp, id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -172,7 +172,7 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
 
       context 'for a bulletin not exists' do
         it 'responds with :not_found' do
-          post :mark, id: 0
+          post :stamp, id: 0
           expect(response).to have_http_status(:not_found)
         end
       end
@@ -180,7 +180,7 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
       context 'for a bulletin exists' do
         context 'when bulletin.group is not affiliated with user' do
           it 'responds with :forbidden' do
-            post :mark, id: bulletin.to_param
+            post :stamp, id: bulletin.to_param
             expect(response).to have_http_status(:forbidden)
           end
         end
@@ -192,55 +192,55 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
 
           context 'with invalid attributes' do
             it 'responds with :bad_request' do
-              post :mark, { id: bulletin.to_param }.merge(
-                attributes_for(:invalid_mark))
+              post :stamp, { id: bulletin.to_param }.merge(
+                attributes_for(:invalid_stamp))
               expect(response).to have_http_status(:bad_request)
             end
           end
 
           context 'with valid attributes' do
-            context 'when bulletin is marked by user' do
+            context 'when bulletin is stamped by user' do
               it 'responds with :ok' do
-                create(:mark, bulletin: bulletin, created_by: membership)
-                post :mark, { id: bulletin.to_param }.merge(
-                  attributes_for(:mark))
+                create(:stamp, bulletin: bulletin, created_by: membership)
+                post :stamp, { id: bulletin.to_param }.merge(
+                  attributes_for(:stamp))
                 expect(response).to have_http_status(:ok)
               end
 
-              it 'updates the existing mark' do
-                create(:mark, bulletin: bulletin, created_by: membership)
+              it 'updates the existing stamp' do
+                create(:stamp, bulletin: bulletin, created_by: membership)
                 expect do
-                  post :mark, { id: bulletin.to_param }.merge(
-                    attributes_for(:mark))
-                end.to_not change(Mark, :count)
+                  post :stamp, { id: bulletin.to_param }.merge(
+                    attributes_for(:stamp))
+                end.to_not change(Stamp, :count)
               end
 
-              it 'decorates the marked bulletin as #bulletin' do
-                create(:mark, bulletin: bulletin, created_by: membership)
-                post :mark, { id: bulletin.to_param }.merge(
-                  attributes_for(:mark))
+              it 'decorates the stamped bulletin as #bulletin' do
+                create(:stamp, bulletin: bulletin, created_by: membership)
+                post :stamp, { id: bulletin.to_param }.merge(
+                  attributes_for(:stamp))
                 expect(controller.bulletin).to be_decorated
                 expect(controller.bulletin).to eq(bulletin)
               end
             end
 
-            context 'when bulletin is not marked by user' do
+            context 'when bulletin is not stamped by user' do
               it 'responds with :ok' do
-                post :mark, { id: bulletin.to_param }.merge(
-                  attributes_for(:mark))
+                post :stamp, { id: bulletin.to_param }.merge(
+                  attributes_for(:stamp))
                 expect(response).to have_http_status(:ok)
               end
 
-              it 'creates a new mark' do
+              it 'creates a new stamp' do
                 expect do
-                  post :mark, { id: bulletin.to_param }.merge(
-                    attributes_for(:mark))
-                end.to change(Mark, :count).by(1)
+                  post :stamp, { id: bulletin.to_param }.merge(
+                    attributes_for(:stamp))
+                end.to change(Stamp, :count).by(1)
               end
 
-              it 'decorates the marked bulletin as #bulletin' do
-                post :mark, { id: bulletin.to_param }.merge(
-                  attributes_for(:mark))
+              it 'decorates the stamped bulletin as #bulletin' do
+                post :stamp, { id: bulletin.to_param }.merge(
+                  attributes_for(:stamp))
                 expect(controller.bulletin).to be_decorated
                 expect(controller.bulletin).to eq(bulletin)
               end

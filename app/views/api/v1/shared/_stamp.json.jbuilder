@@ -1,4 +1,4 @@
-json.call mark,
+json.call stamp,
           :type,
           :id,
           :bulletin_id,
@@ -6,5 +6,5 @@ json.call mark,
           :created_by_type,
           :created_by_id
 
-json.created_at mark.created_at.to_f.to_s
-json.updated_at mark.created_at.to_f.to_s
+json.created_at stamp.created_at.to_f.to_s
+json.updated_at stamp.created_at.to_f.to_s

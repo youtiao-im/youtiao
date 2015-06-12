@@ -7,7 +7,7 @@ RSpec.describe 'Api::V1::Marks', type: :request do
 
   let(:json_expression) do
     {
-      type: 'Mark',
+      type: 'Stamp',
       id: String,
       bulletin_id: String,
       created_by_type: String,
@@ -31,10 +31,10 @@ RSpec.describe 'Api::V1::Marks', type: :request do
     create(:admin_membership, group: bulletin.group, user: user)
   end
 
-  describe 'GET /api/v1/bulletins/:bulletin_id/marks' do
-    it 'returns marks of the requested bulletin' do
-      create(:mark, bulletin: bulletin)
-      get "/api/v1/bulletins/#{bulletin.to_param}/marks",
+  describe 'GET /api/v1/bulletins/:bulletin_id/stamps' do
+    it 'returns stamps of the requested bulletin' do
+      create(:stamp, bulletin: bulletin)
+      get "/api/v1/bulletins/#{bulletin.to_param}/stamps",
           {},
           'Authorization' => "Bearer #{access_token}"
       expect(response.body).to match_json_expression([json_expression])

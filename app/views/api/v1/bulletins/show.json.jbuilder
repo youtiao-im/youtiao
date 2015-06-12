@@ -8,8 +8,8 @@ json.created_by do
   json.partial! 'api/v1/shared/membership', membership: bulletin.created_by
 end
 
-unless bulletin.current_mark.nil?
-  json.mark do
-    json.partial! 'api/v1/shared/mark', mark: bulletin.current_mark
+unless bulletin.current_stamp.nil?
+  json.stamp do
+    json.partial! 'api/v1/shared/stamp', stamp: bulletin.current_stamp
   end
 end

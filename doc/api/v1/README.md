@@ -7,5 +7,5 @@
   * [Groups](groups.md)
   * [Memberships](memberships.md)
   * [Bulletins](bulletins.md)
-  * [Marks](marks.md)
+  * [Stamps](stamps.md)
   * [Comments](comments.md)

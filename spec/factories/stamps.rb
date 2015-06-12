@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: marks
+# Table name: stamps
 #
 #  id              :integer          not null, primary key
 #  bulletin_id     :integer          not null
@@ -12,21 +12,21 @@
 #
 
 FactoryGirl.define do
-  factory :mark do
+  factory :stamp do
     bulletin
     association :created_by, factory: :membership
     symbol :check
   end
 
-  factory :invalid_mark, parent: :mark, class: Mark do
+  factory :invalid_stamp, parent: :stamp, class: Stamp do
     symbol :invalid
   end
 
-  factory :check_mark, parent: :mark, class: Mark do
+  factory :check_stamp, parent: :stamp, class: Stamp do
     symbol :check
   end
 
-  factory :cross_mark, parent: :mark, class: Mark do
+  factory :cross_stamp, parent: :stamp, class: Stamp do
     symbol :cross
   end
 end

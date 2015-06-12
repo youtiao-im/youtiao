@@ -1,6 +1,6 @@
-class CreateMarks < ActiveRecord::Migration
+class CreateStamps < ActiveRecord::Migration
   def change
-    create_table :marks do |t|
+    create_table :stamps do |t|
       t.belongs_to :bulletin, null: false
       t.string :symbol, null: false
       t.belongs_to :created_by, polymorphic: true, null: false

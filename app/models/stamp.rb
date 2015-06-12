@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: marks
+# Table name: stamps
 #
 #  id              :integer          not null, primary key
 #  bulletin_id     :integer          not null
@@ -11,7 +11,7 @@
 #  updated_at      :datetime         not null
 #
 
-class Mark < ActiveRecord::Base
+class Stamp < ActiveRecord::Base
   belongs_to :bulletin
   belongs_to :created_by, polymorphic: true
 
@@ -23,8 +23,8 @@ class Mark < ActiveRecord::Base
   end)
 
   def self.pinpoint(bulletin_id, created_by_id)
-    mark = find_by_bulletin_id_and_created_by_id(bulletin_id, created_by_id)
-    fail ActiveRecord::RecordNotFound if mark.nil?
-    mark
+    stamp = find_by_bulletin_id_and_created_by_id(bulletin_id, created_by_id)
+    fail ActiveRecord::RecordNotFound if stamp.nil?
+    stamp
   end
 end

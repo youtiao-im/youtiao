@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::MarksController, type: :controller do
+RSpec.describe Api::V1::StampsController, type: :controller do
   let(:user) { create(:user) }
   let(:bulletin) { create(:bulletin) }
 
@@ -51,11 +51,11 @@ RSpec.describe Api::V1::MarksController, type: :controller do
               expect(response).to have_http_status(:ok)
             end
 
-            it 'decorates marks of bulletin as #marks' do
-              mark = create(:mark, bulletin: bulletin)
+            it 'decorates stamps of bulletin as #stamps' do
+              stamp = create(:stamp, bulletin: bulletin)
               get :index, bulletin_id: bulletin.to_param
-              expect(controller.marks).to be_decorated
-              expect(controller.marks).to match_array([mark])
+              expect(controller.stamps).to be_decorated
+              expect(controller.stamps).to match_array([stamp])
             end
           end
         end

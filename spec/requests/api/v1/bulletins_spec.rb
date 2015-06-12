@@ -71,11 +71,11 @@ RSpec.describe 'Api::V1::Bulletins', type: :request do
     end
   end
 
-  describe 'POST /api/v1/bulletins/:id/mark' do
-    it 'returns the marked bulletin' do
+  describe 'POST /api/v1/bulletins/:id/stamp' do
+    it 'returns the stamped bulletin' do
       bulletin = create(:bulletin, group: group)
-      post "/api/v1/bulletins/#{bulletin.to_param}/mark",
-           attributes_for(:mark),
+      post "/api/v1/bulletins/#{bulletin.to_param}/stamp",
+           attributes_for(:stamp),
            'Authorization' => "Bearer #{access_token}"
       expect(response.body).to match_json_expression(json_expression)
     end

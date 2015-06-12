@@ -3,7 +3,7 @@
 * [List](#list)
 * [Get](#get)
 * [Create](#create)
-* [Mark](#mark)
+* [Stamp](#stamp)
 
 
 ## List
@@ -155,14 +155,14 @@ POST /groups/:group_id/bulletins
 ## Mark
 
 ```
-POST /bulletins/:id/mark
+POST /bulletins/:id/stamp
 ```
 
 ### Parameters
 
-| Name     | Type     | Description                           |
-| -------- | -------- | ------------------------------------- |
-| `symbol` | `string` | **Required**. The symbol of the mark. |
+| Name     | Type     | Description                            |
+| -------- | -------- | -------------------------------------- |
+| `symbol` | `string` | **Required**. The symbol of the stamp. |
 
 ### Example
 
@@ -205,8 +205,8 @@ POST /bulletins/:id/mark
         "created_at": "1434096763.729186",
         "updated_at": "1434096763.729186"
     },
-    "mark": {
-        "type": "Mark",
+    "stamp": {
+        "type": "Stamp",
         "id": "eb9d6e93",
         "bulletin_id": "3d4a93a6",
         "symbol": "check",

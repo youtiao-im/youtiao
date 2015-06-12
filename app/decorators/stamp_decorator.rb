@@ -1,4 +1,4 @@
-class MarkDecorator < ApplicationDecorator
+class StampDecorator < ApplicationDecorator
   decorates_association :bulletin
   decorates_association :created_by
 

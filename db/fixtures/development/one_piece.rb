@@ -40,7 +40,7 @@ Bulletin.seed_once(
   { id: 2, group_id: 1, text: 'Do we need a musician on board?', created_by_type: 'Membership',created_by_id: 1 },
   { id: 3, group_id: 2, text: '3D2Y', created_by_type: 'Membership',created_by_id: 8 })
 
-Mark.seed_once(
+Stamp.seed_once(
   :id,
   { id: 1, bulletin_id: 1, symbol: :check, created_by_type: 'Membership', created_by_id: 2 },
   { id: 2, bulletin_id: 1, symbol: :check, created_by_type: 'Membership',created_by_id: 3 },

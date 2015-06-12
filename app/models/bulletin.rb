@@ -17,10 +17,10 @@
 class Bulletin < ActiveRecord::Base
   belongs_to :group
   belongs_to :created_by, polymorphic: true
-  has_many :marks
+  has_many :stamps
   has_many :comments
-  has_one :current_mark, -> { where(created_by: User.current.memberships) },
-          class_name: 'Mark'
+  has_one :current_stamp, -> { where(created_by: User.current.memberships) },
+          class_name: 'Stamp'
 
   acts_as_readable on: :created_at
 end

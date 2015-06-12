@@ -1,4 +1,4 @@
-# Marks
+# Stamps
 
 * [List](#list)
 * [Get](#get)
@@ -7,7 +7,7 @@
 ## List
 
 ```
-GET /bulletins/:bulletin_id/marks
+GET /bulletins/:bulletin_id/stamps
 ```
 
 ### Response
