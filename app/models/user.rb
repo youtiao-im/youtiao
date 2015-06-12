@@ -11,24 +11,23 @@
 #  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string
-#  last_sign_in_ip        :string
-#  created_at             :datetime
-#  updated_at             :datetime
+#  current_sign_in_ip     :inet
+#  last_sign_in_ip        :inet
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :trackable,
-         :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+         :trackable, :validatable
 
   has_many :memberships
-  has_many :marks
+  has_many :groups, through: :memberships
+  has_many :bulletins, through: :groups
+
+  acts_as_reader
 
   def self.current
     RequestStore.store[:current_user]
@@ -36,9 +35,5 @@ class User < ActiveRecord::Base
 
   def self.current=(user)
     RequestStore.store[:current_user] = user
-  end
-
-  def feeds
-    Feed.where(channel_id: memberships.pluck(:channel_id))
   end
 end

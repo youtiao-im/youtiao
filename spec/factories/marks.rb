@@ -2,18 +2,19 @@
 #
 # Table name: marks
 #
-#  id         :integer          not null, primary key
-#  feed_id    :integer          not null
-#  user_id    :integer          not null
-#  symbol     :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  bulletin_id     :integer          not null
+#  symbol          :string           not null
+#  created_by_id   :integer          not null
+#  created_by_type :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 FactoryGirl.define do
   factory :mark do
-    feed
-    user
+    bulletin
+    association :created_by, factory: :membership
     symbol :check
   end
 

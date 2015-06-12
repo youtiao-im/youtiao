@@ -2,29 +2,28 @@
 #
 # Table name: marks
 #
-#  id         :integer          not null, primary key
-#  feed_id    :integer          not null
-#  user_id    :integer          not null
-#  symbol     :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  bulletin_id     :integer          not null
+#  symbol          :string           not null
+#  created_by_id   :integer          not null
+#  created_by_type :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 class Mark < ActiveRecord::Base
-  belongs_to :feed
-  belongs_to :user
+  belongs_to :bulletin
+  belongs_to :created_by, polymorphic: true
 
   extend Enumerize
   enumerize :symbol, in: [:check, :cross], predicates: true
 
-  validates :symbol, presence: true
-
-  counter_culture :feed, column_name: (lambda do |model|
+  counter_culture :bulletin, column_name: (lambda do |model|
     "#{model.symbol.pluralize}_count"
   end)
 
-  def self.pinpoint(feed_id, user_id)
-    mark = find_by_feed_id_and_user_id(feed_id, user_id)
+  def self.pinpoint(bulletin_id, created_by_id)
+    mark = find_by_bulletin_id_and_created_by_id(bulletin_id, created_by_id)
     fail ActiveRecord::RecordNotFound if mark.nil?
     mark
   end

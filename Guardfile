@@ -2,17 +2,9 @@
 # More info at https://github.com/guard/guard#readme
 
 ## Uncomment and set this to only include directories you want to watch
-# directories %w(app lib config test spec features)
+# directories %w(app lib config test spec features) \
+#  .select{|d| Dir.exists?(d) ? d : UI.warning("Directory #{d} does not exist")}
 
-## Uncomment to clear the screen before every task
-# clearing :on
-
-## Guard internally checks for changes in the Guardfile and exits.
-## If you want Guard to automatically start up again, run guard in a
-## shell loop, e.g.:
-##
-##  $ while bundle exec guard; do echo "Restarting Guard..."; done
-##
 ## Note: if you are using the `directories` clause above and you are not
 ## watching the project directory ('.'), then you will want to move
 ## the Guardfile to a watched dir and symlink it back, e.g.
@@ -32,8 +24,8 @@
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: 'bundle exec rspec' do
-  require 'guard/rspec/dsl'
+guard :rspec, cmd: "bundle exec rspec" do
+  require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
   # Feel free to open issues for suggestions and improvements
@@ -55,23 +47,24 @@ guard :rspec, cmd: 'bundle exec rspec' do
 
   watch(rails.controllers) do |m|
     [
-      rspec.spec.call("routing/#{m[1]}_routing"),
-      rspec.spec.call("controllers/#{m[1]}_controller"),
-      rspec.spec.call("acceptance/#{m[1]}")
+      rspec.spec.("routing/#{m[1]}_routing"),
+      rspec.spec.("controllers/#{m[1]}_controller"),
+      rspec.spec.("acceptance/#{m[1]}")
     ]
   end
 
   # Rails config changes
-  watch(rails.spec_helper) { rspec.spec_dir }
-  watch(rails.routes) { "#{rspec.spec_dir}/routing" }
-  watch(rails.app_controller) { "#{rspec.spec_dir}/controllers" }
+  watch(rails.spec_helper)     { rspec.spec_dir }
+  watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
+  watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
   # Capybara features specs
-  watch(rails.view_dirs) { |m| rspec.spec.call("features/#{m[1]}") }
+  watch(rails.view_dirs)     { |m| rspec.spec.("features/#{m[1]}") }
+  watch(rails.layouts)       { |m| rspec.spec.("features/#{m[1]}") }
 
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
-    Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance'
+    Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 end

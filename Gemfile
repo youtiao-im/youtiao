@@ -1,10 +1,10 @@
-source 'https://rubygems.org'
-# source 'https://ruby.taobao.org/'
+# source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgresql as the database for Active Record
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -43,35 +43,47 @@ group :development, :test do
   gem 'spring'
 end
 
+# Authn
 gem 'devise'
 gem 'doorkeeper'
+
+# Authr
 gem 'pundit'
 
-gem 'slim'
-gem 'draper'
+# Pagination
 gem 'kaminari'
+gem 'api-pagination'
+
+# Id obfuscate
 gem 'hashids'
 
-gem 'api-pagination'
+# Object decorator
+gem 'draper'
+
+# API versioning
 gem 'versionist'
 
+# Operation/service layer
 gem 'mutations'
 
-gem 'seed-fu'
-# gem 'foreigner'
-gem 'enumerize'
-gem 'counter_culture'
-
+# Request independent variable
 gem 'request_store'
 
-gem 'qiniu'
+# Read status
+gem 'unread'
+
+# DB/model tools
+gem 'seed-fu'
+gem 'foreigner'
+gem 'enumerize'
+gem 'counter_culture'
+gem 'paranoia'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda-matchers'
-  gem 'colored'
   gem 'awesome_print'
   gem 'json_expressions'
 end
@@ -83,6 +95,5 @@ group :development do
   gem 'annotate'
   gem 'quiet_assets'
   gem 'rubocop'
-  gem 'rails_best_practices'
   gem 'codeclimate-test-reporter'
 end

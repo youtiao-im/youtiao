@@ -3,9 +3,11 @@
 # Table name: memberships
 #
 #  id         :integer          not null, primary key
-#  channel_id :integer          not null
+#  group_id   :integer          not null
 #  user_id    :integer          not null
 #  role       :string           not null
+#  alias      :string
+#  deleted_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -13,6 +15,6 @@
 require 'rails_helper'
 
 RSpec.describe Membership, type: :model do
-  it { should belong_to :channel }
+  it { should belong_to :group }
   it { should belong_to :user }
 end

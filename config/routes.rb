@@ -1,48 +1,27 @@
 Rails.application.routes.draw do
-  use_doorkeeper
   devise_for :users
+  use_doorkeeper
 
   namespace :api, shallow: true do
     api_version module: 'v1', path: { value: 'v1' } do
-      resource :user, only: [:show], controller: :authenticated_users
+      resources :groups, only: [:index, :show, :create] do
+        member do
+          post :join
+        end
 
-      resources :channels, only: [:show, :create] do
-        resources :feeds, only: [:index, :show, :create] do
+        resources :memberships, only: [:index]
+
+        resources :bulletins, only: [:index, :create, :show] do
+          member do
+            post :mark
+          end
+
+          resources :marks, only: [:index]
           resources :comments, only: [:index, :show, :create]
         end
       end
 
-      scope :user, module: :authenticated_users do
-        resources :feeds, only: [:index]
-
-        resources :membered_channels, only: [:index, :show] do
-          collection do
-            put ':id', action: :create
-          end
-        end
-
-        resources :marked_feeds, only: [:index, :show] do
-          collection do
-            put ':id', action: :create_or_update
-          end
-        end
-      end
-
-      scope 'channels/:channel_id', module: :channels do
-        resources :memberships, only: [:index] do
-          collection do
-            get 'users/:user_id', action: :show
-          end
-        end
-      end
-
-      scope 'feeds/:feed_id', module: :feeds do
-        resources :marks, only: [:index] do
-          collection do
-            get 'users/:user_id', action: :show
-          end
-        end
-      end
+      resources :bulletins, only: [:index]
     end
   end
 

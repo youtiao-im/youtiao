@@ -11,74 +11,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520051538) do
+ActiveRecord::Schema.define(version: 20150612051526) do
 
-  create_table "attachments", force: :cascade do |t|
-    t.integer  "feed_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "bulletins", force: :cascade do |t|
+    t.integer  "group_id",                    null: false
+    t.string   "text",                        null: false
+    t.integer  "created_by_id",               null: false
+    t.string   "created_by_type",             null: false
+    t.integer  "checks_count",    default: 0, null: false
+    t.integer  "crosses_count",   default: 0, null: false
+    t.integer  "comments_count",  default: 0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  add_index "attachments", ["feed_id"], name: "index_attachments_on_feed_id"
-
-  create_table "channels", force: :cascade do |t|
-    t.string   "name",                          null: false
-    t.integer  "created_by_id",                 null: false
-    t.integer  "memberships_count", default: 0, null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-  end
-
-  add_index "channels", ["created_by_id"], name: "index_channels_on_created_by_id"
+  add_index "bulletins", ["group_id"], name: "index_bulletins_on_group_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "feed_id",       null: false
-    t.string   "text",          null: false
-    t.integer  "created_by_id", null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "bulletin_id",     null: false
+    t.string   "text",            null: false
+    t.integer  "created_by_id",   null: false
+    t.string   "created_by_type", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  add_index "comments", ["created_by_id"], name: "index_comments_on_created_by_id"
-  add_index "comments", ["feed_id"], name: "index_comments_on_feed_id"
+  add_index "comments", ["bulletin_id"], name: "index_comments_on_bulletin_id", using: :btree
 
-  create_table "feeds", force: :cascade do |t|
-    t.integer  "channel_id",                 null: false
-    t.string   "text",                       null: false
-    t.integer  "created_by_id",              null: false
-    t.integer  "checks_count",   default: 0, null: false
-    t.integer  "crosses_count",  default: 0, null: false
-    t.integer  "comments_count", default: 0, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",                          null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "memberships_count", default: 0, null: false
   end
-
-  add_index "feeds", ["channel_id"], name: "index_feeds_on_channel_id"
-  add_index "feeds", ["created_by_id"], name: "index_feeds_on_created_by_id"
 
   create_table "marks", force: :cascade do |t|
-    t.integer  "feed_id",    null: false
-    t.integer  "user_id",    null: false
-    t.string   "symbol",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "bulletin_id",     null: false
+    t.string   "symbol",          null: false
+    t.integer  "created_by_id",   null: false
+    t.string   "created_by_type", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  add_index "marks", ["feed_id", "user_id"], name: "index_marks_on_feed_id_and_user_id", unique: true
-  add_index "marks", ["feed_id"], name: "index_marks_on_feed_id"
-  add_index "marks", ["user_id"], name: "index_marks_on_user_id"
+  add_index "marks", ["bulletin_id", "created_by_id"], name: "index_marks_on_bulletin_id_and_created_by_id", unique: true, using: :btree
 
   create_table "memberships", force: :cascade do |t|
-    t.integer  "channel_id", null: false
+    t.integer  "group_id",   null: false
     t.integer  "user_id",    null: false
     t.string   "role",       null: false
+    t.string   "alias"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "memberships", ["channel_id", "user_id"], name: "index_memberships_on_channel_id_and_user_id", unique: true
-  add_index "memberships", ["channel_id"], name: "index_memberships_on_channel_id"
-  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
+  add_index "memberships", ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", unique: true, using: :btree
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -91,7 +83,7 @@ ActiveRecord::Schema.define(version: 20150520051538) do
     t.string   "scopes"
   end
 
-  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true
+  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
 
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer  "resource_owner_id"
@@ -104,9 +96,9 @@ ActiveRecord::Schema.define(version: 20150520051538) do
     t.string   "scopes"
   end
 
-  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
-  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
-  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true
+  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
+  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
+  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: :cascade do |t|
     t.string   "name",                      null: false
@@ -118,7 +110,16 @@ ActiveRecord::Schema.define(version: 20150520051538) do
     t.datetime "updated_at"
   end
 
-  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
+  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+
+  create_table "read_marks", force: :cascade do |t|
+    t.integer  "readable_id"
+    t.string   "readable_type", null: false
+    t.integer  "user_id",       null: false
+    t.datetime "timestamp"
+  end
+
+  add_index "read_marks", ["user_id", "readable_type", "readable_id"], name: "index_read_marks_on_user_id_and_readable_type_and_readable_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -129,13 +130,13 @@ ActiveRecord::Schema.define(version: 20150520051538) do
     t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::CommentsController, type: :controller do
   let(:user) { create(:user) }
-  let(:feed) { create(:feed) }
+  let(:bulletin) { create(:bulletin) }
   let(:comment) { create(:comment) }
 
   describe 'GET #index' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
-        get :index, feed_id: 0
+        get :index, bulletin_id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -18,42 +18,36 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
         authenticate user
       end
 
-      context 'for a feed not exists' do
+      context 'for a bulletin not exists' do
         it 'responds with :not_found' do
-          get :index, feed_id: 0
+          get :index, bulletin_id: 0
           expect(response).to have_http_status(:not_found)
         end
       end
 
-      context 'for a feed exists' do
-        context 'when feed.channel is not affiliated with user' do
+      context 'for a bulletin exists' do
+        context 'when bulletin.group is not affiliated with user' do
           it 'responds with :forbidden' do
-            get :index, feed_id: feed.to_param
+            get :index, bulletin_id: bulletin.to_param
             expect(response).to have_http_status(:forbidden)
           end
         end
 
-        context 'when feed.channel is affiliated with user' do
+        context 'when bulletin.group is affiliated with user' do
           before do
-            create(:membership, channel: feed.channel, user: user)
+            create(:membership, group: bulletin.group, user: user)
           end
 
           it 'responds with :ok' do
-            get :index, feed_id: feed.to_param
+            get :index, bulletin_id: bulletin.to_param
             expect(response).to have_http_status(:ok)
           end
 
-          it 'decorates comments of feed as #comments' do
-            comment = create(:comment, feed: feed)
-            get :index, feed_id: feed.to_param
+          it 'decorates comments of bulletin as #comments' do
+            comment = create(:comment, bulletin: bulletin)
+            get :index, bulletin_id: bulletin.to_param
             expect(controller.comments).to be_decorated
             expect(controller.comments).to match_array([comment])
-          end
-
-          it 'sets pagination headers' do
-            get :index, feed_id: feed.to_param
-            expect(response.headers['X-Total']).to_not be_nil
-            expect(response.headers['X-Per-Page']).to_not be_nil
           end
         end
       end
@@ -81,18 +75,16 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
       end
 
       context 'for a comment exists' do
-        context 'when comment belongs to a feed whose channel is not '\
-          'affiliated with user' do
+        context 'when comment.bulletin.group is not affiliated with user' do
           it 'responds with :forbidden' do
             get :show, id: comment.to_param
             expect(response).to have_http_status(:forbidden)
           end
         end
 
-        context 'when comment belongs to a feed whose channel is affiliated '\
-          'with user' do
+        context 'when comment.bulletin.group is affiliated with user' do
           before do
-            create(:membership, channel: comment.feed.channel, user: user)
+            create(:membership, group: comment.bulletin.group, user: user)
           end
 
           it 'responds with :ok' do
@@ -113,7 +105,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
   describe 'POST #create' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
-        post :create, feed_id: 0
+        post :create, bulletin_id: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -123,29 +115,29 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
         authenticate user
       end
 
-      context 'for a feed not exists' do
+      context 'for a bulletin not exists' do
         it 'responds with :not_found' do
-          post :create, feed_id: 0
+          post :create, bulletin_id: 0
           expect(response).to have_http_status(:not_found)
         end
       end
 
-      context 'for a feed exists' do
-        context 'when feed.channel is not affiliated with user' do
+      context 'for a bulletin exists' do
+        context 'when bulletin.group is not affiliated with user' do
           it 'responds with :forbidden' do
-            post :create, feed_id: feed.to_param
+            post :create, bulletin_id: bulletin.to_param
             expect(response).to have_http_status(:forbidden)
           end
         end
 
-        context 'when feed.channel is affiliated with user' do
+        context 'when bulletin.group is affiliated with user' do
           before do
-            create(:membership, channel: feed.channel, user: user)
+            create(:membership, group: bulletin.group, user: user)
           end
 
           context 'with invalid attributes' do
             it 'responds with :bad_request' do
-              post :create, { feed_id: feed.to_param }.merge(
+              post :create, { bulletin_id: bulletin.to_param }.merge(
                 attributes_for(:invalid_comment))
               expect(response).to have_http_status(:bad_request)
             end
@@ -153,32 +145,23 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
           context 'with valid attributes' do
             it 'responds with :ok' do
-              post :create, { feed_id: feed.to_param }.merge(
+              post :create, { bulletin_id: bulletin.to_param }.merge(
                 attributes_for(:comment))
               expect(response).to have_http_status(:ok)
             end
 
             it 'creates a new comment' do
               expect do
-                post :create, { feed_id: feed.to_param }.merge(
+                post :create, { bulletin_id: bulletin.to_param }.merge(
                   attributes_for(:comment))
               end.to change(Comment, :count).by(1)
             end
 
-            it 'decorates the new comment as #comment' do
-              post :create, { feed_id: feed.to_param }.merge(
+            it 'decorates the created comment as #comment' do
+              post :create, { bulletin_id: bulletin.to_param }.merge(
                 attributes_for(:comment))
               expect(controller.comment).to be_decorated
               expect(controller.comment).to eq(Comment.last)
-            end
-
-            it 'auto-links urls in comment text' do
-              post :create, { feed_id: feed.to_param }.merge(
-                attributes_for(:comment)).merge(
-                  text: 'Hello youtiao.im, and http://youtiao.im.')
-              expect(Comment.last.text).to eq(
-                'Hello <~http://youtiao.im|youtiao.im>, and '\
-                '<~http://youtiao.im>.')
             end
           end
         end
