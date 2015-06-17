@@ -16,4 +16,6 @@ class Comment < ActiveRecord::Base
   belongs_to :created_by, polymorphic: true
 
   counter_culture :bulletin
+
+  scope :after_id, -> (id) { where('comments.id>?', id) }
 end

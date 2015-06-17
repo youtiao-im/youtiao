@@ -11,6 +11,15 @@
 GET /bulletins/:bulletin_id/comments
 ```
 
+The returned comments will be sorted in the order they get created.
+
+### Parameters
+
+| Name       | Type      | Description |
+| ---------- | --------- | ----------- |
+| `after_id` | `string`  | **Optional**. Returns comments created after the specified comment. |
+| `limit`    | `integer` | **Optional**. The number of comments to retrieve. Default to 25, max to 500. |
+
 ### Response
 
 ```json

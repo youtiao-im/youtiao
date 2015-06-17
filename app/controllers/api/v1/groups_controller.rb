@@ -3,8 +3,7 @@ class Api::V1::GroupsController < Api::V1::ApiController
   decorates_assigned :group
 
   def index
-    @groups = paginate current_resource_owner.groups.includes(
-      :current_membership)
+    @groups = current_resource_owner.groups.includes(:current_membership)
   end
 
   def show

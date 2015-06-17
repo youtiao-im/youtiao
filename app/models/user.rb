@@ -27,8 +27,6 @@ class User < ActiveRecord::Base
   has_many :groups, through: :memberships
   has_many :bulletins, through: :groups
 
-  acts_as_reader
-
   def self.current
     RequestStore.store[:current_user]
   end

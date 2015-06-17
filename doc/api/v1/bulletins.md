@@ -10,7 +10,17 @@
 
 ```
 GET /bulletins
+GET /groups/:group_id/bulletins
 ```
+
+The returned bulletins will be sorted in the reverse order they get created.
+
+### Parameters
+
+| Name        | Type      | Description |
+| ----------- | --------- | ----------- |
+| `before_id` | `string`  | **Optional**. Returns bulletins created before the specified bulletin. |
+| `limit`     | `integer` | **Optional**. The number of bulletins to retrieve. Default to 25, max to 500. |
 
 ### Response
 

@@ -7,6 +7,7 @@ class Stamps::CreateOrUpdate < Mutations::Command
   end
 
   def execute
+    # TODO: recreate
     stamp = Stamp.pinpoint(bulletin_id, created_by_id)
     stamp.update!(symbol: symbol)
     stamp.bulletin.reload

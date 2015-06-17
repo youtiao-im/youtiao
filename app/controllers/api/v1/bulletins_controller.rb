@@ -3,8 +3,18 @@ class Api::V1::BulletinsController < Api::V1::ApiController
   decorates_assigned :bulletin
 
   def index
-    scope = current_resource_owner.bulletins
-    @bulletins = paginate scope.order(id: :desc).includes(
+    if !params[:group_id].nil?
+      group = Group.find(params[:group_id])
+      scope = group.bulletins
+    else
+      scope = current_resource_owner.bulletins
+    end
+    unless params[:before_id].nil?
+      before_id = Bulletin.decrypt_id(params[:before_id])
+      fail ActionController::BadRequest if before_id.nil?
+      scope = scope.before_id(before_id)
+    end
+    @bulletins = limit scope.order(id: :desc).includes(
       :group, :created_by, :current_stamp, created_by: :user)
   end
 

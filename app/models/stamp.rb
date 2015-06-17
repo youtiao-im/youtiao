@@ -22,6 +22,8 @@ class Stamp < ActiveRecord::Base
     "#{model.symbol.pluralize}_count"
   end)
 
+  scope :before_id, -> (id) { where('stamps.id<?', id) }
+
   def self.pinpoint(bulletin_id, created_by_id)
     stamp = find_by_bulletin_id_and_created_by_id(bulletin_id, created_by_id)
     fail ActiveRecord::RecordNotFound if stamp.nil?

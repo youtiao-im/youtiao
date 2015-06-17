@@ -22,5 +22,5 @@ class Bulletin < ActiveRecord::Base
   has_one :current_stamp, -> { where(created_by: User.current.memberships) },
           class_name: 'Stamp'
 
-  acts_as_readable on: :created_at
+  scope :before_id, -> (id) { where('bulletins.id<?', id) }
 end

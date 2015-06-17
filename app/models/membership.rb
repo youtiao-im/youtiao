@@ -21,4 +21,6 @@ class Membership < ActiveRecord::Base
 
   counter_culture :group
   acts_as_paranoid
+
+  scope :before_id, -> (id) { where('memberships.id<?', id) }
 end

@@ -50,10 +50,6 @@ gem 'doorkeeper'
 # Authr
 gem 'pundit'
 
-# Pagination
-gem 'kaminari'
-gem 'api-pagination'
-
 # Id obfuscate
 gem 'hashids'
 
@@ -68,9 +64,6 @@ gem 'mutations'
 
 # Request independent variable
 gem 'request_store'
-
-# Read status
-gem 'unread'
 
 # DB/model tools
 gem 'seed-fu'
