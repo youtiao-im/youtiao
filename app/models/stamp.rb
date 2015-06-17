@@ -15,14 +15,14 @@ class Stamp < ActiveRecord::Base
   belongs_to :bulletin
   belongs_to :created_by, polymorphic: true
 
-  scope :before_id, -> (id) { where('stamps.id<?', id) }
-
   extend Enumerize
   enumerize :symbol, in: [:check, :cross], predicates: true
 
   counter_culture :bulletin, column_name: (lambda do |model|
     "#{model.symbol.pluralize}_count"
   end)
+
+  scope :before_id, -> (id) { where('stamps.id<?', id) }
 
   def self.pinpoint(bulletin_id, created_by_id)
     stamp = find_by_bulletin_id_and_created_by_id(bulletin_id, created_by_id)
