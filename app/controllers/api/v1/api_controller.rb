@@ -23,7 +23,7 @@ class Api::V1::ApiController < ActionController::Base
   before_action :doorkeeper_authorize!
   before_action :set_format_json
 
-  helper_method :current_resource_owner, :pundit_user, :paginate
+  helper_method :current_resource_owner, :pundit_user, :limit
 
   def current_resource_owner
     @current_resource_owner ||=
