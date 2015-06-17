@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   namespace :api, shallow: true do
     api_version module: 'v1', path: { value: 'v1' } do
+      resource :user, only: [:show]
+
       resources :groups, only: [:index, :show, :create] do
         member do
           post :join
