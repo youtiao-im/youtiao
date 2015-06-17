@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Marks', type: :request do
+RSpec.describe 'Api::V1::Stamps', type: :request do
   let(:user) { create(:user) }
   let(:bulletin) { create(:bulletin) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
