@@ -5,7 +5,13 @@ class Api::V1::CommentsController < Api::V1::ApiController
   def index
     bulletin = Bulletin.find(params[:bulletin_id])
     authorize bulletin.group, :show?
-    @comments = paginate bulletin.comments.includes(
+    scope = bulletin.comments
+    unless params[:after_id].nil?
+      after_id = Comment.decrypt_id(params[:after_id])
+      fail ActionController::BadRequest if after_id.nil?
+      scope = scope.after_id(after_id)
+    end
+    @comments = limit scope.order(id: :asc).includes(
       :created_by, created_by: :user)
   end
 

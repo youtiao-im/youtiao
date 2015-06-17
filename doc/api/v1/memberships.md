@@ -9,6 +9,15 @@
 GET /groups/:group_id/memberships
 ```
 
+The returned memberships will be sorted in the reverse order they get created.
+
+### Parameters
+
+| Name        | Type      | Description |
+| ----------- | --------- | ----------- |
+| `before_id` | `string`  | **Optional**. Returns memberships created before the specified membership. |
+| `limit`     | `integer` | **Optional**. The number of memberships to retrieve. Default to 25, max to 500. |
+
 ### Response
 
 ```json

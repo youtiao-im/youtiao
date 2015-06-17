@@ -16,6 +16,8 @@ class Membership < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
 
+  scope :before_id, -> (id) { where('memberships.id<?', id) }
+
   extend Enumerize
   enumerize :role, in: [:owner, :admin, :member], predicates: true
 

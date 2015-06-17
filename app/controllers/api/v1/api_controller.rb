@@ -23,7 +23,7 @@ class Api::V1::ApiController < ActionController::Base
   before_action :doorkeeper_authorize!
   before_action :set_format_json
 
-  helper_method :current_resource_owner
+  helper_method :current_resource_owner, :pundit_user, :paginate
 
   def current_resource_owner
     @current_resource_owner ||=
@@ -33,6 +33,15 @@ class Api::V1::ApiController < ActionController::Base
 
   def pundit_user
     current_resource_owner
+  end
+
+  def limit(scope)
+    limit = 25
+    unless params[:limit].nil?
+      limit = params[:limit].to_i
+      limit = limit > 500 ? 500 : limit
+    end
+    scope.limit(limit)
   end
 
   private

@@ -10,12 +10,21 @@
 GET /bulletins/:bulletin_id/stamps
 ```
 
+The returned stamps will be sorted in the reverse order they get created.
+
+### Parameters
+
+| Name        | Type      | Description |
+| ----------- | --------- | ----------- |
+| `before_id` | `string`  | **Optional**. Returns stamps created before the specified stamp. |
+| `limit`     | `integer` | **Optional**. The number of stamps to retrieve. Default to 25, max to 500. |
+
 ### Response
 
 ```json
 [
     {
-        "type": "Mark",
+        "type": "Stamp",
         "id": "a7926392",
         "bulletin_id": "3d4a93a6",
         "symbol": "check",
