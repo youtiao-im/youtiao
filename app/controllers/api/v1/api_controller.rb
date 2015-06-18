@@ -22,13 +22,13 @@ class Api::V1::ApiController < ActionController::Base
 
   before_action :doorkeeper_authorize!
   before_action :set_format_json
+  before_action :set_current_user
 
   helper_method :current_resource_owner, :pundit_user, :limit
 
   def current_resource_owner
     @current_resource_owner ||=
       User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
-    User.current = @current_resource_owner
   end
 
   def pundit_user
@@ -48,5 +48,9 @@ class Api::V1::ApiController < ActionController::Base
 
   def set_format_json
     request.format = :json
+  end
+
+  def set_current_user
+    User.current = current_resource_owner
   end
 end

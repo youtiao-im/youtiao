@@ -52,6 +52,16 @@ RSpec.describe 'Api::V1::Bulletins', type: :request do
     end
   end
 
+  describe 'GET /api/v1/groups/:group_id/bulletins' do
+    it 'returns bulletins' do
+      create(:bulletin, group: group)
+      get "/api/v1/groups/#{group.to_param}/bulletins",
+          {},
+          'Authorization' => "Bearer #{access_token}"
+      expect(response.body).to match_json_expression([json_expression])
+    end
+  end
+
   describe 'GET /api/v1/bulletins/:id' do
     it 'returns the requested bulletin' do
       bulletin = create(:bulletin, group: group)
