@@ -3,8 +3,7 @@ json.call membership,
           :id,
           :group_id,
           :user_id,
-          :role,
-          :alias
+          :role
 
 json.created_at membership.created_at.to_f.to_s
-json.updated_at membership.created_at.to_f.to_s
+json.updated_at membership.updated_at.to_f.to_s

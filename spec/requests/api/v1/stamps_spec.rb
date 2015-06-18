@@ -10,17 +10,16 @@ RSpec.describe 'Api::V1::Stamps', type: :request do
       type: 'Stamp',
       id: String,
       bulletin_id: String,
-      created_by_type: String,
       created_by_id: String,
       symbol: String,
       created_at: String,
       updated_at: String,
       created_by: {
-        type: 'Membership',
+        type: 'User',
         id: String,
-        group_id: String,
-        user_id: String,
-        role: String,
+        email: String,
+        name: String,
+        avatar_id: nil,
         created_at: String,
         updated_at: String
       }.ignore_extra_keys!

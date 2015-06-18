@@ -12,9 +12,15 @@ class Api::V1::GroupsController < Api::V1::ApiController
   end
 
   def create
-    group = Group.new(safe_create_params)
+    @group = Group.new(safe_create_params)
+    @group.created_by = current_resource_owner
     authorize group
-    @group = Groups::Create.run!(group.attributes)
+    @group.save!
+    membership = Membership.new
+    membership.group = @group
+    membership.user = current_resource_owner
+    membership.role = :owner
+    membership.save!
     render :show
   end
 
@@ -24,7 +30,7 @@ class Api::V1::GroupsController < Api::V1::ApiController
     membership.group = @group
     membership.user = current_resource_owner
     membership.role = :member
-    Memberships::Create.run!(membership.attributes)
+    membership.save!
     @group.reload
     render :show
   end

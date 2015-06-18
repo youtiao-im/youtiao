@@ -27,7 +27,7 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
       it 'decorates bulletins of user as #bulletins' do
         get :index
         expect(controller.bulletins).to be_decorated
-        expect(controller.bulletins).to eq([bulletin])
+        expect(controller.bulletins).to match_array([bulletin])
       end
     end
   end
@@ -186,7 +186,7 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
         end
 
         context 'when bulletin.group is affiliated with user' do
-          let!(:membership) do
+          before do
             create(:membership, group: bulletin.group, user: user)
           end
 
@@ -200,15 +200,17 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
 
           context 'with valid attributes' do
             context 'when bulletin is stamped by user' do
+              before do
+                create(:stamp, bulletin: bulletin, created_by: user)
+              end
+
               it 'responds with :ok' do
-                create(:stamp, bulletin: bulletin, created_by: membership)
                 post :stamp, { id: bulletin.to_param }.merge(
                   attributes_for(:stamp))
                 expect(response).to have_http_status(:ok)
               end
 
               it 'updates the existing stamp' do
-                create(:stamp, bulletin: bulletin, created_by: membership)
                 expect do
                   post :stamp, { id: bulletin.to_param }.merge(
                     attributes_for(:stamp))
@@ -216,7 +218,6 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
               end
 
               it 'decorates the stamped bulletin as #bulletin' do
-                create(:stamp, bulletin: bulletin, created_by: membership)
                 post :stamp, { id: bulletin.to_param }.merge(
                   attributes_for(:stamp))
                 expect(controller.bulletin).to be_decorated

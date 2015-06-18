@@ -13,6 +13,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  name                   :string           not null
+#  avatar_id              :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -20,6 +22,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  it { should belong_to :avatar }
   it { should have_many :memberships }
   it { should have_many(:groups).through(:memberships) }
   it { should have_many(:bulletins).through(:groups) }

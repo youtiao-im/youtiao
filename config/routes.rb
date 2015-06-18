@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api, shallow: true do
     api_version module: 'v1', path: { value: 'v1' } do
-      resource :user, only: [:show]
+      resource :user, only: [:show, :update]
 
       resources :groups, only: [:index, :show, :create] do
         member do
@@ -24,6 +24,12 @@ Rails.application.routes.draw do
       end
 
       resources :bulletins, only: [:index]
+
+      resources :blobs, only: [:create] do
+        collection do
+          post :token
+        end
+      end
     end
   end
 

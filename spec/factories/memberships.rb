@@ -6,8 +6,6 @@
 #  group_id   :integer          not null
 #  user_id    :integer          not null
 #  role       :string           not null
-#  alias      :string
-#  deleted_at :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

@@ -10,6 +10,6 @@ class Api::V1::MembershipsController < Api::V1::ApiController
       fail ActionController::BadRequest if before_id.nil?
       scope = scope.before_id(before_id)
     end
-    @memberships = limit scope.order(id: :desc).includes(:user)
+    @memberships = limit scope.order(id: :desc).includes(:user, user: :avatar)
   end
 end

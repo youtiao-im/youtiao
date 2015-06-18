@@ -5,4 +5,4 @@ json.call group,
           :memberships_count
 
 json.created_at group.created_at.to_f.to_s
-json.updated_at group.created_at.to_f.to_s
+json.updated_at group.updated_at.to_f.to_s

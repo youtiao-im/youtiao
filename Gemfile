@@ -59,9 +59,6 @@ gem 'draper'
 # API versioning
 gem 'versionist'
 
-# Operation/service layer
-gem 'mutations'
-
 # Request independent variable
 gem 'request_store'
 
@@ -70,7 +67,8 @@ gem 'seed-fu'
 gem 'foreigner'
 gem 'enumerize'
 gem 'counter_culture'
-gem 'paranoia'
+
+gem 'qiniu'
 
 group :development, :test do
   gem 'rspec-rails'

@@ -11,6 +11,6 @@ class Api::V1::StampsController < Api::V1::ApiController
       scope = scope.before_id(before_id)
     end
     @stamps = limit scope.order(id: :desc).includes(
-      :created_by, created_by: :user)
+      :created_by, created_by: :avatar)
   end
 end

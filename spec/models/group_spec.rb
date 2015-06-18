@@ -6,12 +6,14 @@
 #  name              :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  created_by_id     :integer          not null
 #  memberships_count :integer          default(0), not null
 #
 
 require 'rails_helper'
 
 RSpec.describe Group, type: :model do
+  it { should belong_to :created_by }
   it { should have_many :memberships }
   it { should have_many :bulletins }
   it { should have_one :current_membership }

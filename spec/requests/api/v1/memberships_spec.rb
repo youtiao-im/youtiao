@@ -18,6 +18,8 @@ RSpec.describe 'Api::V1::Memberships', type: :request do
         type: 'User',
         id: String,
         email: String,
+        name: String,
+        avatar_id: nil,
         created_at: String,
         updated_at: String
       }
