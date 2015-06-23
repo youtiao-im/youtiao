@@ -36,7 +36,7 @@ class Api::V1::BulletinsController < Api::V1::ApiController
   def stamp
     @bulletin = Bulletin.find(params[:id])
     authorize @bulletin.group, :show?
-    Stamp.delete_all(bulletin: bulletin, created_by: current_resource_owner)
+    Stamp.destroy_all(bulletin: bulletin, created_by: current_resource_owner)
     stamp = Stamp.new(params.permit(:symbol))
     stamp.bulletin = @bulletin
     stamp.created_by = current_resource_owner
