@@ -12,7 +12,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
       scope = scope.after_id(after_id)
     end
     @comments = limit scope.order(id: :asc).includes(
-      :created_by, created_by: :user)
+      :created_by, created_by: :avatar)
   end
 
   def show
@@ -23,10 +23,10 @@ class Api::V1::CommentsController < Api::V1::ApiController
   def create
     bulletin = Bulletin.find(params[:bulletin_id])
     authorize bulletin.group, :show?
-    comment = Comment.new(safe_create_params)
-    comment.bulletin = bulletin
-    comment.created_by = bulletin.group.current_membership
-    @comment = Comments::Create.run!(comment.attributes)
+    @comment = Comment.new(safe_create_params)
+    @comment.bulletin = bulletin
+    @comment.created_by = current_resource_owner
+    @comment.save!
     render :show
   end
 

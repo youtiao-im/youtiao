@@ -7,6 +7,6 @@ class StampDecorator < ApplicationDecorator
   end
 
   def created_by_id
-    Membership.encrypt_id(object.created_by_id)
+    User.encrypt_id(object.created_by_id)
   end
 end

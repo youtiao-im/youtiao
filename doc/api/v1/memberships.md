@@ -24,19 +24,20 @@ The returned memberships will be sorted in the reverse order they get created.
 [
     {
         "type": "Membership",
-        "id": "ed767a69",
+        "id": "3246856d",
         "group_id": "8e2d94da",
-        "user_id": "de58e284",
-        "role": "owner",
-        "alias": null,
-        "created_at": "1434096763.6591308",
-        "updated_at": "1434096763.6591308",
+        "user_id": "d658b98a",
+        "role": "member",
+        "created_at": "1434633474.826644",
+        "updated_at": "1434633474.826644",
         "user": {
             "type": "User",
-            "id": "de58e284",
-            "email": "luffy@straw-hat.org",
-            "created_at": "1434096763.077031",
-            "updated_at": "1434096763.077031"
+            "id": "d658b98a",
+            "email": "robin@straw-hat.org",
+            "name": "robin",
+            "avatar_id": null,
+            "created_at": "1434633474.640276",
+            "updated_at": "1434633474.640276"
         }
     },
     ...

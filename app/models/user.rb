@@ -13,6 +13,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  name                   :string           not null
+#  avatar_id              :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -23,9 +25,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable
 
+  belongs_to :avatar, class_name: 'Blob'
   has_many :memberships
   has_many :groups, through: :memberships
   has_many :bulletins, through: :groups
+
+  validates :name, presence: true
 
   def self.current
     RequestStore.store[:current_user]

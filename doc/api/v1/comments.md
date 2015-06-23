@@ -29,19 +29,17 @@ The returned comments will be sorted in the order they get created.
         "id": "7293583a",
         "bulletin_id": "e52ad5a9",
         "text": "Hell yeah!",
-        "created_by_type": "Membership",
-        "created_by_id": "4e26a868",
-        "created_at": "1434096763.962079",
-        "updated_at": "1434096763.962079",
+        "created_by_id": "d5283a89",
+        "created_at": "1434633475.0101671",
+        "updated_at": "1434633475.0101671",
         "created_by": {
-            "type": "Membership",
-            "id": "4e26a868",
-            "group_id": "8e2d94da",
-            "user_id": "d5283a89",
-            "role": "member",
-            "alias": null,
-            "created_at": "1434096763.687575",
-            "updated_at": "1434096763.687575"
+            "type": "User",
+            "id": "d5283a89",
+            "email": "zoro@straw-hat.org",
+            "name": "zoro",
+            "avatar_id": null,
+            "created_at": "1434633474.332154",
+            "updated_at": "1434633474.332154"
         }
     },
     ...
@@ -63,19 +61,17 @@ GET /comments/:id
     "id": "7293583a",
     "bulletin_id": "e52ad5a9",
     "text": "Hell yeah!",
-    "created_by_type": "Membership",
-    "created_by_id": "4e26a868",
-    "created_at": "1434096763.962079",
-    "updated_at": "1434096763.962079",
+    "created_by_id": "d5283a89",
+    "created_at": "1434633475.0101671",
+    "updated_at": "1434633475.0101671",
     "created_by": {
-        "type": "Membership",
-        "id": "4e26a868",
-        "group_id": "8e2d94da",
-        "user_id": "d5283a89",
-        "role": "member",
-        "alias": null,
-        "created_at": "1434096763.687575",
-        "updated_at": "1434096763.687575"
+        "type": "User",
+        "id": "d5283a89",
+        "email": "zoro@straw-hat.org",
+        "name": "zoro",
+        "avatar_id": null,
+        "created_at": "1434633474.332154",
+        "updated_at": "1434633474.332154"
     }
 }
 ```
@@ -109,19 +105,17 @@ POST /bulletins/:bulletin_id/comments
     "id": "7293583a",
     "bulletin_id": "e52ad5a9",
     "text": "Hell yeah!",
-    "created_by_type": "Membership",
-    "created_by_id": "4e26a868",
-    "created_at": "1434096763.962079",
-    "updated_at": "1434096763.962079",
+    "created_by_id": "d5283a89",
+    "created_at": "1434633475.0101671",
+    "updated_at": "1434633475.0101671",
     "created_by": {
-        "type": "Membership",
-        "id": "4e26a868",
-        "group_id": "8e2d94da",
-        "user_id": "d5283a89",
-        "role": "member",
-        "alias": null,
-        "created_at": "1434096763.687575",
-        "updated_at": "1434096763.687575"
+        "type": "User",
+        "id": "d5283a89",
+        "email": "zoro@straw-hat.org",
+        "name": "zoro",
+        "avatar_id": null,
+        "created_at": "1434633474.332154",
+        "updated_at": "1434633474.332154"
     }
 }
 ```

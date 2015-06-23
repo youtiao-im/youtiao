@@ -1,0 +1,2 @@
+class BlobDecorator < ApplicationDecorator
+end

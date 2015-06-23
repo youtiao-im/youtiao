@@ -11,16 +11,15 @@ RSpec.describe 'Api::V1::Comments', type: :request do
       id: String,
       bulletin_id: String,
       text: String,
-      created_by_type: String,
       created_by_id: String,
       created_at: String,
       updated_at: String,
       created_by: {
-        type: 'Membership',
+        type: 'User',
         id: String,
-        group_id: String,
-        user_id: String,
-        role: String,
+        email: String,
+        name: String,
+        avatar_id: nil,
         created_at: String,
         updated_at: String
       }.ignore_extra_keys!

@@ -13,6 +13,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  name                   :string           not null
+#  avatar_id              :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -21,5 +23,6 @@ FactoryGirl.define do
   factory :user do
     email { Faker::Internet.safe_email }
     password { Faker::Internet.password(8) }
+    name { Faker::Name.name }
   end
 end

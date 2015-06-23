@@ -11,32 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612051526) do
+ActiveRecord::Schema.define(version: 20150618100804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "blobs", force: :cascade do |t|
+    t.string   "data_url",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "bulletins", force: :cascade do |t|
-    t.integer  "group_id",                    null: false
-    t.string   "text",                        null: false
-    t.integer  "created_by_id",               null: false
-    t.string   "created_by_type",             null: false
-    t.integer  "checks_count",    default: 0, null: false
-    t.integer  "crosses_count",   default: 0, null: false
-    t.integer  "comments_count",  default: 0, null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "group_id",                   null: false
+    t.string   "text",                       null: false
+    t.integer  "created_by_id",              null: false
+    t.integer  "checks_count",   default: 0, null: false
+    t.integer  "crosses_count",  default: 0, null: false
+    t.integer  "comments_count", default: 0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "bulletins", ["group_id"], name: "index_bulletins_on_group_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "bulletin_id",     null: false
-    t.string   "text",            null: false
-    t.integer  "created_by_id",   null: false
-    t.string   "created_by_type", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "bulletin_id",   null: false
+    t.string   "text",          null: false
+    t.integer  "created_by_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "comments", ["bulletin_id"], name: "index_comments_on_bulletin_id", using: :btree
@@ -45,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150612051526) do
     t.string   "name",                          null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "created_by_id",                 null: false
     t.integer  "memberships_count", default: 0, null: false
   end
 
@@ -52,8 +57,6 @@ ActiveRecord::Schema.define(version: 20150612051526) do
     t.integer  "group_id",   null: false
     t.integer  "user_id",    null: false
     t.string   "role",       null: false
-    t.string   "alias"
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -101,22 +104,12 @@ ActiveRecord::Schema.define(version: 20150612051526) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
-  create_table "read_marks", force: :cascade do |t|
-    t.integer  "readable_id"
-    t.string   "readable_type", null: false
-    t.integer  "user_id",       null: false
-    t.datetime "timestamp"
-  end
-
-  add_index "read_marks", ["user_id", "readable_type", "readable_id"], name: "index_read_marks_on_user_id_and_readable_type_and_readable_id", using: :btree
-
   create_table "stamps", force: :cascade do |t|
-    t.integer  "bulletin_id",     null: false
-    t.string   "symbol",          null: false
-    t.integer  "created_by_id",   null: false
-    t.string   "created_by_type", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "bulletin_id",   null: false
+    t.string   "symbol",        null: false
+    t.integer  "created_by_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "stamps", ["bulletin_id", "created_by_id"], name: "index_stamps_on_bulletin_id_and_created_by_id", unique: true, using: :btree
@@ -132,10 +125,13 @@ ActiveRecord::Schema.define(version: 20150612051526) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "name",                                null: false
+    t.integer  "avatar_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
 
+  add_index "users", ["avatar_id"], name: "index_users_on_avatar_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

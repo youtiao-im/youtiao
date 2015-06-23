@@ -15,7 +15,7 @@ class Api::V1::BulletinsController < Api::V1::ApiController
       scope = scope.before_id(before_id)
     end
     @bulletins = limit scope.order(id: :desc).includes(
-      :group, :created_by, :current_stamp, created_by: :user)
+      :group, :created_by, :current_stamp, created_by: :avatar)
   end
 
   def show
@@ -26,20 +26,21 @@ class Api::V1::BulletinsController < Api::V1::ApiController
   def create
     group = Group.find(params[:group_id])
     authorize group, :admin?
-    bulletin = Bulletin.new(safe_create_params)
-    bulletin.group = group
-    bulletin.created_by = group.current_membership
-    @bulletin = Bulletins::Create.run!(bulletin.attributes)
+    @bulletin = Bulletin.new(safe_create_params)
+    @bulletin.group = group
+    @bulletin.created_by = current_resource_owner
+    @bulletin.save!
     render :show
   end
 
   def stamp
     @bulletin = Bulletin.find(params[:id])
     authorize @bulletin.group, :show?
+    Stamp.delete_all(bulletin: bulletin, created_by: current_resource_owner)
     stamp = Stamp.new(params.permit(:symbol))
     stamp.bulletin = @bulletin
-    stamp.created_by = @bulletin.group.current_membership
-    Stamps::CreateOrUpdate.run!(stamp.attributes)
+    stamp.created_by = current_resource_owner
+    stamp.save!
     @bulletin.reload
     render :show
   end

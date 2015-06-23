@@ -6,7 +6,7 @@ json.array! bulletins do |bulletin|
   end
 
   json.created_by do
-    json.partial! 'api/v1/shared/membership', membership: bulletin.created_by
+    json.partial! 'api/v1/shared/user', user: bulletin.created_by
   end
 
   unless bulletin.current_stamp.nil?
