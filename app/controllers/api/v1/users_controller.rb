@@ -14,6 +14,9 @@ class Api::V1::UsersController < Api::V1::ApiController
   private
 
   def safe_update_params
+    unless params[:avatar_id].nil?
+      params[:avatar_id] = Blob.decrypt_id(params[:avatar_id])
+    end
     params.permit(:name, :avatar_id)
   end
 end
