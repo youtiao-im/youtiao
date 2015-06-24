@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     api_version module: 'v1', path: { value: 'v1' } do
       resource :user, only: [:show, :update]
 
-      resources :groups, only: [:index, :show, :create] do
+      resources :groups, only: [:index, :show, :create, :update] do
         collection do
           post :join
         end

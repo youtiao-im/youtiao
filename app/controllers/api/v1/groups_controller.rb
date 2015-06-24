@@ -24,9 +24,16 @@ class Api::V1::GroupsController < Api::V1::ApiController
     render :show
   end
 
+  def update
+    @group = Group.find(params[:id])
+    authorize @group, :admin?
+    @group.update!(safe_update_params)
+    render :show
+  end
+
   def join
     fail ActionController::BadRequest if params[:code].nil?
-    @group = Group.find_by_code(params[:code])
+    @group = Group.find_by_code!(params[:code])
     membership = Membership.new
     membership.group = @group
     membership.user = current_resource_owner
@@ -40,5 +47,9 @@ class Api::V1::GroupsController < Api::V1::ApiController
 
   def safe_create_params
     params.permit(:name)
+  end
+
+  def safe_update_params
+    params.permit(:name, :code)
   end
 end

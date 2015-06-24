@@ -125,6 +125,69 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
     end
   end
 
+  describe 'PATCH #update' do
+    context 'when not authenticated' do
+      it 'responds with :unauthorized' do
+        patch :update, id: 0
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when authenticated' do
+      before do
+        authenticate user
+      end
+
+      context 'for a group not exists' do
+        it 'responds with :not_found' do
+          patch :update, id: 0
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context 'for a group exists' do
+        context 'when group is not affiliated with user' do
+          it 'responds with :forbidden' do
+            patch :update, id: group.to_param
+            expect(response).to have_http_status(:forbidden)
+          end
+        end
+
+        context 'when group is affiliated with user 'do
+          context 'when user is not an admin of group' do
+            before do
+              create(:membership, group: group, user: user)
+            end
+
+            it 'responds with :forbidden' do
+              patch :update, id: group.to_param
+              expect(response).to have_http_status(:forbidden)
+            end
+          end
+
+          context 'when user is an admin of group' do
+            before do
+              create(:admin_membership, group: group, user: user)
+            end
+
+            it 'responds with :ok' do
+              patch :update, { id: group.to_param }.merge(
+                attributes_for(:group))
+              expect(response).to have_http_status(:ok)
+            end
+
+            it 'decorates the updated group as #group' do
+              patch :update, { id: group.to_param }.merge(
+                attributes_for(:group))
+              expect(controller.group).to be_decorated
+              expect(controller.group).to eq(group)
+            end
+          end
+        end
+      end
+    end
+  end
+
   describe 'POST #join' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
@@ -138,30 +201,42 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
         authenticate user
       end
 
-      context 'for a group affiliated with user' do
-        it 'responds with :conflict' do
-          create(:membership, group: group, user: user)
-          post :join, code: group.code
-          expect(response).to have_http_status(:conflict)
+      context 'for a group not exists' do
+        it 'responds with :not_found' do
+          post :join, code: 0
+          expect(response).to have_http_status(:not_found)
         end
       end
 
-      context 'for a group not affiliated with user' do
-        it 'responds with :ok' do
-          post :join, code: group.code
-          expect(response).to have_http_status(:ok)
-        end
+      context 'for a group exists' do
+        context 'for a group affiliated with user' do
+          before do
+            create(:membership, group: group, user: user)
+          end
 
-        it 'creates a new membership' do
-          expect do
+          it 'responds with :conflict' do
             post :join, code: group.code
-          end.to change(Membership, :count).by(1)
+            expect(response).to have_http_status(:conflict)
+          end
         end
 
-        it 'decorates the joined group as #group' do
-          post :join, code: group.code
-          expect(controller.group).to be_decorated
-          expect(controller.group).to eq(group)
+        context 'for a group not affiliated with user' do
+          it 'responds with :ok' do
+            post :join, code: group.code
+            expect(response).to have_http_status(:ok)
+          end
+
+          it 'creates a new membership' do
+            expect do
+              post :join, code: group.code
+            end.to change(Membership, :count).by(1)
+          end
+
+          it 'decorates the joined group as #group' do
+            post :join, code: group.code
+            expect(controller.group).to be_decorated
+            expect(controller.group).to eq(group)
+          end
         end
       end
     end
