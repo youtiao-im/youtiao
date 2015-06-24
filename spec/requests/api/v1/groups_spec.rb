@@ -47,6 +47,17 @@ RSpec.describe 'Api::V1::Groups', type: :request do
     end
   end
 
+  describe 'PATCH /api/v1/groups/:id' do
+    it 'returns the updated group' do
+      group = create(:group)
+      create(:admin_membership, group: group, user: user)
+      patch "/api/v1/groups/#{group.to_param}",
+            attributes_for(:group),
+            'Authorization' => "Bearer #{access_token}"
+      expect(response.body).to match_json_expression(json_expression)
+    end
+  end
+
   describe 'POST /api/v1/groups/join' do
     it 'returns the joined group' do
       group = create(:group)
