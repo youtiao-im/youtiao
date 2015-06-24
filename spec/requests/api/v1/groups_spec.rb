@@ -9,6 +9,7 @@ RSpec.describe 'Api::V1::Groups', type: :request do
       type: 'Group',
       id: String,
       name: String,
+      code: String,
       memberships_count: Fixnum,
       created_at: String,
       updated_at: String
@@ -46,11 +47,11 @@ RSpec.describe 'Api::V1::Groups', type: :request do
     end
   end
 
-  describe 'POST /api/v1/groups/:id/join' do
-    it 'returns the created group' do
+  describe 'POST /api/v1/groups/join' do
+    it 'returns the joined group' do
       group = create(:group)
-      post "/api/v1/groups/#{group.to_param}/join",
-           {},
+      post '/api/v1/groups/join',
+           { code: group.code },
            'Authorization' => "Bearer #{access_token}"
       expect(response.body).to match_json_expression(json_expression)
     end

@@ -67,6 +67,7 @@ gem 'seed-fu'
 gem 'foreigner'
 gem 'enumerize'
 gem 'counter_culture'
+gem 'stringex'
 
 gem 'qiniu'
 

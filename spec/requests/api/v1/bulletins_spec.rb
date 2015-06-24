@@ -21,6 +21,7 @@ RSpec.describe 'Api::V1::Bulletins', type: :request do
         type: 'Group',
         id: String,
         name: String,
+        code: String,
         memberships_count: Fixnum,
         created_at: String,
         updated_at: String

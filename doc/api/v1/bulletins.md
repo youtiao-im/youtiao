@@ -41,6 +41,7 @@ The returned bulletins will be sorted in the reverse order they get created.
             "type": "Group",
             "id": "ea6d69d2",
             "name": "Thousand Sunny",
+            "code": "thousand-sunny#2543",
             "memberships_count": 9,
             "created_at": "1434633474.775358",
             "updated_at": "1434633474.775358"
@@ -84,6 +85,7 @@ GET /bulletins/:id
         "type": "Group",
         "id": "ea6d69d2",
         "name": "Thousand Sunny",
+        "code": "thousand-sunny#2543",
         "memberships_count": 9,
         "created_at": "1434633474.775358",
         "updated_at": "1434633474.775358"
@@ -139,6 +141,7 @@ POST /groups/:group_id/bulletins
         "type": "Group",
         "id": "ea6d69d2",
         "name": "Thousand Sunny",
+        "code": "thousand-sunny#2543",
         "memberships_count": 9,
         "created_at": "1434633474.775358",
         "updated_at": "1434633474.775358"
@@ -194,6 +197,7 @@ POST /bulletins/:id/stamp
         "type": "Group",
         "id": "ea6d69d2",
         "name": "Thousand Sunny",
+        "code": "thousand-sunny#2543",
         "memberships_count": 9,
         "created_at": "1434633474.775358",
         "updated_at": "1434633474.775358"
