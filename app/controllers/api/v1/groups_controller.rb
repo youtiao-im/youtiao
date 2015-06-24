@@ -25,7 +25,8 @@ class Api::V1::GroupsController < Api::V1::ApiController
   end
 
   def join
-    @group = Group.find(params[:id])
+    fail ActionController::BadRequest if params[:code].nil?
+    @group = Group.find_by_code(params[:code])
     membership = Membership.new
     membership.group = @group
     membership.user = current_resource_owner

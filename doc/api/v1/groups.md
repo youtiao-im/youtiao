@@ -20,6 +20,7 @@ GET /groups
         "type": "Group",
         "id": "8e2d94da",
         "name": "Going Merry",
+        "code": "going-merry#5733",
         "memberships_count": 7,
         "created_at": "1434633474.772994",
         "updated_at": "1434633474.772994",
@@ -51,6 +52,7 @@ GET /groups/:id
     "type": "Group",
     "id": "8e2d94da",
     "name": "Going Merry",
+    "code": "going-merry#5733",
     "memberships_count": 7,
     "created_at": "1434633474.772994",
     "updated_at": "1434633474.772994",
@@ -94,6 +96,7 @@ POST /groups
     "type": "Group",
     "id": "8e2d94da",
     "name": "Going Merry",
+    "code": "going-merry#5733",
     "memberships_count": 1,
     "created_at": "1434633474.772994",
     "updated_at": "1434633474.772994",
@@ -113,8 +116,14 @@ POST /groups
 ## Join
 
 ```
-POST /groups/:id/join
+POST /groups/join
 ```
+
+### Parameters
+
+| Name   | Type     | Description                          |
+| ------ | -------- | ------------------------------------ |
+| `code` | `string` | **Required**. The code of the group. |
 
 ### Response
 
@@ -123,6 +132,7 @@ POST /groups/:id/join
     "type": "Group",
     "id": "8e2d94da",
     "name": "Going Merry",
+    "code": "going-merry#5733",
     "memberships_count": 7,
     "created_at": "1434633474.772994",
     "updated_at": "1434633474.772994",

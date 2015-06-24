@@ -128,7 +128,7 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
   describe 'POST #join' do
     context 'when not authenticated' do
       it 'responds with :unauthorized' do
-        post :join, id: 0
+        post :join, code: 0
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -141,25 +141,25 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
       context 'for a group affiliated with user' do
         it 'responds with :conflict' do
           create(:membership, group: group, user: user)
-          post :join, id: group.to_param
+          post :join, code: group.code
           expect(response).to have_http_status(:conflict)
         end
       end
 
       context 'for a group not affiliated with user' do
         it 'responds with :ok' do
-          post :join, id: group.to_param
+          post :join, code: group.code
           expect(response).to have_http_status(:ok)
         end
 
         it 'creates a new membership' do
           expect do
-            post :join, id: group.to_param
+            post :join, code: group.code
           end.to change(Membership, :count).by(1)
         end
 
         it 'decorates the joined group as #group' do
-          post :join, id: group.to_param
+          post :join, code: group.code
           expect(controller.group).to be_decorated
           expect(controller.group).to eq(group)
         end

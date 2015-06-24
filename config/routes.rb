@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resource :user, only: [:show, :update]
 
       resources :groups, only: [:index, :show, :create] do
-        member do
+        collection do
           post :join
         end
 

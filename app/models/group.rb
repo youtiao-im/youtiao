@@ -4,6 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  name              :string           not null
+#  code              :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  created_by_id     :integer          not null
@@ -18,4 +19,15 @@ class Group < ActiveRecord::Base
           class_name: 'Membership'
 
   validates :name, presence: true
+
+  before_create :generate_code
+
+  def generate_code
+    return unless code.nil?
+    name_slug = name.to_url
+    loop do
+      self.code = "#{name_slug}\##{SecureRandom.random_number(9000) + 1000}"
+      break unless Group.exists?(code: code)
+    end
+  end
 end
