@@ -15,7 +15,7 @@ class Api::V1::ApiController < ActionController::Base
     render nothing: true, status: :forbidden
   end
 
-  rescue_from ActiveRecord::RecordInvalid do |ex|
+  rescue_from ActiveRecord::RecordInvalid do
     render nothing: true, status: :unprocessable_entity
   end
 
