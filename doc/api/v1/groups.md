@@ -21,18 +21,18 @@ GET /groups
         "type": "Group",
         "id": "8e2d94da",
         "name": "Going Merry",
-        "code": "going-merry#5733",
+        "code": "going-merry#2500",
         "memberships_count": 7,
-        "created_at": "1434633474.772994",
-        "updated_at": "1434633474.772994",
+        "created_at": "1435209292.760114",
+        "updated_at": "1435209292.760114",
         "membership": {
             "type": "Membership",
             "id": "ed767a69",
             "group_id": "8e2d94da",
             "user_id": "de58e284",
             "role": "owner",
-            "created_at": "1434633474.7885382",
-            "updated_at": "1434633474.7885382"
+            "created_at": "1435209293.049273",
+            "updated_at": "1435209293.049273"
         }
     },
     ...
@@ -53,18 +53,18 @@ GET /groups/:id
     "type": "Group",
     "id": "8e2d94da",
     "name": "Going Merry",
-    "code": "going-merry#5733",
+    "code": "going-merry#2500",
     "memberships_count": 7,
-    "created_at": "1434633474.772994",
-    "updated_at": "1434633474.772994",
+    "created_at": "1435209292.760114",
+    "updated_at": "1435209292.760114",
     "membership": {
         "type": "Membership",
         "id": "ed767a69",
         "group_id": "8e2d94da",
         "user_id": "de58e284",
         "role": "owner",
-        "created_at": "1434633474.7885382",
-        "updated_at": "1434633474.7885382"
+        "created_at": "1435209293.049273",
+        "updated_at": "1435209293.049273"
     }
 }
 ```
@@ -98,18 +98,18 @@ POST /groups
     "type": "Group",
     "id": "8e2d94da",
     "name": "Going Merry",
-    "code": "going-merry#5733",
+    "code": "going-merry#2500",
     "memberships_count": 1,
-    "created_at": "1434633474.772994",
-    "updated_at": "1434633474.772994",
+    "created_at": "1435209292.760114",
+    "updated_at": "1435209292.760114",
     "membership": {
         "type": "Membership",
         "id": "ed767a69",
         "group_id": "8e2d94da",
         "user_id": "de58e284",
         "role": "owner",
-        "created_at": "1434633474.7885382",
-        "updated_at": "1434633474.7885382"
+        "created_at": "1435209293.049273",
+        "updated_at": "1435209293.049273"
     }
 }
 ```
@@ -143,18 +143,18 @@ PATCH /groups/:id
     "type": "Group",
     "id": "8e2d94da",
     "name": "Going Merry II",
-    "code": "going-merry#5733",
-    "memberships_count": 1,
-    "created_at": "1434633474.772994",
-    "updated_at": "1434633474.772994",
+    "code": "going-merry#2500",
+    "memberships_count": 7,
+    "created_at": "1435209292.760114",
+    "updated_at": "1435209292.760114",
     "membership": {
         "type": "Membership",
         "id": "ed767a69",
         "group_id": "8e2d94da",
         "user_id": "de58e284",
         "role": "owner",
-        "created_at": "1434633474.7885382",
-        "updated_at": "1434633474.7885382"
+        "created_at": "1435209293.049273",
+        "updated_at": "1435209293.049273"
     }
 }
 ```
@@ -179,18 +179,18 @@ POST /groups/join
     "type": "Group",
     "id": "8e2d94da",
     "name": "Going Merry",
-    "code": "going-merry#5733",
+    "code": "going-merry#2500",
     "memberships_count": 7,
-    "created_at": "1434633474.772994",
-    "updated_at": "1434633474.772994",
+    "created_at": "1435209292.760114",
+    "updated_at": "1435209292.760114",
     "membership": {
         "type": "Membership",
         "id": "ed767a69",
         "group_id": "8e2d94da",
         "user_id": "de58e284",
         "role": "owner",
-        "created_at": "1434633474.7885382",
-        "updated_at": "1434633474.7885382"
+        "created_at": "1435209293.049273",
+        "updated_at": "1435209293.049273"
     }
 }
 ```

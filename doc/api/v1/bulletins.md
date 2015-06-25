@@ -35,16 +35,16 @@ The returned bulletins will be sorted in the reverse order they get created.
         "checks_count": 8,
         "crosses_count": 0,
         "comments_count": 0,
-        "created_at": "1434633474.884896",
-        "updated_at": "1434633474.884896",
+        "created_at": "1435209293.163268",
+        "updated_at": "1435209293.163268",
         "group": {
             "type": "Group",
             "id": "ea6d69d2",
             "name": "Thousand Sunny",
-            "code": "thousand-sunny#2543",
+            "code": "thousand-sunny#1224",
             "memberships_count": 9,
-            "created_at": "1434633474.775358",
-            "updated_at": "1434633474.775358"
+            "created_at": "1435209293.0380712",
+            "updated_at": "1435209293.0380712"
         },
         "created_by": {
             "type": "User",
@@ -52,9 +52,11 @@ The returned bulletins will be sorted in the reverse order they get created.
             "email": "luffy@straw-hat.org",
             "name": "luffy",
             "avatar_id": null,
-            "created_at": "1434633474.270281",
-            "updated_at": "1434633474.270281"
-        }
+            "avatar": null,
+            "created_at": "1435209292.265453",
+            "updated_at": "1435209292.265453"
+        },
+        "stamp": null
     },
     ...
 ]
@@ -79,16 +81,16 @@ GET /bulletins/:id
     "checks_count": 8,
     "crosses_count": 0,
     "comments_count": 0,
-    "created_at": "1434633474.884896",
-    "updated_at": "1434633474.884896",
+    "created_at": "1435209293.163268",
+    "updated_at": "1435209293.163268",
     "group": {
         "type": "Group",
         "id": "ea6d69d2",
         "name": "Thousand Sunny",
-        "code": "thousand-sunny#2543",
+        "code": "thousand-sunny#1224",
         "memberships_count": 9,
-        "created_at": "1434633474.775358",
-        "updated_at": "1434633474.775358"
+        "created_at": "1435209293.0380712",
+        "updated_at": "1435209293.0380712"
     },
     "created_by": {
         "type": "User",
@@ -96,9 +98,11 @@ GET /bulletins/:id
         "email": "luffy@straw-hat.org",
         "name": "luffy",
         "avatar_id": null,
-        "created_at": "1434633474.270281",
-        "updated_at": "1434633474.270281"
-    }
+        "avatar": null,
+        "created_at": "1435209292.265453",
+        "updated_at": "1435209292.265453"
+    },
+    "stamp": null
 }
 ```
 
@@ -132,19 +136,19 @@ POST /groups/:group_id/bulletins
     "group_id": "ea6d69d2",
     "text": "3D2Y",
     "created_by_id": "de58e284",
-    "checks_count": 0,
+    "checks_count": 8,
     "crosses_count": 0,
     "comments_count": 0,
-    "created_at": "1434633474.884896",
-    "updated_at": "1434633474.884896",
+    "created_at": "1435209293.163268",
+    "updated_at": "1435209293.163268",
     "group": {
         "type": "Group",
         "id": "ea6d69d2",
         "name": "Thousand Sunny",
-        "code": "thousand-sunny#2543",
+        "code": "thousand-sunny#1224",
         "memberships_count": 9,
-        "created_at": "1434633474.775358",
-        "updated_at": "1434633474.775358"
+        "created_at": "1435209293.0380712",
+        "updated_at": "1435209293.0380712"
     },
     "created_by": {
         "type": "User",
@@ -152,9 +156,11 @@ POST /groups/:group_id/bulletins
         "email": "luffy@straw-hat.org",
         "name": "luffy",
         "avatar_id": null,
-        "created_at": "1434633474.270281",
-        "updated_at": "1434633474.270281"
-    }
+        "avatar": null,
+        "created_at": "1435209292.265453",
+        "updated_at": "1435209292.265453"
+    },
+    "stamp": null
 }
 ```
 
@@ -191,16 +197,16 @@ POST /bulletins/:id/stamp
     "checks_count": 9,
     "crosses_count": 0,
     "comments_count": 0,
-    "created_at": "1434633474.884896",
-    "updated_at": "1434633474.884896",
+    "created_at": "1435209293.163268",
+    "updated_at": "1435209293.163268",
     "group": {
         "type": "Group",
         "id": "ea6d69d2",
         "name": "Thousand Sunny",
-        "code": "thousand-sunny#2543",
+        "code": "thousand-sunny#1224",
         "memberships_count": 9,
-        "created_at": "1434633474.775358",
-        "updated_at": "1434633474.775358"
+        "created_at": "1435209293.0380712",
+        "updated_at": "1435209293.0380712"
     },
     "created_by": {
         "type": "User",
@@ -208,8 +214,9 @@ POST /bulletins/:id/stamp
         "email": "luffy@straw-hat.org",
         "name": "luffy",
         "avatar_id": null,
-        "created_at": "1434633474.270281",
-        "updated_at": "1434633474.270281"
+        "avatar": null,
+        "created_at": "1435209292.265453",
+        "updated_at": "1435209292.265453"
     },
     "stamp": {
         "type": "Stamp",
@@ -217,8 +224,8 @@ POST /bulletins/:id/stamp
         "bulletin_id": "3d4a93a6",
         "symbol": "check",
         "created_by_id": "de58e284",
-        "created_at": "1434634816.8099551",
-        "updated_at": "1434634816.8099551"
+        "created_at": "1435209376.498585",
+        "updated_at": "1435209376.498585"
     }
 }
 ```

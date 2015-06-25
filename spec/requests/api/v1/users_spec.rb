@@ -11,6 +11,7 @@ RSpec.describe 'Api::V1::Users', type: :request do
       email: String,
       name: String,
       avatar_id: nil,
+      avatar: nil,
       created_at: String,
       updated_at: String
     }

@@ -6,12 +6,12 @@ class Api::V1::CommentsController < Api::V1::ApiController
     bulletin = Bulletin.find(params[:bulletin_id])
     authorize bulletin.group, :show?
     scope = bulletin.comments
-    unless params[:after_id].nil?
-      after_id = Comment.decrypt_id(params[:after_id])
-      fail ActionController::BadRequest if after_id.nil?
-      scope = scope.after_id(after_id)
+    unless params[:before_id].nil?
+      before_id = Comment.decrypt_id(params[:before_id])
+      fail ActionController::BadRequest if before_id.nil?
+      scope = scope.before_id(before_id)
     end
-    @comments = limit scope.order(id: :asc).includes(
+    @comments = limit scope.order(id: :desc).includes(
       :created_by, created_by: :avatar)
   end
 

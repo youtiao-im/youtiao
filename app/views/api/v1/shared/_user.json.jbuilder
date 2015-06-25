@@ -5,8 +5,10 @@ json.call user,
           :name,
           :avatar_id
 
-unless user.avatar.nil?
-  json.avatar do
+json.avatar do
+  if user.avatar.nil?
+    json.null!
+  else
     json.partial! 'api/v1/shared/blob', blob: user.avatar
   end
 end

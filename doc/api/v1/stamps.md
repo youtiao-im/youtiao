@@ -25,20 +25,21 @@ The returned stamps will be sorted in the reverse order they get created.
 [
     {
         "type": "Stamp",
-        "id": "6d75875e",
-        "bulletin_id": "e52ad5a9",
+        "id": "7d567952",
+        "bulletin_id": "3d4a93a6",
         "symbol": "check",
-        "created_by_id": "2de8da87",
-        "created_at": "1434633474.912439",
-        "updated_at": "1434633474.912439",
+        "created_by_id": "de58e284",
+        "created_at": "1435209376.498585",
+        "updated_at": "1435209376.498585",
         "created_by": {
             "type": "User",
-            "id": "2de8da87",
-            "email": "sanji@straw-hat.org",
-            "name": "sanji",
+            "id": "de58e284",
+            "email": "luffy@straw-hat.org",
+            "name": "luffy",
             "avatar_id": null,
-            "created_at": "1434633474.516248",
-            "updated_at": "1434633474.516248"
+            "avatar": null,
+            "created_at": "1435209292.265453",
+            "updated_at": "1435209292.265453"
         }
     },
     ...

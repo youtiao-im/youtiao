@@ -9,8 +9,10 @@ json.array! bulletins do |bulletin|
     json.partial! 'api/v1/shared/user', user: bulletin.created_by
   end
 
-  unless bulletin.current_stamp.nil?
-    json.stamp do
+  json.stamp do
+    if bulletin.current_stamp.nil?
+      json.null!
+    else
       json.partial! 'api/v1/shared/stamp', stamp: bulletin.current_stamp
     end
   end
