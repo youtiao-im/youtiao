@@ -9,4 +9,5 @@
 #
 
 class Blob < ActiveRecord::Base
+  validates :data_url, presence: true, length: { maximum: 256 }
 end

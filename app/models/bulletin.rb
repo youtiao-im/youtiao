@@ -21,7 +21,10 @@ class Bulletin < ActiveRecord::Base
   has_one :current_stamp, -> { where(created_by: User.current) },
           class_name: 'Stamp'
 
-  validates :text, presence: true
+  validates :text,
+            presence: true,
+            length: { maximum: 512 },
+            format: /\A[[:print:]]+\z/
 
   scope :before_id, -> (id) { where('bulletins.id<?', id) }
 end

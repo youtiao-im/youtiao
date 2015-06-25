@@ -123,10 +123,10 @@ RSpec.describe Api::V1::BulletinsController, type: :controller do
             end
 
             context 'with invalid attributes' do
-              it 'responds with :bad_request' do
+              it 'responds with :unprocessable_entity' do
                 post :create, { group_id: group.to_param }.merge(
                   attributes_for(:invalid_bulletin))
-                expect(response).to have_http_status(:bad_request)
+                expect(response).to have_http_status(:unprocessable_entity)
               end
             end
 

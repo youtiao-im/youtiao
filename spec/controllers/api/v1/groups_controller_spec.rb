@@ -93,9 +93,9 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
       end
 
       context 'with invalid attributes' do
-        it 'responds with :bad_request' do
+        it 'responds with :unprocessable_entity' do
           post :create, attributes_for(:invalid_group)
-          expect(response).to have_http_status(:bad_request)
+          expect(response).to have_http_status(:unprocessable_entity)
         end
       end
 
@@ -214,9 +214,21 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
             create(:membership, group: group, user: user)
           end
 
-          it 'responds with :conflict' do
+          it 'responds with :ok' do
             post :join, code: group.code
-            expect(response).to have_http_status(:conflict)
+            expect(response).to have_http_status(:ok)
+          end
+
+          it 'does not create a new membership' do
+            expect do
+              post :join, code: group.code
+            end.to_not change(Membership, :count)
+          end
+
+          it 'decorates the group as #group' do
+            post :join, code: group.code
+            expect(controller.group).to be_decorated
+            expect(controller.group).to eq(group)
           end
         end
 

@@ -63,11 +63,11 @@ $ curl https://api.youtiao.im/v1?access_token=:OAUTH_TOKEN
 
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
-| `400`            | Missing required parameter / Invalid parameter / Invalid resource body |
+| `400`            | Missing required parameter / Invalid parameter |
 | `401`            | Not authenticated |
 | `403`            | Permission denied |
 | `404`            | Resource not found / No route |
-| `409`            | Unique constraint violation |
+| `422`            | Unprocessable entity |
 | `5xx`            | Server error |
 
 

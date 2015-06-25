@@ -43,6 +43,8 @@ class Api::V1::BulletinsController < Api::V1::ApiController
     stamp.save!
     @bulletin.reload
     render :show
+  rescue ActiveRecord::RecordInvalid
+    fail ActionController::BadRequest
   end
 
   private

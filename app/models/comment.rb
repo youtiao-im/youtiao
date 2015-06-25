@@ -14,7 +14,10 @@ class Comment < ActiveRecord::Base
   belongs_to :bulletin
   belongs_to :created_by, class_name: 'User'
 
-  validates :text, presence: true
+  validates :text,
+            presence: true,
+            length: { maximum: 512 },
+            format: /\A[[:print:]]+\z/
 
   counter_culture :bulletin
 

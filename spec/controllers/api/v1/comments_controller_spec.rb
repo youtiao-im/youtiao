@@ -136,10 +136,10 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
           end
 
           context 'with invalid attributes' do
-            it 'responds with :bad_request' do
+            it 'responds with :unprocessable_entity' do
               post :create, { bulletin_id: bulletin.to_param }.merge(
                 attributes_for(:invalid_comment))
-              expect(response).to have_http_status(:bad_request)
+              expect(response).to have_http_status(:unprocessable_entity)
             end
           end
 

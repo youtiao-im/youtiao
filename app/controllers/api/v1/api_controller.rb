@@ -2,7 +2,6 @@ class Api::V1::ApiController < ActionController::Base
   include Pundit
 
   rescue_from ActionController::ParameterMissing,
-              ActiveRecord::RecordInvalid,
               ActionController::BadRequest do
     render nothing: true, status: :bad_request
   end
@@ -16,8 +15,8 @@ class Api::V1::ApiController < ActionController::Base
     render nothing: true, status: :forbidden
   end
 
-  rescue_from ActiveRecord::RecordNotUnique do
-    render nothing: true, status: :conflict
+  rescue_from ActiveRecord::RecordInvalid do |ex|
+    render nothing: true, status: :unprocessable_entity
   end
 
   unless Rails.application.config.consider_all_requests_local

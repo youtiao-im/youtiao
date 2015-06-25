@@ -15,4 +15,5 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   it { should belong_to :bulletin }
   it { should belong_to :created_by }
+  it { should validate_length_of(:text).is_at_most(512) }
 end

@@ -41,6 +41,8 @@ class Api::V1::GroupsController < Api::V1::ApiController
     membership.save!
     @group.reload
     render :show
+  rescue ActiveRecord::RecordNotUnique
+    render :show
   end
 
   private

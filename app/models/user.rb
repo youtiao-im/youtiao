@@ -30,7 +30,10 @@ class User < ActiveRecord::Base
   has_many :groups, through: :memberships
   has_many :bulletins, through: :groups
 
-  validates :name, presence: true
+  validates :name,
+            presence: true,
+            length: { minimum: 2, maximum: 32 },
+            format: /\A[[:print:]]+\z/
 
   def self.current
     RequestStore.store[:current_user]
