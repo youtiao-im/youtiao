@@ -64,8 +64,8 @@ $ curl https://api.youtiao.im/v1?access_token=:OAUTH_TOKEN
 | HTTP Status Code | Description |
 | ---------------- | ----------- |
 | `400`            | Missing required parameter / Invalid parameter / Invalid resource body |
-| `401`            | Permission denied |
-| `403`            | Invalid access token |
+| `401`            | Not authenticated |
+| `403`            | Permission denied |
 | `404`            | Resource not found / No route |
 | `409`            | Unique constraint violation |
 | `5xx`            | Server error |
