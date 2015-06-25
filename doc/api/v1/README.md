@@ -81,7 +81,7 @@ POST /blobs/token
 
 With the upload token in hand, you can upload the file using [Qiniu SDKs](https://github.com/qiniu). When upload finishes, the response would be a blob object:
 
-```
+```json
 {
     "type": "Blob",
     "id": "d3853a59",
