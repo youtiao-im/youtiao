@@ -46,7 +46,7 @@ class Api::V1::GroupsController < Api::V1::ApiController
   private
 
   def safe_create_params
-    params.permit(:name)
+    params.permit(:name, :code)
   end
 
   def safe_update_params
