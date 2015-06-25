@@ -18,5 +18,5 @@ class Comment < ActiveRecord::Base
 
   counter_culture :bulletin
 
-  scope :after_id, -> (id) { where('comments.id>?', id) }
+  scope :before_id, -> (id) { where('comments.id<?', id) }
 end

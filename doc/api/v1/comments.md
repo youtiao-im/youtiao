@@ -11,14 +11,14 @@
 GET /bulletins/:bulletin_id/comments
 ```
 
-The returned comments will be sorted in the order they get created.
+The returned comments will be sorted in the reverse order they get created.
 
 ### Parameters
 
-| Name       | Type      | Description |
-| ---------- | --------- | ----------- |
-| `after_id` | `string`  | **Optional**. Returns comments created after the specified comment. |
-| `limit`    | `integer` | **Optional**. The number of comments to retrieve. Default to 25, max to 500. |
+| Name        | Type      | Description |
+| ----------- | --------- | ----------- |
+| `before_id` | `string`  | **Optional**. Returns comments created before the specified comment. |
+| `limit`     | `integer` | **Optional**. The number of comments to retrieve. Default to 25, max to 500. |
 
 ### Response
 
@@ -26,20 +26,21 @@ The returned comments will be sorted in the order they get created.
 [
     {
         "type": "Comment",
-        "id": "7293583a",
+        "id": "d423863e",
         "bulletin_id": "e52ad5a9",
-        "text": "Hell yeah!",
-        "created_by_id": "d5283a89",
-        "created_at": "1434633475.0101671",
-        "updated_at": "1434633475.0101671",
+        "text": "Need a map?",
+        "created_by_id": "43a82582",
+        "created_at": "1435209293.27758",
+        "updated_at": "1435209293.27758",
         "created_by": {
             "type": "User",
-            "id": "d5283a89",
-            "email": "zoro@straw-hat.org",
-            "name": "zoro",
+            "id": "43a82582",
+            "email": "usopp@straw-hat.org",
+            "name": "usopp",
             "avatar_id": null,
-            "created_at": "1434633474.332154",
-            "updated_at": "1434633474.332154"
+            "avatar": null,
+            "created_at": "1435209292.448469",
+            "updated_at": "1435209292.448469"
         }
     },
     ...
@@ -58,20 +59,21 @@ GET /comments/:id
 ```json
 {
     "type": "Comment",
-    "id": "7293583a",
+    "id": "d423863e",
     "bulletin_id": "e52ad5a9",
-    "text": "Hell yeah!",
-    "created_by_id": "d5283a89",
-    "created_at": "1434633475.0101671",
-    "updated_at": "1434633475.0101671",
+    "text": "Need a map?",
+    "created_by_id": "43a82582",
+    "created_at": "1435209293.27758",
+    "updated_at": "1435209293.27758",
     "created_by": {
         "type": "User",
-        "id": "d5283a89",
-        "email": "zoro@straw-hat.org",
-        "name": "zoro",
+        "id": "43a82582",
+        "email": "usopp@straw-hat.org",
+        "name": "usopp",
         "avatar_id": null,
-        "created_at": "1434633474.332154",
-        "updated_at": "1434633474.332154"
+        "avatar": null,
+        "created_at": "1435209292.448469",
+        "updated_at": "1435209292.448469"
     }
 }
 ```
@@ -93,7 +95,7 @@ POST /bulletins/:bulletin_id/comments
 
 ```json
 {
-    "text": "Hell yeah!"
+    "text": "Need a map?"
 }
 ```
 
@@ -102,20 +104,21 @@ POST /bulletins/:bulletin_id/comments
 ```json
 {
     "type": "Comment",
-    "id": "7293583a",
+    "id": "d423863e",
     "bulletin_id": "e52ad5a9",
-    "text": "Hell yeah!",
-    "created_by_id": "d5283a89",
-    "created_at": "1434633475.0101671",
-    "updated_at": "1434633475.0101671",
+    "text": "Need a map?",
+    "created_by_id": "43a82582",
+    "created_at": "1435209293.27758",
+    "updated_at": "1435209293.27758",
     "created_by": {
         "type": "User",
-        "id": "d5283a89",
-        "email": "zoro@straw-hat.org",
-        "name": "zoro",
+        "id": "43a82582",
+        "email": "usopp@straw-hat.org",
+        "name": "usopp",
         "avatar_id": null,
-        "created_at": "1434633474.332154",
-        "updated_at": "1434633474.332154"
+        "avatar": null,
+        "created_at": "1435209292.448469",
+        "updated_at": "1435209292.448469"
     }
 }
 ```

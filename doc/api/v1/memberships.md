@@ -28,16 +28,17 @@ The returned memberships will be sorted in the reverse order they get created.
         "group_id": "8e2d94da",
         "user_id": "d658b98a",
         "role": "member",
-        "created_at": "1434633474.826644",
-        "updated_at": "1434633474.826644",
+        "created_at": "1435209293.0905359",
+        "updated_at": "1435209293.0905359",
         "user": {
             "type": "User",
             "id": "d658b98a",
             "email": "robin@straw-hat.org",
             "name": "robin",
             "avatar_id": null,
-            "created_at": "1434633474.640276",
-            "updated_at": "1434633474.640276"
+            "avatar": null,
+            "created_at": "1435209292.628777",
+            "updated_at": "1435209292.628777"
         }
     },
     ...

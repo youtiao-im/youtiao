@@ -3,27 +3,36 @@ class Api::V1::ApiController < ActionController::Base
 
   rescue_from ActionController::ParameterMissing,
               ActiveRecord::RecordInvalid,
-              ActionController::BadRequest do |exception|
-    render json: exception, status: :bad_request
+              ActionController::BadRequest do
+    render nothing: true, status: :bad_request
   end
 
-  rescue_from ActiveRecord::RecordNotFound do |exception|
-    render json: exception, status: :not_found
+  rescue_from ActiveRecord::RecordNotFound,
+              Hashids::InputError do
+    render nothing: true, status: :not_found
   end
 
-  rescue_from Pundit::NotAuthorizedError do |exception|
-    render json: exception, status: :forbidden
+  rescue_from Pundit::NotAuthorizedError do
+    render nothing: true, status: :forbidden
   end
 
-  rescue_from ActiveRecord::RecordNotUnique do |exception|
-    render json: exception, status: :conflict
+  rescue_from ActiveRecord::RecordNotUnique do
+    render nothing: true, status: :conflict
+  end
+
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from ActionController::RoutingError do
+      render nothing: true, status: :not_found
+    end
+
+    rescue_from Exception do
+      render nothing: true, status: :internal_server_error
+    end
   end
 
   before_action :doorkeeper_authorize!
   before_action :set_format_json
   before_action :set_current_user
-
-  helper_method :current_resource_owner, :pundit_user, :limit
 
   def current_resource_owner
     @current_resource_owner ||=

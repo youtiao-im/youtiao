@@ -16,7 +16,10 @@ GET /user
     "type": "User",
     "id": "de58e284",
     "email": "luffy@straw-hat.org",
-    "created_at": "1434103789.628273",
-    "updated_at": "1434103789.628273"
+    "name": "luffy",
+    "avatar_id": null,
+    "avatar": null,
+    "created_at": "1435209292.265453",
+    "updated_at": "1435209292.265453"
 }
 ```
