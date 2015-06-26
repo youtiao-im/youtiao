@@ -1,6 +1,8 @@
 # API Methods
 
-## groups
+## Methods Overview
+
+### groups
 
 | Method                            | Description |
 | --------------------------------- | ----------- |
@@ -9,13 +11,13 @@
 | [groups.update](#groups.update) | Updates a group. |
 | [groups.join](#groups.join)     | Joins a group. |
 
-## memberships
+### memberships
 
 | Method                                  | Description |
 | --------------------------------------- | ----------- |
 | [memberships.list](#memberships.list) | Lists memberships of a group. |
 
-## bulletins
+### bulletins
 
 | Method                                  | Description |
 | --------------------------------------- | ----------- |
@@ -23,13 +25,13 @@
 | [bulletins.create](#bulletins.create) | Create a bulletin. |
 | [bulletins.stamp](#bulletins.stamp)   | Stamp a bulletin. |
 
-## stamps
+### stamps
 
 | Method                        | Description |
 | ----------------------------- | ----------- |
 | [stamps.list](#stamps.list) | Lists stamps of a bulletin. |
 
-## comments
+### comments
 
 | Method                                | Description |
 | ------------------------------------- | ----------- |
@@ -38,46 +40,46 @@
 
 
 
-# Methods Explained
+## Methods Explained
 
-## groups.list
+### groups.list
 
 ```
 GET /groups.list
 ```
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## groups.create
+### groups.create
 
 ```
 POST /groups.create
 ```
 
-### Parameters
+#### Parameters
 
 | Name   | Type     | Description |
 | ------ | -------- | ----------- |
 | `name` | `string` | **Required**. Name of the group. |
 | `code` | `string` | **Optional**. Unique code of the group. |
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## groups.update
+### groups.update
 
 ```
 POST /groups.update
 ```
 
-### Parameters
+#### Parameters
 
 | Name   | Type     | Description |
 | ------ | -------- | ----------- |
@@ -85,37 +87,37 @@ POST /groups.update
 | `name` | `string` | **Optional**. Name of the group. |
 | `code` | `string` | **Optional**. Unique code of the group. |
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## groups.join
+### groups.join
 
 ```
 POST /groups.join
 ```
 
-### Parameters
+#### Parameters
 
 | Name   | Type     | Description |
 | ------ | -------- | ----------- |
 | `code` | `string` | **Required**. Unique code of the group. |
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## memberships.list
+### memberships.list
 
 ```
 GET /memberships.list
 ```
 
-### Parameters
+#### Parameters
 
 | Name        | Type      | Description |
 | ----------- | --------- | ----------- |
@@ -128,13 +130,13 @@ GET /memberships.list
 ```
 
 
-## bulletins.list
+### bulletins.list
 
 ```
 GET /bulletins.list
 ```
 
-### Parameters
+#### Parameters
 
 | Name        | Type      | Description |
 | ----------- | --------- | ----------- |
@@ -142,57 +144,57 @@ GET /bulletins.list
 | `before_id` | `string`  | **Optional**. Scopes bulletins created before this one. |
 | `limit`     | `integer` | **Optional**. Number of bulletins to retrieve. Default to 25, max to 500. |
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## bulletins.create
+### bulletins.create
 
 ```
 POST /bulletins.create
 ```
 
-### Parameters
+#### Parameters
 
 | Name       | Type      | Description |
 | ---------- | --------- | ----------- |
 | `group_id` | `string`  | **Required**. Group id of the bulletin. |
 | `text`     | `string`  | **Required**. Text of the bulletin. |
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## bulletins.stamp
+### bulletins.stamp
 
 ```
 POST /bulletins.stamp
 ```
 
-### Parameters
+#### Parameters
 
 | Name     | Type      | Description |
 | -------- | --------- | ----------- |
 | `id`     | `string`  | **Required**. Id of the bulletin. |
 | `symbol` | `string`  | **Required**. Symbol of the stamp. |
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## stamps.list
+### stamps.list
 
 ```
 GET /stamps.list
 ```
 
-### Parameters
+#### Parameters
 
 | Name          | Type      | Description |
 | ------------- | --------- | ----------- |
@@ -200,19 +202,19 @@ GET /stamps.list
 | `before_id`   | `string`  | **Optional**. Scopes stamps created before this one. |
 | `limit`       | `integer` | **Optional**. Number of stamps to retrieve. Default to 25, max to 500. |
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## comments.list
+### comments.list
 
 ```
 GET /comments.list
 ```
 
-### Parameters
+#### Parameters
 
 | Name          | Type      | Description |
 | ------------- | --------- | ----------- |
@@ -220,26 +222,26 @@ GET /comments.list
 | `before_id`   | `string`  | **Optional**. Scopes comments created before this one. |
 | `limit`       | `integer` | **Optional**. Number of comments to retrieve. Default to 25, max to 500. |
 
-### Response
+#### Response
 
 ```json
 ```
 
 
-## comments.create
+### comments.create
 
 ```
 GET /comments.create
 ```
 
-### Parameters
+#### Parameters
 
 | Name          | Type      | Description |
 | ------------- | --------- | ----------- |
 | `bulletin_id` | `string`  | **Required**. Bulletin id of the comment. |
 | `text`        | `string`  | **Required**. Text of the comment. |
 
-### Response
+#### Response
 
 ```json
 ```
