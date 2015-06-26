@@ -6,43 +6,43 @@
 
 | Method                            | Description |
 | --------------------------------- | ----------- |
-| [groups.list](#groups.list)     | Lists groups user joined. |
-| [groups.create](#groups.create) | Creates a group. |
-| [groups.update](#groups.update) | Updates a group. |
-| [groups.join](#groups.join)     | Joins a group. |
+| [groups.list](#groupslist)     | Lists groups user joined. |
+| [groups.create](#groupscreate) | Creates a group. |
+| [groups.update](#groupsupdate) | Updates a group. |
+| [groups.join](#groupsjoin)     | Joins a group. |
 
 ### memberships
 
 | Method                                  | Description |
 | --------------------------------------- | ----------- |
-| [memberships.list](#memberships.list) | Lists memberships of a group. |
+| [memberships.list](#membershipslist) | Lists memberships of a group. |
 
 ### bulletins
 
 | Method                                  | Description |
 | --------------------------------------- | ----------- |
-| [bulletins.list](#bulletins.list)     | Lists bulletins of one or all groups user joined. |
-| [bulletins.create](#bulletins.create) | Create a bulletin. |
-| [bulletins.stamp](#bulletins.stamp)   | Stamp a bulletin. |
+| [bulletins.list](#bulletinslist)     | Lists bulletins of one or all groups user joined. |
+| [bulletins.create](#bulletinscreate) | Create a bulletin. |
+| [bulletins.stamp](#bulletinsstamp)   | Stamp a bulletin. |
 
 ### stamps
 
 | Method                        | Description |
 | ----------------------------- | ----------- |
-| [stamps.list](#stamps.list) | Lists stamps of a bulletin. |
+| [stamps.list](#stampslist) | Lists stamps of a bulletin. |
 
 ### comments
 
 | Method                                | Description |
 | ------------------------------------- | ----------- |
-| [comments.list](#comments.list)     | Lists comments of a bulletin. |
-| [comments.create](#comments.create) | Create a comment. |
+| [comments.list](#commentslist)     | Lists comments of a bulletin. |
+| [comments.create](#commentscreate) | Create a comment. |
 
 
 
 ## Methods Explained
 
-### groups.list {#groups.list}
+### groups.list
 
 ```
 GET /groups.list
