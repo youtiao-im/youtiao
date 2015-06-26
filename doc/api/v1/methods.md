@@ -42,7 +42,7 @@
 
 ## Methods Explained
 
-### groups.list
+### groups.list {#groups.list}
 
 ```
 GET /groups.list
