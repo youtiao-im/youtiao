@@ -6,9 +6,6 @@ AllCops:
     - 'Guardfile'
   RunRailsCops: true
 
-Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
-
 Style/Documentation:
   Enabled: false
 

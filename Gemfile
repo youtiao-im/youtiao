@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-# source 'https://ruby.taobao.org'
+# source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -45,19 +45,20 @@ end
 
 # Authn
 gem 'devise'
-gem 'doorkeeper'
 
 # Authr
 gem 'pundit'
 
+# API
+gem 'grape'
+gem 'grape-entity'
+
+# API authn
+gem 'doorkeeper'
+gem 'wine_bouncer'
+
 # Id obfuscate
 gem 'hashids'
-
-# Object decorator
-gem 'draper'
-
-# API versioning
-gem 'versionist'
 
 # Request independent variable
 gem 'request_store'

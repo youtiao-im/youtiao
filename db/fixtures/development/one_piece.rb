@@ -12,8 +12,8 @@ User.seed_once(
 
 Group.seed_once(
   :id,
-  { id: 1, name: 'Going Merry', created_by_id: 1 },
-  { id: 2, name: 'Thousand Sunny', created_by_id: 1 })
+  { id: 1, name: 'Going Merry', code: 'going-merry', created_by_id: 1 },
+  { id: 2, name: 'Thousand Sunny', code: 'thousand-sunny', created_by_id: 1 })
 
 Membership.seed_once(
   :id,

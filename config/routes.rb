@@ -2,36 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   use_doorkeeper
 
-  namespace :api, shallow: true do
-    api_version module: 'v1', path: { value: 'v1' } do
-      resource :user, only: [:show, :update]
-
-      resources :groups, only: [:index, :show, :create, :update] do
-        collection do
-          post :join
-        end
-
-        resources :memberships, only: [:index]
-
-        resources :bulletins, only: [:index, :create, :show] do
-          member do
-            post :stamp
-          end
-
-          resources :stamps, only: [:index]
-          resources :comments, only: [:index, :show, :create]
-        end
-      end
-
-      resources :bulletins, only: [:index]
-
-      resources :blobs, only: [:create] do
-        collection do
-          post :token
-        end
-      end
-    end
-  end
+  mount V1::API => '/api'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
