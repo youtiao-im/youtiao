@@ -14,16 +14,6 @@ module HashidsSupport
       return nil if id.nil?
       id.is_a?(String) ? id_hash.decode(id).first : id
     end
-
-    def find(*args)
-      scope = args.slice!(0)
-      if scope.is_a?(Array)
-        scope.map! { |id| decrypt_id(id).to_i }
-      else
-        scope = decrypt_id(scope)
-      end
-      super(scope)
-    end
   end
 
   module InstanceMethods

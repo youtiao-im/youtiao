@@ -1,5 +1,10 @@
 module V1
   class MembershipsAPI < Grape::API
+    before do
+      params[:before_id] = Membership.decrypt_id(params[:before_id]) if params.key?(:before_id)
+      params[:group_id] = Group.decrypt_id(params[:group_id]) if params.key?(:group_id)
+    end
+
     params do
       requires :group_id, type: String
       optional :before_id, type: String

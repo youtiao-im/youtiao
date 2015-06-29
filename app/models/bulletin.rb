@@ -26,5 +26,5 @@ class Bulletin < ActiveRecord::Base
             length: { maximum: 512 },
             format: /\A[[:print:]]+\z/
 
-  scope :before_id, -> (id) { where('bulletins.id<?', Bulletin.decrypt_id(id)) }
+  scope :before_id, -> (id) { where('bulletins.id<?', id) }
 end

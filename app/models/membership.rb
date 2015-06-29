@@ -21,5 +21,5 @@ class Membership < ActiveRecord::Base
 
   counter_culture :group
 
-  scope :before_id, -> (id) { where('memberships.id<?', Membership.decrypt_id(id)) }
+  scope :before_id, -> (id) { where('memberships.id<?', id) }
 end

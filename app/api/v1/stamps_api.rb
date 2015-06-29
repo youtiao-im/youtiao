@@ -1,5 +1,10 @@
 module V1
   class StampsAPI < Grape::API
+    before do
+      params[:before_id] = Stamp.decrypt_id(params[:before_id]) if params.key?(:before_id)
+      params[:bulletin_id] = Bulletin.decrypt_id(params[:bulletin_id]) if params.key?(:bulletin_id)
+    end
+
     params do
       requires :bulletin_id, type: String
       optional :before_id, type: String

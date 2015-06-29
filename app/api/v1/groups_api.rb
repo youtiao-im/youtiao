@@ -1,5 +1,9 @@
 module V1
   class GroupsAPI < Grape::API
+    before do
+      params[:id] = Group.decrypt_id(params[:id]) if params.key?(:id)
+    end
+
     get 'groups.list' do
       # TODO: order?
       groups = User.current.groups.includes(:current_membership)

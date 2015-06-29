@@ -1,17 +1,23 @@
 module V1
   class BulletinsAPI < Grape::API
+    before do
+      params[:id] = Bulletin.decrypt_id(params[:id]) if params.key?(:id)
+      params[:before_id] = Bulletin.decrypt_id(params[:before_id]) if params.key?(:before_id)
+      params[:group_id] = Group.decrypt_id(params[:group_id]) if params.key?(:group_id)
+    end
+
     params do
       optional :group_id, type: String
       optional :before_id, type: String
       optional :limit, type: Integer, default: 25, values: 1..500
     end
     get 'bulletins.list' do
-      if params[:group_id].nil?
-        scope = User.current.bulletins
-      else
+      if params.key?(:group_id)
         group = Group.find(params[:group_id])
         authorize group, :show?
         scope = group.bulletins
+      else
+        scope = User.current.bulletins
       end
       scope = scope.before_id(params[:before_id]) unless params[:before_id].nil?
       bulletins = scope.order(id: :desc).limit(params[:limit]).includes(

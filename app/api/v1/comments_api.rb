@@ -1,5 +1,11 @@
 module V1
   class CommentsAPI < Grape::API
+    before do
+      params[:id] = Comment.decrypt_id(params[:id]) if params.key?(:id)
+      params[:before_id] = Comment.decrypt_id(params[:before_id]) if params.key?(:before_id)
+      params[:bulletin_id] = Bulletin.decrypt_id(params[:bulletin_id]) if params.key?(:bulletin_id)
+    end
+
     params do
       requires :bulletin_id, type: String
       optional :before_id, type: String

@@ -4,9 +4,10 @@
 
 ### users
 
-| Method                         | Description |
-| ------------------------------ | ----------- |
-| [users.current](#userscurrent) | Get current authenticated user. |
+| Method                     | Description |
+| -------------------------- | ----------- |
+| [user.info](#userinfo)     | Get current authenticated user. |
+| [user.update](#userupdate) | Update current authenticated user. |
 
 ### groups
 
@@ -48,11 +49,40 @@
 
 ## Methods Explained
 
-### users.current
+### user.info
 
 ```
-GET /users.current
+GET /user.info
 ```
+
+##### Response
+
+```json
+{
+    "id": "de58e284",
+    "type": "User",
+    "created_at": "1435548611.256135",
+    "updated_at": "1435548611.256135",
+    "email": "luffy@straw-hat.org",
+    "name": "luffy",
+    "avatar_id": null,
+    "avatar": null
+}
+```
+
+
+### user.update
+
+```
+POST /user.update
+```
+
+##### Parameters
+
+| Name        | Type     | Description |
+| ----------- | -------- | ----------- |
+| `name`      | `string` | **Optional**. Name of current user. |
+| `avatar_id` | `string` | **Optional**. Avatar id of current user. |
 
 ##### Response
 
