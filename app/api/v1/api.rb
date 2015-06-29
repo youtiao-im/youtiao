@@ -45,15 +45,15 @@ module V1
       error = nil
       e.record.errors.each do |field, message|
         if message.match(/\A.*(has already been taken).*\z/)
-          error = "#{field}_taken"
+          error = "#{field}:taken"
         elsif message.match(/\A.*(too long).*\z/)
-          error = "#{field}_too_long"
+          error = "#{field}:too_long"
         elsif message.match(/\A.*(too short).*\z/)
-          error = "#{field}_too_short"
+          error = "#{field}:too_short"
         elsif message.match(/\A.*(can't be blank).*\z/)
-          error = "#{field}_blank"
+          error = "#{field}:blank"
         else
-          error = "#{field}_invalid"
+          error = "#{field}:invalid"
         end
         break
       end
