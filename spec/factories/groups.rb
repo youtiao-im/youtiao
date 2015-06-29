@@ -13,7 +13,7 @@
 
 FactoryGirl.define do
   factory :group do
-    name { Faker::Lorem.word }
+    name { Faker::Name.name }
     association :created_by, factory: :user
   end
 

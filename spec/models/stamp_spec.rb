@@ -15,4 +15,5 @@ require 'rails_helper'
 RSpec.describe Stamp, type: :model do
   it { should belong_to :bulletin }
   it { should belong_to :created_by }
+  it { should validate_presence_of :symbol }
 end

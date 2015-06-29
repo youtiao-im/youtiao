@@ -21,4 +21,6 @@ RSpec.describe Bulletin, type: :model do
   it { should have_many :stamps }
   it { should have_many :comments }
   it { should have_one :current_stamp }
+  it { should validate_presence_of :text }
+  it { should validate_length_of(:text).is_at_most(512) }
 end

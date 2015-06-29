@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20150618100804) do
     t.integer  "memberships_count", default: 0, null: false
   end
 
+  add_index "groups", ["code"], name: "index_groups_on_code", unique: true, using: :btree
+
   create_table "memberships", force: :cascade do |t|
     t.integer  "group_id",   null: false
     t.integer  "user_id",    null: false

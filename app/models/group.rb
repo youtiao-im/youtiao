@@ -18,15 +18,24 @@ class Group < ActiveRecord::Base
   has_one :current_membership, -> { where(user_id: User.current.id) },
           class_name: 'Membership'
 
-  validates :name, presence: true
+  validates :name,
+            presence: true,
+            length: { minimum: 2, maximum: 32 },
+            format: /\A(?!.*?[\\\/:\*\?\/"<>\|@#])[[:print:]]+\z/
 
-  before_create :generate_code
+  validates :code,
+            presence: true,
+            uniqueness: true,
+            length: { minimum: 2, maximum: 40 },
+            format: /\A[\w\-]+\z/
+
+  before_validation :generate_code, on: :create
 
   def generate_code
-    return unless code.nil?
+    return if name.nil? || !code.nil?
     name_slug = name.to_url
     loop do
-      self.code = "#{name_slug}\##{SecureRandom.random_number(9000) + 1000}"
+      self.code = "#{name_slug}-#{SecureRandom.random_number(9000) + 1000}"
       break unless Group.exists?(code: code)
     end
   end

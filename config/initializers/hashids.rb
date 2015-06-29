@@ -6,10 +6,12 @@ module HashidsSupport
     end
 
     def encrypt_id(id)
+      return nil if id.nil?
       id.is_a?(String) ? id : id_hash.encode(id)
     end
 
     def decrypt_id(id)
+      return nil if id.nil?
       id.is_a?(String) ? id_hash.decode(id).first : id
     end
 
