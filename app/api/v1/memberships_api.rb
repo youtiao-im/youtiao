@@ -3,7 +3,7 @@ module V1
     params do
       requires :group_id, type: String
       optional :before_id, type: String
-      optional :limit, type: Integer, default: 25
+      optional :limit, type: Integer, default: 25, values: 1..500
     end
     get 'memberships.list' do
       group = Group.find(params[:group_id])

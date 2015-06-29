@@ -3,7 +3,7 @@ module V1
     params do
       optional :group_id, type: String
       optional :before_id, type: String
-      optional :limit, type: Integer, default: 25
+      optional :limit, type: Integer, default: 25, values: 1..500
     end
     get 'bulletins.list' do
       if params[:group_id].nil?
