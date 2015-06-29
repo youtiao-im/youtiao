@@ -21,7 +21,7 @@ class Group < ActiveRecord::Base
   validates :name,
             presence: true,
             length: { minimum: 2, maximum: 32 },
-            format: /\A[[:print:]]+\z/
+            format: /\A[^@#][[:print:]]+\z/
 
   validates :code,
             presence: true,

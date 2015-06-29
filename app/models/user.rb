@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   validates :name,
             presence: true,
             length: { minimum: 2, maximum: 32 },
-            format: /\A[[:print:]]+\z/
+            format: /\A[^@#][[:print:]]+\z/
 
   def self.current
     RequestStore.store[:current_user]
