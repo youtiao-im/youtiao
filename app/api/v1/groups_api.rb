@@ -58,10 +58,10 @@ module V1
       membership.role = :member
       begin
         membership.save!
+        group.reload
       rescue ActiveRecord::RecordNotUnique
-        # ignore
+        # it's ok, ignore it
       end
-      group.reload
       present group, with: Entities::GroupEntity
     end
   end
