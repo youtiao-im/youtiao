@@ -32,19 +32,17 @@ The response body is a JSON string formatted as below:
 
 ```json
 {
-    "error": "name:taken"
+    "error": "field_name:error_reason"
 }
 ```
 
-The `error` field is formatted as `field_name:error_type`.
-
-| Error Types | Description |
-| ----------- | ----------- |
-| `too_long`  | For a string field that contains too many characters. |
-| `too_short` | For a string field that contains too few characters. |
-| `blank`     | Field not provided or is a blank string. |
-| `invalid`   | Value contains invalid characters. |
-| `taken`     | The field requires uniqueness and the given value has already been taken. |
+| Error Reasons | Description |
+| ------------- | ----------- |
+| `too_long`    | For a string field that contains too many characters. |
+| `too_short`   | For a string field that contains too few characters. |
+| `blank`       | Field not provided or is a blank string. |
+| `invalid`     | Value contains invalid characters. |
+| `taken`       | The field requires uniqueness and the given value has already been taken. |
 
 
 ## Server Errors

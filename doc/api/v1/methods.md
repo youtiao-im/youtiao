@@ -2,6 +2,12 @@
 
 ## Methods Overview
 
+### users
+
+| Method                         | Description |
+| ------------------------------ | ----------- |
+| [users.current](#userscurrent) | Get current authenticated user. |
+
 ### groups
 
 | Method                         | Description |
@@ -42,6 +48,28 @@
 
 ## Methods Explained
 
+### users.current
+
+```
+GET /users.current
+```
+
+##### Response
+
+```json
+{
+    "id": "de58e284",
+    "type": "User",
+    "created_at": "1435548611.256135",
+    "updated_at": "1435548611.256135",
+    "email": "luffy@straw-hat.org",
+    "name": "luffy",
+    "avatar_id": null,
+    "avatar": null
+}
+```
+
+
 ### groups.list
 
 ```
@@ -51,6 +79,27 @@ GET /groups.list
 ##### Response
 
 ```json
+[
+    {
+        "id": "8e2d94da",
+        "type": "Group",
+        "created_at": "1435548611.757163",
+        "updated_at": "1435548611.757163",
+        "name": "Going Merry",
+        "code": "going-merry",
+        "memberships_count": 7,
+        "current_membership": {
+            "id": "ed767a69",
+            "type": "Membership",
+            "created_at": "1435548611.7686899",
+            "updated_at": "1435548611.7686899",
+            "role": "owner",
+            "group_id": "8e2d94da",
+            "user_id": "de58e284"
+        }
+    },
+    ...
+]
 ```
 
 
@@ -70,6 +119,24 @@ POST /groups.create
 ##### Response
 
 ```json
+{
+    "id": "8e2d94da",
+    "type": "Group",
+    "created_at": "1435548611.757163",
+    "updated_at": "1435548611.757163",
+    "name": "Going Merry",
+    "code": "going-merry",
+    "memberships_count": 1,
+    "current_membership": {
+        "id": "ed767a69",
+        "type": "Membership",
+        "created_at": "1435548611.7686899",
+        "updated_at": "1435548611.7686899",
+        "role": "owner",
+        "group_id": "8e2d94da",
+        "user_id": "de58e284"
+    }
+}
 ```
 
 
@@ -90,6 +157,24 @@ POST /groups.update
 ##### Response
 
 ```json
+{
+    "id": "8e2d94da",
+    "type": "Group",
+    "created_at": "1435548611.757163",
+    "updated_at": "1435548611.757163",
+    "name": "Going Merry",
+    "code": "going-merry",
+    "memberships_count": 7,
+    "current_membership": {
+        "id": "ed767a69",
+        "type": "Membership",
+        "created_at": "1435548611.7686899",
+        "updated_at": "1435548611.7686899",
+        "role": "owner",
+        "group_id": "8e2d94da",
+        "user_id": "de58e284"
+    }
+}
 ```
 
 
@@ -108,6 +193,24 @@ POST /groups.join
 ##### Response
 
 ```json
+{
+    "id": "8e2d94da",
+    "type": "Group",
+    "created_at": "1435548611.757163",
+    "updated_at": "1435548611.757163",
+    "name": "Going Merry",
+    "code": "going-merry",
+    "memberships_count": 7,
+    "current_membership": {
+        "id": "ed767a69",
+        "type": "Membership",
+        "created_at": "1435548611.7686899",
+        "updated_at": "1435548611.7686899",
+        "role": "owner",
+        "group_id": "8e2d94da",
+        "user_id": "de58e284"
+    }
+}
 ```
 
 
@@ -127,6 +230,28 @@ GET /memberships.list
 #### Response
 
 ```json
+[
+    {
+        "id": "3246856d",
+        "type": "Membership",
+        "created_at": "1435548611.800355",
+        "updated_at": "1435548611.800355",
+        "role": "member",
+        "group_id": "8e2d94da",
+        "user_id": "d658b98a",
+        "user": {
+            "id": "d658b98a",
+            "type": "User",
+            "created_at": "1435548611.627708",
+            "updated_at": "1435548611.627708",
+            "email": "robin@straw-hat.org",
+            "name": "robin",
+            "avatar_id": null,
+            "avatar": null
+        }
+    },
+    ...
+]
 ```
 
 
@@ -147,6 +272,41 @@ GET /bulletins.list
 ##### Response
 
 ```json
+[
+    {
+        "id": "3d4a93a6",
+        "type": "Bulletin",
+        "created_at": "1435548611.8673868",
+        "updated_at": "1435548611.8673868",
+        "text": "3D2Y",
+        "checks_count": 8,
+        "crosses_count": 0,
+        "comments_count": 0,
+        "group_id": "ea6d69d2",
+        "created_by_id": "de58e284",
+        "group": {
+            "id": "ea6d69d2",
+            "type": "Group",
+            "created_at": "1435548611.759491",
+            "updated_at": "1435548611.759491",
+            "name": "Thousand Sunny",
+            "code": "thousand-sunny",
+            "memberships_count": 9
+        },
+        "created_by": {
+            "id": "de58e284",
+            "type": "User",
+            "created_at": "1435548611.256135",
+            "updated_at": "1435548611.256135",
+            "email": "luffy@straw-hat.org",
+            "name": "luffy",
+            "avatar_id": null,
+            "avatar": null
+        },
+        "current_stamp": null
+    },
+    ...
+]
 ```
 
 
@@ -166,6 +326,38 @@ POST /bulletins.create
 ##### Response
 
 ```json
+{
+    "id": "3d4a93a6",
+    "type": "Bulletin",
+    "created_at": "1435548611.8673868",
+    "updated_at": "1435548611.8673868",
+    "text": "3D2Y",
+    "checks_count": 0,
+    "crosses_count": 0,
+    "comments_count": 0,
+    "group_id": "ea6d69d2",
+    "created_by_id": "de58e284",
+    "group": {
+        "id": "ea6d69d2",
+        "type": "Group",
+        "created_at": "1435548611.759491",
+        "updated_at": "1435548611.759491",
+        "name": "Thousand Sunny",
+        "code": "thousand-sunny",
+        "memberships_count": 9
+    },
+    "created_by": {
+        "id": "de58e284",
+        "type": "User",
+        "created_at": "1435548611.256135",
+        "updated_at": "1435548611.256135",
+        "email": "luffy@straw-hat.org",
+        "name": "luffy",
+        "avatar_id": null,
+        "avatar": null
+    },
+    "current_stamp": null
+}
 ```
 
 
@@ -185,6 +377,46 @@ POST /bulletins.stamp
 ##### Response
 
 ```json
+{
+    "id": "3d4a93a6",
+    "type": "Bulletin",
+    "created_at": "1435548611.8673868",
+    "updated_at": "1435548611.8673868",
+    "text": "3D2Y",
+    "checks_count": 9,
+    "crosses_count": 0,
+    "comments_count": 0,
+    "group_id": "ea6d69d2",
+    "created_by_id": "de58e284",
+    "group": {
+        "id": "ea6d69d2",
+        "type": "Group",
+        "created_at": "1435548611.759491",
+        "updated_at": "1435548611.759491",
+        "name": "Thousand Sunny",
+        "code": "thousand-sunny",
+        "memberships_count": 9
+    },
+    "created_by": {
+        "id": "de58e284",
+        "type": "User",
+        "created_at": "1435548611.256135",
+        "updated_at": "1435548611.256135",
+        "email": "luffy@straw-hat.org",
+        "name": "luffy",
+        "avatar_id": null,
+        "avatar": null
+    },
+    "current_stamp": {
+        "id": "7d567952",
+        "type": "Stamp",
+        "created_at": "1435549074.442284",
+        "updated_at": "1435549074.442284",
+        "symbol": "check",
+        "bulletin_id": "3d4a93a6",
+        "created_by_id": "de58e284"
+    }
+}
 ```
 
 
@@ -205,6 +437,28 @@ GET /stamps.list
 ##### Response
 
 ```json
+[
+    {
+        "id": "a325de58",
+        "type": "Stamp",
+        "created_at": "1435548611.933444",
+        "updated_at": "1435548611.933444",
+        "symbol": "check",
+        "bulletin_id": "265a75a3",
+        "created_by_id": "d658b98a",
+        "created_by": {
+            "id": "d658b98a",
+            "type": "User",
+            "created_at": "1435548611.627708",
+            "updated_at": "1435548611.627708",
+            "email": "robin@straw-hat.org",
+            "name": "robin",
+            "avatar_id": null,
+            "avatar": null
+        }
+    },
+    ...
+]
 ```
 
 
@@ -225,6 +479,28 @@ GET /comments.list
 ##### Response
 
 ```json
+[
+    {
+        "id": "e4a3eb39",
+        "type": "Comment",
+        "created_at": "1435548611.989644",
+        "updated_at": "1435548611.989644",
+        "text": "I have a candidate.",
+        "bulletin_id": "265a75a3",
+        "created_by_id": "2de8da87",
+        "created_by": {
+            "id": "2de8da87",
+            "type": "User",
+            "created_at": "1435548611.5049229",
+            "updated_at": "1435548611.5049229",
+            "email": "sanji@straw-hat.org",
+            "name": "sanji",
+            "avatar_id": null,
+            "avatar": null
+        }
+    },
+    ...
+]
 ```
 
 
@@ -244,4 +520,23 @@ GET /comments.create
 ##### Response
 
 ```json
+{
+    "id": "e4a3eb39",
+    "type": "Comment",
+    "created_at": "1435548611.989644",
+    "updated_at": "1435548611.989644",
+    "text": "I have a candidate.",
+    "bulletin_id": "265a75a3",
+    "created_by_id": "2de8da87",
+    "created_by": {
+        "id": "2de8da87",
+        "type": "User",
+        "created_at": "1435548611.5049229",
+        "updated_at": "1435548611.5049229",
+        "email": "sanji@straw-hat.org",
+        "name": "sanji",
+        "avatar_id": null,
+        "avatar": null
+    }
+}
 ```

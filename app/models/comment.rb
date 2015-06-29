@@ -21,5 +21,5 @@ class Comment < ActiveRecord::Base
 
   counter_culture :bulletin
 
-  scope :before_id, -> (id) { where('comments.id<?', id) }
+  scope :before_id, -> (id) { where('comments.id<?', Comment.decrypt_id(id)) }
 end
