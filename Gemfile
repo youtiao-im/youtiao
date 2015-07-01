@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-# source 'https://ruby.taobao.org'
+# source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -48,6 +48,20 @@ gem 'devise'
 
 # Authr
 gem 'pundit'
+
+# Front-end assets
+gem 'bower-rails'
+
+# HTML template
+gem 'haml'
+
+# Static pages
+gem 'high_voltage'
+
+# i18n
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'http_accept_language'
 
 # API
 gem 'grape'

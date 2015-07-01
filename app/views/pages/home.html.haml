@@ -1,0 +1,45 @@
+.ui.inverted.vertical.masthead.center.aligned.segment
+  .ui.container
+    .ui.large.secondary.inverted.pointing.menu
+      %a.header.item= t 'youtiao'
+      %a.item= t 'android'
+      %a.item= t 'ios'
+      .right.menu
+        %a.item= t 'help'
+        %a.item= t 'about'
+  .ui.text.container
+    %h1= t 'home.intro_title'
+    %h2= t 'home.intro_body'
+    .ui.huge.green.button iOS
+    .ui.huge.green.button Android
+
+.ui.vertical.stripe.segment
+  .ui.middle.aligned.stackable.grid.container
+    .row
+      .six.wide.right.floated.column
+        %img.ui.large.bordered.rounded.image
+      .ten.wide.column
+        %h3.ui.header= t 'home.first_feature_title'
+        %p= t 'home.first_feature_body'
+    .row
+      .ten.wide.column
+        %h3.ui.header= t 'home.second_feature_title'
+        %p= t 'home.second_feature_body'
+      .six.wide.right.floated.column
+        %img.ui.large.bordered.rounded.image
+    .row
+      .six.wide.right.floated.column
+        %img.ui.large.bordered.rounded.image
+      .ten.wide.column
+        %h3.ui.header= t 'home.third_feature_title'
+        %p= t 'home.third_feature_body'
+
+.ui.vertical.stripe.quote.segment
+  .ui.equal.width.stackable.internally.celled.grid
+    .center.aligned.row
+      .column
+        %h3 "What a Company"
+        %p That is what they all say about us.
+      .column
+        %h3 "I shouldn't have gone with their competitor."
+        %p Chief Fun Officer Acme Toys

@@ -20,4 +20,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  youtiao: "Youtiao"
+  android: "Android"
+  ios: "iOS"
+  help: "Help"
+  home:
+    intro_title: "We Make Notices Right"
+    intro_body: "Do whatever you want when you want to."
+    first_feature_title: "Deliver important notices to students, all of them."
+    first_feature_body: "We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics."
+    second_feature_title: "Collect response easily."
+    second_feature_body: "Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered."
+    third_feature_title: "Spread your groups among freshmans easily."
+    third_feature_body: "We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics."
+    first_customer_comment: "What a Company"
+    first_customer_name: "That is what they all say about us."
+    second_customer_comment: "I shouldn't have gone with their competitor."

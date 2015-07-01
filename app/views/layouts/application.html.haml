@@ -1,0 +1,42 @@
+!!! 5
+%html
+  %head
+    %meta(charset='utf-8')
+    %meta(http-equiv='X-UA-Compatible' content='IE=edge, chrome=1')
+    %meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    %title Youtiao
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+%body
+  = yield
+
+  .ui.vertical.footer.segment
+    .ui.container
+      .ui.stackable.grid
+        .three.wide.column
+          %h4.ui.header Youtiao
+          .ui.link.list
+            %a.item Android App
+            %a.item iOS App
+            %a.item Security
+        .three.wide.column
+          %h4.ui.header Company
+          .ui.link.list
+            %a.item About Us
+            %a.item Jobs
+        .three.wide.column
+          %h4.ui.header Support
+          .ui.link.list
+            %a.item Help
+            %a.item Contact
+            %a.item Privacy & Terms
+        .three.wide.column
+          %h4.ui.header Connect
+          .ui.link.list
+            %a.item WeChat
+            %a.item Weibo
+        .four.wide.right.floated.column
+          %p Made with love by Youtiao
+          %small Copyright 2015, Youtiao Inc.
