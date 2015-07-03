@@ -5,7 +5,7 @@ class BulletinStampedNotificationWorker
   def perform(bulletin_id, user_id, symbol)
     bulletin = Bulletin.find(bulletin_id)
     user = User.find(user_id)
-    alert_text = (I18n.t('notifications.bulletin_stamped' ) %
+    alert_text = (I18n.t('notifications.bulletin_stamped') %
       { name: user.name, symbol: symbol }).truncate(48)
 
     master_secret = 'e417378d4d97db603089d50d'
