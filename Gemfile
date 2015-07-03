@@ -71,6 +71,10 @@ gem 'grape-entity'
 gem 'doorkeeper'
 gem 'wine_bouncer'
 
+# Background work
+gem 'sinatra', require: nil
+gem 'sidekiq'
+
 # Id obfuscate
 gem 'hashids'
 
@@ -84,7 +88,11 @@ gem 'enumerize'
 gem 'counter_culture'
 gem 'stringex'
 
+# Cloud storage service
 gem 'qiniu'
+
+# Push notification service
+gem 'jpush'
 
 group :development, :test do
   gem 'rspec-rails'

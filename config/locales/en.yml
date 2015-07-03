@@ -36,3 +36,6 @@ en:
     first_customer_comment: "What a Company"
     first_customer_name: "That is what they all say about us."
     second_customer_comment: "I shouldn't have gone with their competitor."
+
+  notifications:
+    bulletin_stamped: "%{name} stamped [%{symbol}] on your bulletin"
