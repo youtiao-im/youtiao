@@ -20,25 +20,20 @@ module V1
     end
 
     rescue_from Grape::Exceptions::ValidationErrors do |e|
-      error_response(message: { error: :bad_request,
-                                message: e.message },
-                     status: 400)
+      error!({ error: :bad_request, message: e.message }, 400)
     end
 
     rescue_from WineBouncer::Errors::OAuthUnauthorizedError,
                 WineBouncer::Errors::OAuthForbiddenError do
-      error_response(message: { error: :not_authenticated },
-                     status: 401)
+      error!({ error: :not_authenticated }, 401)
     end
 
     rescue_from Pundit::NotAuthorizedError do
-      error_response(message: { error: :not_authorized },
-                     status: 403)
+      error!({ error: :not_authorized }, 403)
     end
 
     rescue_from ActiveRecord::RecordNotFound do
-      error_response(message: { error: :not_found },
-                     status: 404)
+      error!({ error: :not_found }, 404)
     end
 
     rescue_from ActiveRecord::RecordInvalid do |e|
@@ -57,8 +52,7 @@ module V1
         end
         break
       end
-      error_response(message: { error: error },
-                     status: 422)
+      error!({ error: error }, 422)
     end
 
     mount V1::UsersAPI

@@ -4,10 +4,12 @@
 
 ### users
 
-| Method                     | Description |
-| -------------------------- | ----------- |
-| [user.info](#userinfo)     | Get current authenticated user. |
-| [user.update](#userupdate) | Update current authenticated user. |
+| Method                                       | Description |
+| -------------------------------------------- | ----------- |
+| [users.register](#usersregister)             | Register a new user. |
+| [user.info](#userinfo)                       | Get current user. |
+| [user.update](#userupdate)                   | Update current user. |
+| [user.change_password](#userchange_password) | Change password of current user. |
 
 ### groups
 
@@ -49,6 +51,36 @@
 
 ## Methods Explained
 
+### users.register
+
+```
+POST /users.register
+```
+
+#### Parameters
+
+| Name       | Type     | Description |
+| ---------- | -------- | ----------- |
+| `email`    | `string` | **Required**. Email of user. |
+| `password` | `string` | **Required**. Password of user. |
+| `name`     | `string` | **Required**. Name of user. |
+
+#### Response
+
+```json
+{
+    "id": "de58e284",
+    "type": "User",
+    "created_at": "1435548611.256135",
+    "updated_at": "1435548611.256135",
+    "email": "luffy@straw-hat.org",
+    "name": "luffy",
+    "avatar_id": null,
+    "avatar": null
+}
+```
+
+
 ### user.info
 
 ```
@@ -83,6 +115,35 @@ POST /user.update
 | ----------- | -------- | ----------- |
 | `name`      | `string` | **Optional**. Name of current user. |
 | `avatar_id` | `string` | **Optional**. Avatar id of current user. |
+
+#### Response
+
+```json
+{
+    "id": "de58e284",
+    "type": "User",
+    "created_at": "1435548611.256135",
+    "updated_at": "1435548611.256135",
+    "email": "luffy@straw-hat.org",
+    "name": "luffy",
+    "avatar_id": null,
+    "avatar": null
+}
+```
+
+
+### user.change_password
+
+```
+POST /user.change_password
+```
+
+#### Parameters
+
+| Name           | Type     | Description |
+| -------------- | -------- | ----------- |
+| `password`     | `string` | **Required**. Password of current user. |
+| `new_password` | `string` | **Required**. New password of current user. |
 
 #### Response
 

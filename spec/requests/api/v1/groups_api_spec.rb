@@ -94,6 +94,7 @@ RSpec.describe V1::GroupsAPI, type: :request do
           expect(response.body).to match_json_expression(
             {
               type: 'Group',
+              id: Group.last.to_param,
               current_membership: Hash
             }.ignore_extra_keys!)
         end

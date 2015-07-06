@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :groups, through: :memberships
   has_many :bulletins, through: :groups
+  has_many :access_tokens, class_name: 'Doorkeeper::AccessToken', foreign_key: :resource_owner_id
 
   validates :name,
             presence: true,

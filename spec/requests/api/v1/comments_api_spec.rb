@@ -132,7 +132,8 @@ RSpec.describe V1::CommentsAPI, type: :request do
                      access_token: access_token)
               expect(response.body).to match_json_expression(
                 {
-                  type: 'Comment'
+                  type: 'Comment',
+                  id: Comment.last.to_param
                 }.ignore_extra_keys!)
             end
           end
