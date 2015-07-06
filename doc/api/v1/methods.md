@@ -55,7 +55,7 @@
 GET /user.info
 ```
 
-##### Response
+#### Response
 
 ```json
 {
@@ -77,14 +77,14 @@ GET /user.info
 POST /user.update
 ```
 
-##### Parameters
+#### Parameters
 
 | Name        | Type     | Description |
 | ----------- | -------- | ----------- |
 | `name`      | `string` | **Optional**. Name of current user. |
 | `avatar_id` | `string` | **Optional**. Avatar id of current user. |
 
-##### Response
+#### Response
 
 ```json
 {
@@ -106,7 +106,7 @@ POST /user.update
 GET /groups.list
 ```
 
-##### Response
+#### Response
 
 ```json
 [
@@ -139,14 +139,14 @@ GET /groups.list
 POST /groups.create
 ```
 
-##### Parameters
+#### Parameters
 
 | Name   | Type     | Description |
 | ------ | -------- | ----------- |
 | `name` | `string` | **Required**. Name of the group. |
 | `code` | `string` | **Optional**. Unique code of the group. |
 
-##### Response
+#### Response
 
 ```json
 {
@@ -176,7 +176,7 @@ POST /groups.create
 POST /groups.update
 ```
 
-##### Parameters
+#### Parameters
 
 | Name   | Type     | Description |
 | ------ | -------- | ----------- |
@@ -184,7 +184,7 @@ POST /groups.update
 | `name` | `string` | **Optional**. Name of the group. |
 | `code` | `string` | **Optional**. Unique code of the group. |
 
-##### Response
+#### Response
 
 ```json
 {
@@ -214,13 +214,13 @@ POST /groups.update
 POST /groups.join
 ```
 
-##### Parameters
+#### Parameters
 
 | Name   | Type     | Description |
 | ------ | -------- | ----------- |
 | `code` | `string` | **Required**. Unique code of the group. |
 
-##### Response
+#### Response
 
 ```json
 {
@@ -250,7 +250,7 @@ POST /groups.join
 GET /memberships.list
 ```
 
-##### Parameters
+#### Parameters
 
 | Name        | Type       | Description |
 | ----------- | ---------- | ----------- |
@@ -293,7 +293,7 @@ GET /memberships.list
 GET /bulletins.list
 ```
 
-##### Parameters
+#### Parameters
 
 | Name        | Type      | Description |
 | ----------- | --------- | ----------- |
@@ -301,7 +301,7 @@ GET /bulletins.list
 | `before_id` | `string`  | **Optional**. Scopes bulletins created before this one. |
 | `limit`     | `integer` | **Optional**. Number of bulletins to retrieve. Default to 25, max to 500. |
 
-##### Response
+#### Response
 
 ```json
 [
@@ -348,14 +348,14 @@ GET /bulletins.list
 POST /bulletins.create
 ```
 
-##### Parameters
+#### Parameters
 
 | Name       | Type      | Description |
 | ---------- | --------- | ----------- |
 | `group_id` | `string`  | **Required**. Group id of the bulletin. |
 | `text`     | `string`  | **Required**. Text of the bulletin. |
 
-##### Response
+#### Response
 
 ```json
 {
@@ -399,14 +399,14 @@ POST /bulletins.create
 POST /bulletins.stamp
 ```
 
-##### Parameters
+#### Parameters
 
 | Name     | Type      | Description |
 | -------- | --------- | ----------- |
 | `id`     | `string`  | **Required**. Id of the bulletin. |
 | `symbol` | `string`  | **Required**. Symbol of the stamp. |
 
-##### Response
+#### Response
 
 ```json
 {
@@ -458,7 +458,7 @@ POST /bulletins.stamp
 GET /stamps.list
 ```
 
-##### Parameters
+#### Parameters
 
 | Name          | Type       | Description |
 | ------------- | ---------- | ----------- |
@@ -467,7 +467,7 @@ GET /stamps.list
 | `before_id`   | `string`   | **Optional**. Scopes stamps created before this one. |
 | `limit`       | `integer`  | **Optional**. Number of stamps to retrieve. Default to 25, max to 500. |
 
-##### Response
+#### Response
 
 ```json
 [
@@ -501,7 +501,7 @@ GET /stamps.list
 GET /comments.list
 ```
 
-##### Parameters
+#### Parameters
 
 | Name          | Type      | Description |
 | ------------- | --------- | ----------- |
@@ -509,7 +509,7 @@ GET /comments.list
 | `before_id`   | `string`  | **Optional**. Scopes comments created before this one. |
 | `limit`       | `integer` | **Optional**. Number of comments to retrieve. Default to 25, max to 500. |
 
-##### Response
+#### Response
 
 ```json
 [
@@ -543,14 +543,14 @@ GET /comments.list
 GET /comments.create
 ```
 
-##### Parameters
+#### Parameters
 
 | Name          | Type      | Description |
 | ------------- | --------- | ----------- |
 | `bulletin_id` | `string`  | **Required**. Bulletin id of the comment. |
 | `text`        | `string`  | **Required**. Text of the comment. |
 
-##### Response
+#### Response
 
 ```json
 {
