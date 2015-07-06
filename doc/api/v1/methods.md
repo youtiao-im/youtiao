@@ -6,7 +6,7 @@
 
 | Method                                       | Description |
 | -------------------------------------------- | ----------- |
-| [users.register](#usersregister)             | Register a new user. |
+| [users.sign_up](#userssign_up)               | Sign up a new user. |
 | [user.info](#userinfo)                       | Get current user. |
 | [user.update](#userupdate)                   | Update current user. |
 | [user.change_password](#userchange_password) | Change password of current user. |
@@ -51,10 +51,10 @@
 
 ## Methods Explained
 
-### users.register
+### users.sign_up
 
 ```
-POST /users.register
+POST /users.sign_up
 ```
 
 #### Parameters

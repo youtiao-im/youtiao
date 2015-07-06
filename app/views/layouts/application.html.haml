@@ -10,33 +10,25 @@
     = csrf_meta_tags
 
 %body
+  .ui.large.attached.borderless.menu#main-menu
+    .ui.container
+      = link_to t('home'), root_path, class: 'item'
+      = link_to t('about'), page_path('about'), class: 'item'
+      .right.menu
+        %a.item= t 'help'
+        - if user_signed_in?
+          .item
+            = link_to t('sign_out'), destroy_user_session_path, method: :delete, class: 'ui button'
+
   = yield
 
   .ui.vertical.footer.segment
-    .ui.container
+    .ui.center.aligned.container
+      .ui.section.divider
       .ui.stackable.grid
-        .three.wide.column
-          %h4.ui.header Youtiao
-          .ui.link.list
-            %a.item Android App
-            %a.item iOS App
-            %a.item Security
-        .three.wide.column
-          %h4.ui.header Company
-          .ui.link.list
-            %a.item About Us
-            %a.item Jobs
-        .three.wide.column
-          %h4.ui.header Support
-          .ui.link.list
-            %a.item Help
-            %a.item Contact
-            %a.item Privacy & Terms
-        .three.wide.column
-          %h4.ui.header Connect
-          .ui.link.list
-            %a.item WeChat
-            %a.item Weibo
-        .four.wide.right.floated.column
-          %p Made with love by Youtiao
+        .centered.column
+          %p 
+            %span Made with
+            %i.icon.heart.red
+            %span by Youtiao
           %small Copyright 2015, Youtiao Inc.

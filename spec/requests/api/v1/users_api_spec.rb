@@ -4,10 +4,10 @@ RSpec.describe V1::UsersAPI, type: :request do
   let(:user) { create(:user) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
 
-  describe 'POST users.register' do
+  describe 'POST users.sign_up' do
     context 'with INVALID attributes' do
       it 'responds with :unprocessable_entity' do
-        post '/api/v1/users.register',
+        post '/api/v1/users.sign_up',
              attributes_for(:invalid_user)
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -15,19 +15,19 @@ RSpec.describe V1::UsersAPI, type: :request do
 
     context 'with valid attributes' do
       it 'responds with :ok' do
-        post '/api/v1/users.register',
+        post '/api/v1/users.sign_up',
              attributes_for(:user)
       end
 
       it 'createds a new user' do
         expect do
-          post '/api/v1/users.register',
+          post '/api/v1/users.sign_up',
                attributes_for(:user)
         end.to change(User, :count).by(1)
       end
 
       it 'returns the created user' do
-        post '/api/v1/users.register',
+        post '/api/v1/users.sign_up',
              attributes_for(:user)
         expect(response.body).to match_json_expression(
           {

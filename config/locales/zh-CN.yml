@@ -3,7 +3,7 @@ zh-CN:
   android: "安卓"
   ios: "iOS"
   help: "帮助"
-  home:
+  home_page:
     intro_title: "We Make Notices Right"
     intro_body: "Do whatever you want when you want to."
     first_feature_title: "通知，使命必达"

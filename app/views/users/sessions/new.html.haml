@@ -1,0 +1,25 @@
+.ui.container
+  .ui.centered.padded.grid
+    .sixteen.wide.mobile.twelve.wide.tablet.eight.wide.computer.column
+      .ui.top.attached.center.aligned.secondary.segment
+        %h3 Sign in
+
+      .ui.attached.segment
+        = form_for resource, as: resource_name, url: session_path(resource_name), html: { class: 'ui large form' } do |f|
+          .field
+            = f.label :email
+            = f.email_field :email, autofocus: true, placeholder: 'name@domain.com'
+
+          .field
+            %label
+              Password
+              = link_to "(don't remember?)", new_password_path(resource_name)
+            = f.password_field :password, autocomplete: 'off', placeholder: 'password'
+
+          = f.submit 'Sign in', class: 'ui large blue button'
+
+      .ui.bottom.attached.info.message
+        %p
+          %span Doesn't have an account?
+          = link_to 'Sign up', new_user_registration_path
+          %span now.

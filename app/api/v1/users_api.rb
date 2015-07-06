@@ -10,7 +10,7 @@ module V1
       requires :password, type: String
       requires :name, type: String
     end
-    post 'users.register' do
+    post 'users.sign_up' do
       safe_params = ActionController::Parameters.new(params).permit(
         :email, :password, :name)
       user = User.new(safe_params)

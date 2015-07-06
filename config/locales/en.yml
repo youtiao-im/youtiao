@@ -24,7 +24,7 @@ en:
   android: "Android"
   ios: "iOS"
   help: "Help"
-  home:
+  home_page:
     intro_title: "We Make Notices Right"
     intro_body: "Do whatever you want when you want to."
     first_feature_title: "Deliver important notices to students, all of them."
