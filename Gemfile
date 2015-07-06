@@ -49,6 +49,20 @@ gem 'devise'
 # Authr
 gem 'pundit'
 
+# Front-end assets
+gem 'bower-rails'
+
+# HTML template
+gem 'haml'
+
+# Static pages
+gem 'high_voltage'
+
+# i18n
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'http_accept_language'
+
 # API
 gem 'grape'
 gem 'grape-entity'
@@ -56,6 +70,10 @@ gem 'grape-entity'
 # API authn
 gem 'doorkeeper'
 gem 'wine_bouncer'
+
+# Background work
+gem 'sinatra', require: nil
+gem 'sidekiq'
 
 # Id obfuscate
 gem 'hashids'
@@ -70,7 +88,11 @@ gem 'enumerize'
 gem 'counter_culture'
 gem 'stringex'
 
+# Cloud storage service
 gem 'qiniu'
+
+# Push notification service
+gem 'jpush'
 
 group :development, :test do
   gem 'rspec-rails'

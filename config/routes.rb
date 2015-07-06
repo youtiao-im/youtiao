@@ -1,8 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users
   use_doorkeeper
 
   mount V1::API => '/api'
+
+  mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

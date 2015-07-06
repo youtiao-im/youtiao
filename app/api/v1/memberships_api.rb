@@ -7,6 +7,7 @@ module V1
 
     params do
       requires :group_id, type: String
+      optional :roles, type: Array[Symbol], values: [:owner, :admin, :member]
       optional :before_id, type: String
       optional :limit, type: Integer, default: 25, values: 1..500
     end
@@ -14,6 +15,7 @@ module V1
       group = Group.find(params[:group_id])
       authorize group, :show?
       scope = group.memberships
+      scope = scope.where(role: params[:roles]) unless params[:roles].nil?
       scope = scope.before_id(params[:before_id]) unless params[:before_id].nil?
       memberships = scope.order(id: :desc).limit(params[:limit]).includes(
         :user, user: :avatar)
