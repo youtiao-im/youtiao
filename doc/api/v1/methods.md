@@ -316,9 +316,6 @@ GET /memberships.list
 | Name        | Type       | Description |
 | ----------- | ---------- | ----------- |
 | `group_id`  | `string`   | **Required**. Scopes memberships of this group. |
-| `roles`     | `string[]` | **Optional**. Scopes memberships with specific roles. |
-| `before_id` | `string`   | **Optional**. Scopes memberships created before this one. |
-| `limit`     | `integer`  | **Optional**. Number of memberships to retrieve. Default to 25, max to 500. |
 
 #### Response
 

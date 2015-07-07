@@ -1,20 +1,20 @@
 zh-CN:
   youtiao: "有条"
+  home: "首页"
+  about: "关于"
+  help: "帮助"
   android: "安卓"
   ios: "iOS"
-  help: "帮助"
+
   home_page:
-    intro_title: "We Make Notices Right"
-    intro_body: "Do whatever you want when you want to."
-    first_feature_title: "通知，使命必达"
-    first_feature_body: "We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics."
-    second_feature_title: "轻松收集反馈"
-    second_feature_body: "Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered."
-    third_feature_title: "新生报到？我们帮您"
-    third_feature_body: "We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics."
-    first_customer_comment: "What a Company"
-    first_customer_name: "That is what they all say about us."
-    second_customer_comment: "I shouldn't have gone with their competitor."
+    intro_title: "有条：为通知而生"
+    intro_body: "重要的事情值得特别的对待"
+    first_feature_title: "专注，所以高效"
+    first_feature_body: "有条专注于通知类内容的分发，您收到的通知一目了然，保证这些重要的消息不被其他无关内容淹没。"
+    second_feature_title: "简单，所以快捷"
+    second_feature_body: "还在聊天记录中数'+1'统计人数？还在为重要的通知是否已被大家收阅而疑惑？有条提供简单、快速的反馈及统计机制，让您痛苦不再。"
+    third_feature_title: "自主加入，无需邀请"
+    third_feature_body: "组员凭群组您设定的邀请码自主加入群组，免去烦人的邀请步骤。"
 
   notifications:
     bulletin_stamped: "%{name} 标记了 [%{symbol}]"

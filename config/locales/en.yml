@@ -21,21 +21,21 @@
 
 en:
   youtiao: "Youtiao"
+  home: "Home"
+  about: "About"
+  help: "Help"
   android: "Android"
   ios: "iOS"
-  help: "Help"
+
   home_page:
-    intro_title: "We Make Notices Right"
-    intro_body: "Do whatever you want when you want to."
-    first_feature_title: "Deliver important notices to students, all of them."
-    first_feature_body: "We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics."
-    second_feature_title: "Collect response easily."
-    second_feature_body: "Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered."
-    third_feature_title: "Spread your groups among freshmans easily."
-    third_feature_body: "We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics."
-    first_customer_comment: "What a Company"
-    first_customer_name: "That is what they all say about us."
-    second_customer_comment: "I shouldn't have gone with their competitor."
+    intro_title: "Youtiao: Born to Notify"
+    intro_body: "The important things worth special attentions."
+    first_feature_title: "Focus, to be effective"
+    first_feature_body: "Youtiao focuses on notices only, making sure they don't get flooded with unrelated stuffs."
+    second_feature_title: "Simple, to be easy"
+    second_feature_body: "Still counting '+1' in the chat history? Still wondering whether everyone copies your messages? Youtiao solves them all with a simple, intuitive feedback mechanism."
+    third_feature_title: "Join, not invite"
+    third_feature_body: "Group members would help themselves joining your group, using a group code chosen freely by you."
 
   notifications:
     bulletin_stamped: "%{name} stamped [%{symbol}] on your bulletin"
