@@ -58,6 +58,9 @@ gem 'haml'
 # Static pages
 gem 'high_voltage'
 
+# Active link
+gem 'active_link_to'
+
 # i18n
 gem 'rails-i18n'
 gem 'devise-i18n'

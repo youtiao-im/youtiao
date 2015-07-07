@@ -9,26 +9,21 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-%body
-  .ui.large.attached.borderless.menu#main-menu
+%body(style="padding-top: 46px;")
+  .ui.large.top.fixed.borderless.menu
     .ui.container
-      = link_to t('home'), root_path, class: 'item'
-      = link_to t('about'), page_path('about'), class: 'item'
+      = link_to t('youtiao'), root_path, class: 'header item'
       .right.menu
-        %a.item= t 'help'
-        - if user_signed_in?
-          .item
-            = link_to t('sign_out'), destroy_user_session_path, method: :delete, class: 'ui button'
+        = link_to t('about'), page_path('about'), class: 'item'
 
   = yield
 
-  .ui.vertical.footer.segment
-    .ui.center.aligned.container
-      .ui.section.divider
+  .ui.vertical.very.padded.center.aligned.segment
+    .ui.container
       .ui.stackable.grid
         .centered.column
           %p 
             %span Made with
-            %i.icon.heart.red
+            %i.red.heart.icon
             %span by Youtiao
           %small Copyright 2015, Youtiao Inc.

@@ -1,37 +1,30 @@
 .ui.vertical.center.aligned.segment
-  .ui.text.container
+  .ui.container
+    %img.ui.centered.image(src="http://images.dailytech.com/nimage/Dropbox-Pro-Logo.png")
     %h1= t 'home_page.intro_title'
-    %h2= t 'home_page.intro_body'
-    .ui.huge.green.icon.button iOS
-    .ui.huge.green.button Android
+    %p= t 'home_page.intro_body'
 
-.ui.vertical.stripe.segment
-  .ui.center.aligned.stackable.grid.container
-    .row
-      .seven.wide.column
-        %img.ui.large.bordered.rounded.image
-      .seven.wide.column
-        %h2.ui.header= t 'home_page.first_feature_title'
-        %p= t 'home_page.first_feature_body'
-    .row
-      .seven.wide.column
-        %h2.ui.header= t 'home_page.second_feature_title'
-        %p= t 'home_page.second_feature_body'
-      .seven.wide.column
-        %img.ui.large.bordered.rounded.image
-    .row
-      .seven.wide.column
-        %img.ui.large.bordered.rounded.image
-      .seven.wide.column
-        %h2.ui.header= t 'home_page.third_feature_title'
-        %p= t 'home_page.third_feature_body'
+  .ui.huge.green.icon.button iOS
+  .ui.huge.green.button Android
 
-.ui.vertical.stripe.segment
-  .ui.equal.width.stackable.internally.celled.grid
-    .center.aligned.row
-      .column
-        %h3 "What a Company"
-        %p That is what they all say about us.
-      .column
-        %h3 "I shouldn't have gone with their competitor."
-        %p Chief Fun Officer Acme Toys
+.ui.vertical.secondary.segment
+  .ui.container
+    .ui.centered.middle.aligned.grid
+      .row
+        .seven.wide.column
+          %img.ui.large.image(src="http://www.technologyreview.com/sites/default/files/images/dropbox.png")
+        .seven.wide.column
+          %h2.ui.header= t 'home_page.first_feature_title'
+          %p= t 'home_page.first_feature_body'
+      .row
+        .seven.wide.column
+          %h2.ui.header= t 'home_page.second_feature_title'
+          %p= t 'home_page.second_feature_body'
+        .seven.wide.column
+          %img.ui.large.image(src="http://www.technologyreview.com/sites/default/files/images/dropbox.png")
+      .row
+        .seven.wide.column
+          %img.ui.large.image(src="http://www.technologyreview.com/sites/default/files/images/dropbox.png")
+        .seven.wide.column
+          %h2.ui.header= t 'home_page.third_feature_title'
+          %p= t 'home_page.third_feature_body'
