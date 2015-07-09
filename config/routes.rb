@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root 'high_voltage/pages#show', id: 'home'
 
   devise_for :users
-  use_doorkeeper
+
+  use_doorkeeper do
+    skip_controllers :applications, :authorized_applications, :authorizations
+  end
 
   mount V1::API => '/api'
 

@@ -8,7 +8,7 @@ module V1
       expose :created_by_id do |bulletin|
         User.encrypt_id(bulletin.created_by_id)
       end
-      expose :group, using: BasicGroupEntity
+      expose :group, using: GroupEntity
       expose :created_by, using: UserEntity
       expose :current_stamp, using: BasicStampEntity
     end

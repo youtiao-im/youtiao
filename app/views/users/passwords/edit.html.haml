@@ -1,17 +1,11 @@
-.ui.vertical.segment
+.ui.vertical.padded.segment
   .ui.container
-    .ui.centered.padded.grid
+    .ui.centered.grid
       .sixteen.wide.mobile.twelve.wide.tablet.eight.wide.computer.column
-        .ui.top.attached.center.aligned.secondary.segment
-          %h3 Change your password
+        %h2 Reset your password
+        %p Please enter a new password for your account.
 
-        .ui.bottom.attached.segment
-          = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'ui large form' } do |f|
-            = devise_error_messages!
-            = f.hidden_field :reset_password_token
-
-            .field
-              = f.label :password, 'New password'
-              = f.password_field :password, autofocus: true, autocomplete: 'off', placeholder: 'password'
-
-            = f.submit 'Submit', class: 'ui large blue button'
+        = simple_form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'ui form' } do |f|
+          = f.hidden_field :reset_password_token
+          = f.input :password, placeholder: 'New password', required: true, label: false, autofocus: true, autocomplete: 'off'
+          = f.button :submit, 'Submit', class: 'ui blue button'

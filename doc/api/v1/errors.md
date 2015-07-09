@@ -32,7 +32,7 @@ The response body is a JSON string formatted as below:
 
 ```json
 {
-    "error": "field_name:error_reason"
+    "error": "attribute:reason"
 }
 ```
 

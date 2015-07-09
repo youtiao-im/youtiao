@@ -1,30 +1,9 @@
-.ui.vertical.center.aligned.padded.segment
-  .ui.container
-    %img.ui.centered.image(src="http://images.dailytech.com/nimage/Dropbox-Pro-Logo.png")
-    %h1= t 'home_page.intro_title'
-    %p= t 'home_page.intro_body'
-
-  .ui.huge.green.icon.button iOS
-  .ui.huge.green.button Android
-
-.ui.vertical.secondary.padded.segment
+.ui.vertical.padded.secondary.segment
   .ui.container
     .ui.centered.middle.aligned.stackable.grid
       .row
-        .seven.wide.column
-          %img.ui.large.image(src="http://www.technologyreview.com/sites/default/files/images/dropbox.png")
-        .seven.wide.column
-          %h2.ui.header= t 'home_page.first_feature_title'
-          %p= t 'home_page.first_feature_body'
-      .row
-        .seven.wide.column
-          %h2.ui.header= t 'home_page.second_feature_title'
-          %p= t 'home_page.second_feature_body'
-        .seven.wide.column
-          %img.ui.large.image(src="http://www.technologyreview.com/sites/default/files/images/dropbox.png")
-      .row
-        .seven.wide.column
-          %img.ui.large.image(src="http://www.technologyreview.com/sites/default/files/images/dropbox.png")
-        .seven.wide.column
-          %h2.ui.header= t 'home_page.third_feature_title'
-          %p= t 'home_page.third_feature_body'
+        .eight.wide.column.center.aligned
+          %h1= t 'home_page.intro_title'
+          %p= t 'home_page.intro_body'
+        .six.wide.column
+          %img.ui.large.image{ src: 'https://slack.global.ssl.fastly.net/d390/img/landing/header_phone.png' }

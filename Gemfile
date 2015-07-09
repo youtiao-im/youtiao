@@ -60,6 +60,7 @@ gem 'high_voltage'
 
 # Active link
 gem 'active_link_to'
+gem 'simple_form'
 
 # i18n
 gem 'rails-i18n'

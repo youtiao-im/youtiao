@@ -21,7 +21,8 @@ module V1
       end
       scope = scope.before_id(params[:before_id]) unless params[:before_id].nil?
       bulletins = scope.order(id: :desc).limit(params[:limit]).includes(
-        :group, :created_by, :current_stamp, created_by: :avatar)
+        :group, :created_by, :current_stamp,
+        group: :current_membership, created_by: :avatar)
       present bulletins, with: Entities::BulletinEntity
     end
 
@@ -37,7 +38,7 @@ module V1
       bulletin.group = group
       bulletin.created_by = User.current
       bulletin.save!
-      BulletinCreatedNotificationWorker.perform_async(bulletin.id)
+      # BulletinCreatedNotificationWorker.perform_async(bulletin.id)
       present bulletin, with: Entities::BulletinEntity
     end
 
@@ -53,7 +54,7 @@ module V1
       stamp.bulletin = bulletin
       stamp.created_by = User.current
       stamp.save!
-      BulletinStampedNotificationWorker.perform_async(bulletin.id, User.current.id, params[:symbol])
+      # BulletinStampedNotificationWorker.perform_async(bulletin.id, User.current.id, params[:symbol])
       bulletin.reload
       present bulletin, with: Entities::BulletinEntity
     end

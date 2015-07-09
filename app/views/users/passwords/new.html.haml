@@ -1,19 +1,10 @@
-.ui.vertical.segment
+.ui.vertical.padded.segment
   .ui.container
-    .ui.centered.padded.grid
+    .ui.centered.grid
       .sixteen.wide.mobile.twelve.wide.tablet.eight.wide.computer.column
         %h2 Forgot your password?
         %p Enter your email address to reset your password.
 
-        = form_for resource, as: resource_name, url: password_path(resource_name), html: { class: 'ui large form' } do |f|
-          = devise_error_messages!
-
-          .field
-            = f.email_field :email, autofocus: true, placeholder: 'name@domain.com'
-
-          = f.submit 'Submit', class: 'ui large blue button right aligned'
-
-        .ui.info.message
-          %p
-            %i.icon.idea
-            %span You may need to check your spam folder or unblock no-reply@youtiao.im.
+        = simple_form_for resource, as: resource_name, url: password_path(resource_name), html: { class: 'ui form' } do |f|
+          = f.input :email, placeholder: 'Email address', required: true, label: false, autofocus: true
+          = f.button :submit, 'Submit', class: 'ui blue button'

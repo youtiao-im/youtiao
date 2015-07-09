@@ -1,0 +1,12 @@
+.flash.wrapper {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 0;
+  z-index: 1001;
+  text-align: center;
+}
+
+.flash.message {
+  text-align: left;
+}

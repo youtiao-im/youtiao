@@ -381,7 +381,16 @@ GET /bulletins.list
             "updated_at": "1435548611.759491",
             "name": "Thousand Sunny",
             "code": "thousand-sunny",
-            "memberships_count": 9
+            "memberships_count": 9,
+            "current_membership": {
+                "id": "b4e69a67",
+                "type": "Membership",
+                "created_at": "1435561553.257601",
+                "updated_at": "1435561553.257601",
+                "role": "owner",
+                "group_id": "ea6d69d2",
+                "user_id": "de58e284"
+            }
         },
         "created_by": {
             "id": "de58e284",
@@ -434,7 +443,16 @@ POST /bulletins.create
         "updated_at": "1435548611.759491",
         "name": "Thousand Sunny",
         "code": "thousand-sunny",
-        "memberships_count": 9
+        "memberships_count": 9,
+        "current_membership": {
+            "id": "b4e69a67",
+            "type": "Membership",
+            "created_at": "1435561553.257601",
+            "updated_at": "1435561553.257601",
+            "role": "owner",
+            "group_id": "ea6d69d2",
+            "user_id": "de58e284"
+        }
     },
     "created_by": {
         "id": "de58e284",
@@ -485,7 +503,16 @@ POST /bulletins.stamp
         "updated_at": "1435548611.759491",
         "name": "Thousand Sunny",
         "code": "thousand-sunny",
-        "memberships_count": 9
+        "memberships_count": 9,
+        "current_membership": {
+            "id": "b4e69a67",
+            "type": "Membership",
+            "created_at": "1435561553.257601",
+            "updated_at": "1435561553.257601",
+            "role": "owner",
+            "group_id": "ea6d69d2",
+            "user_id": "de58e284"
+        }
     },
     "created_by": {
         "id": "de58e284",

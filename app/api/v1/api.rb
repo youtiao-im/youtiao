@@ -38,17 +38,17 @@ module V1
 
     rescue_from ActiveRecord::RecordInvalid do |e|
       error = nil
-      e.record.errors.each do |field, message|
+      e.record.errors.each do |attribute, message|
         if message.match(/\A.*(has already been taken).*\z/)
-          error = "#{field}:taken"
+          error = "#{attribute}:taken"
         elsif message.match(/\A.*(too long).*\z/)
-          error = "#{field}:too_long"
+          error = "#{attribute}:too_long"
         elsif message.match(/\A.*(too short).*\z/)
-          error = "#{field}:too_short"
+          error = "#{attribute}:too_short"
         elsif message.match(/\A.*(can't be blank).*\z/)
-          error = "#{field}:blank"
+          error = "#{attribute}:blank"
         else
-          error = "#{field}:invalid"
+          error = "#{attribute}:invalid"
         end
         break
       end
