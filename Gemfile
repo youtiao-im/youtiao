@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-# source 'https://ruby.taobao.org'
+# source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -115,4 +115,8 @@ group :development do
   gem 'quiet_assets'
   gem 'rubocop'
   gem 'codeclimate-test-reporter'
+
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
 end
