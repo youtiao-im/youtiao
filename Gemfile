@@ -43,6 +43,9 @@ group :development, :test do
   gem 'spring'
 end
 
+# App server
+gem 'unicorn'
+
 # Authn
 gem 'devise'
 
@@ -118,5 +121,4 @@ group :development do
 
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
-  gem 'capistrano-rvm'
 end

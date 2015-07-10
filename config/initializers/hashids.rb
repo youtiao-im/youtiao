@@ -27,8 +27,8 @@ module HashidsSupport
   end
 
   def self.included(base)
-    base.extend ClassMethods
-    base.include InstanceMethods
+    base.send :extend, ClassMethods
+    base.send :include, InstanceMethods
   end
 end
 

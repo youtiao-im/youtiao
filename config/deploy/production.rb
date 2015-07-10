@@ -1,3 +1,7 @@
+set :rails_env, :production
+
+server 'youtiao.im', user: "#{fetch(:deploy_user)}", roles: %w{web app db}, primary: true
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
@@ -59,12 +63,3 @@
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
-
-set :stage, :production
-set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
-set :server_name, 'youtiao.im'
-set :deploy_to, "/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
-set :rails_env, :production
-set :enable_ssl, false
-
-server 'youtiao.im', user: "#{fetch(:deploy_user)}", roles: %w{web app db}, primary: true

@@ -4,6 +4,7 @@ lock '3.4.0'
 set :application, 'youtiao'
 set :repo_url, 'git@github.com:youtiao-im/youtiao.git'
 set :deploy_user, 'deploy'
+set :deploy_to, "/home/#{fetch(:deploy_user)}/apps/#{fetch(:application)}"
 
 role :web, %w{deploy@youtiao.im}
 role :app, %w{deploy@youtiao.im}
@@ -38,9 +39,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
-set :rvm_type, :user
-set :rvm_ruby_version, '2.2.1'
 
 namespace :deploy do
 

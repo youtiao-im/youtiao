@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   root 'high_voltage/pages#show', id: 'home'
 
-  devise_for :users
+  devise_for :users, skip: [:registrations, :sessions]
 
   use_doorkeeper do
     skip_controllers :applications, :authorized_applications, :authorizations

@@ -4,4 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include HttpAcceptLanguage::AutoLocale
+
+  def new_user_session_path
+    ap 'good'
+    root_path
+  end
+
+  def new_session_path(resource_name)
+    ap resource
+    root_path
+  end
 end
