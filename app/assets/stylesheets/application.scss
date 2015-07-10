@@ -12,7 +12,8 @@
  *
  * require_tree .
  * require_self
+ *= require semantic-ui/dist/semantic.css
  */
 
-@import "semantic-ui/dist/semantic.css";
-@import "flash.css.scss";
+// @import "semantic-ui/dist/semantic.css";
+@import "flash.scss";
