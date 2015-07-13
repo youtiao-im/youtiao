@@ -84,5 +84,6 @@ test:
 production:
   <<: *default
   database: youtiao_production
+  host: <%= ENV['YOUTIAO_DATABASE_HOST'] %>
   username: youtiao
   password: <%= ENV['YOUTIAO_DATABASE_PASSWORD'] %>
