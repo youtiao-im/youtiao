@@ -53,10 +53,8 @@ namespace :deploy do
     end
   end
 
-  after :publishing, :restart_unicorn do
-    task :restart do
-      invoke 'unicorn:restart'
-    end
+  after :publishing, :reload_unicorn do
+    invoke 'unicorn:reload'
   end
 
 end
