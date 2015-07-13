@@ -15,9 +15,8 @@ notifications:
   slack: youtiao:q5q7rFKwd3pJpZau3FiF0UNy
 
 before_install:
-  - cat Gemfile.lock
+  - sed -i 's/ruby\.taobao\.org/rubygems\.org/g' Gemfile
   - sed -i 's/ruby\.taobao\.org/rubygems\.org/g' Gemfile.lock
-  - cat Gemfile.lock
 
 script:
   - RAILS_ENV=test bundle exec rake spec
