@@ -15,6 +15,7 @@ notifications:
   slack: youtiao:q5q7rFKwd3pJpZau3FiF0UNy
 
 before_install:
+  - pwd
   - sed -i 's/ruby\.taobao\.org/rubygems\.org/g' Gemfile.lock
 
 script:
