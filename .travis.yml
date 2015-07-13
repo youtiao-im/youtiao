@@ -4,7 +4,7 @@ rvm:
   - 2.2.2
 
 addons:
-  postgresql: "9.3"
+  postgresql: "9.4"
   code_climate:
     repo_token: 20323a35ccf8384acc6421828b65679ea30931f0b9b3572a906ce738c4e8faee
 
@@ -18,7 +18,6 @@ script:
   - RAILS_ENV=test bundle exec rake spec
 
 before_script:
-  - sed -i 's/ruby\.taobao\.org/rubygems\.org/g' Gemfile.lock
   - cp config/database.travis.yml config/database.yml
   - RAILS_ENV=test bundle exec rake db:create --trace
   - RAILS_ENV=test bundle exec rake db:migrate --trace

@@ -19,7 +19,7 @@ worker_processes 4
 # user, do this to switch euid/egid in the workers (also chowns logs):
 # user "unprivileged_user", "unprivileged_group"
 
-root_path = '~/apps/youtiao'
+root_path = '~/youtiao_production'
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
