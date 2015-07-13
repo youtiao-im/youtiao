@@ -1,6 +1,6 @@
 ## 0. Important Notes
 
-This installation guide was created for and tested on **CentOS 7** operating systems.
+This installation guide was created for and tested on **CentOS 7** operating systems. It will not install Youtiao app, but only make a node ready for Capistrano deployment.
 
 
 ## 1. Add System Users
@@ -28,6 +28,8 @@ chmod 644 ~/.ssh/authorized_keys
 # copy paste public key to Github Deploy Keys
 cat ~/.ssh/id_rsa.pub
 ```
+
+**Important:** `node_name` should be something like `youtiao-1`.
 
 
 ## 2. Install Packages / Dependencies
@@ -105,6 +107,27 @@ bower --version
 ```shell
 mkdir -p ~/youtiao/shared/
 
-# add values for SECRET_KEY_BASE, YOUTIAO_DATABASE_HOST, YOUTIAO_DATABASE_PASSWORD
+# add values for SECRET_KEY_BASE, DATABASE_HOST, DATABASE_PASSWORD, HASHIDS_SALT
 vim ~/youtiao/shared/.env
 ```
+
+**Important:** these environment variables must be kept 100% secret. Please do consult dev@youtiao.im for their values.
+
+
+## 7. (Web Node Only) Install nginx
+
+```shell
+# install nginx
+sudo yum install nginx
+
+# configure nginx
+sudo vim /etc/nginx/nginx.conf
+
+# start nginx on startup
+sudo chkconfig nginx on
+
+# start nginx
+sudo service nginx start
+```
+
+[Here](nginx.conf) is an example `nginx.conf`.

@@ -1,8 +1,7 @@
 module HashidsSupport
   module ClassMethods
     def id_hash
-      # Hashids.new("#{table_name}-y0u7140", 8, '0123456789abcdef')
-      Hashids.new("#{table_name}", 8, '0123456789abcdef')
+      Hashids.new("#{table_name}-#{ENV['HASHIDS_SALT']}", 8, '0123456789abcdef')
     end
 
     def encrypt_id(id)
