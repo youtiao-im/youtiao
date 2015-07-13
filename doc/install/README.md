@@ -38,7 +38,7 @@ cat ~/.ssh/id_rsa.pub
 sudo yum update
 sudo yum install epel-release
 sudo yum install vim git postfix
-sudo chkconfig postfilx on
+sudo chkconfig postfix on
 ```
 
 
