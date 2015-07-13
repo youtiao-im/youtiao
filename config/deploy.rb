@@ -53,7 +53,7 @@ namespace :deploy do
     end
   end
 
-  after :publishing, :reload_unicorn do
+  after :publishing, :restart_unicorn do
     invoke 'unicorn:legacy_restart'
   end
 
