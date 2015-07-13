@@ -5,13 +5,7 @@ class ApplicationController < ActionController::Base
 
   include HttpAcceptLanguage::AutoLocale
 
-  def new_user_session_path
-    ap 'good'
-    root_path
-  end
-
-  def new_session_path(resource_name)
-    ap resource
+  def new_session_path(_resource_name)
     root_path
   end
 end
