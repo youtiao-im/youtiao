@@ -1,9 +1,3 @@
-set :stage, :production
-set :rails_env, :production
-
-set :deploy_user, 'deploy'
-set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:application)}_#{fetch(:stage)}"
-
 server 'youtiao.im', user: "#{fetch(:deploy_user)}", roles: %w{web app db}, primary: true
 
 # server-based syntax

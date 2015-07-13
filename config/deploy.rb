@@ -3,9 +3,13 @@ lock '3.4.0'
 
 set :application, 'youtiao'
 set :repo_url, 'git@github.com:youtiao-im/youtiao.git'
+set :rails_env, :production
+
+set :deploy_user, 'deploy'
+set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
 
 set :rvm_type, :user
-# set :rvm_ruby_version, File.read('.ruby-version').strip
+set :rvm_ruby_version, File.read('.ruby-version').strip
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -46,6 +50,12 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+    end
+  end
+
+  after :publishing, :restart_unicorn do
+    task :restart do
+      invoke 'unicorn:restart'
     end
   end
 
