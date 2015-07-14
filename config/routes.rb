@@ -1,17 +1,23 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  root 'high_voltage/pages#show', id: 'home'
+  constraints(subdomain: '') do
+    root 'high_voltage/pages#show', id: 'home'
 
-  devise_for :users, skip: [:registrations, :sessions]
+    devise_for :users, skip: [:registrations, :sessions]
 
-  use_doorkeeper do
-    skip_controllers :applications, :authorized_applications, :authorizations
+    use_doorkeeper do
+      skip_controllers :applications, :authorized_applications, :authorizations
+    end
   end
 
-  mount V1::API => '/api'
+  constraints(subdomain: 'api') do
+    mount V1::API => '/'
+  end
 
-  mount Sidekiq::Web => '/sidekiq'
+  constraints(subdomain: 'admin') do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
