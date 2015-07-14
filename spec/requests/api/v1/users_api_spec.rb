@@ -23,7 +23,7 @@ RSpec.describe V1::UsersAPI, type: :request do
              attributes_for(:user)
       end
 
-      it 'createds a new user' do
+      it 'creates a new user' do
         expect do
           post '/v1/users.sign_up',
                attributes_for(:user)

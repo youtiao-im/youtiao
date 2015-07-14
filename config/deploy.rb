@@ -11,6 +11,8 @@ set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
 set :rvm_type, :user
 set :rvm_ruby_version, File.read('.ruby-version').strip
 
+set :unicorn_pid, "#{fetch(:deploy_to)}/shared/tmp/pids/unicorn.pid"
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -54,7 +56,7 @@ namespace :deploy do
   end
 
   after :publishing, :restart_unicorn do
-    invoke 'unicorn:legacy_restart'
+    invoke 'unicorn:restart'
   end
 
 end
