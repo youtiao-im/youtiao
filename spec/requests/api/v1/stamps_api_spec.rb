@@ -5,10 +5,14 @@ RSpec.describe V1::StampsAPI, type: :request do
   let(:bulletin) { create(:bulletin) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
 
+  before do
+    host! 'api.lvh.me'
+  end
+
   describe 'GET stamps.list' do
     context 'when NOT authenticated' do
       it 'responds with :unauthorized' do
-        get '/api/v1/stamps.list'
+        get '/v1/stamps.list'
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -16,7 +20,7 @@ RSpec.describe V1::StampsAPI, type: :request do
     context 'when authenticated' do
       context 'for a NON-existing bulletin' do
         it 'responds with :not_found' do
-          get '/api/v1/stamps.list',
+          get '/v1/stamps.list',
               bulletin_id: 0,
               access_token: access_token
           expect(response).to have_http_status(:not_found)
@@ -30,7 +34,7 @@ RSpec.describe V1::StampsAPI, type: :request do
           end
 
           it 'responds with :forbidden' do
-            get '/api/v1/stamps.list',
+            get '/v1/stamps.list',
                 bulletin_id: bulletin.to_param,
                 access_token: access_token
             expect(response).to have_http_status(:forbidden)
@@ -43,7 +47,7 @@ RSpec.describe V1::StampsAPI, type: :request do
           end
 
           it 'responds with :ok' do
-            get '/api/v1/stamps.list',
+            get '/v1/stamps.list',
                 bulletin_id: bulletin.to_param,
                 access_token: access_token
             expect(response).to have_http_status(:ok)
@@ -51,7 +55,7 @@ RSpec.describe V1::StampsAPI, type: :request do
 
           it 'returns stamps of the bulletin' do
             stamp = create(:stamp, bulletin: bulletin)
-            get '/api/v1/stamps.list',
+            get '/v1/stamps.list',
                 bulletin_id: bulletin.to_param,
                 access_token: access_token
             expect(response.body).to match_json_expression(

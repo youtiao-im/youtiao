@@ -4,10 +4,14 @@ RSpec.describe V1::UsersAPI, type: :request do
   let(:user) { create(:user) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
 
+  before do
+    host! 'api.lvh.me'
+  end
+
   describe 'POST users.sign_up' do
     context 'with INVALID attributes' do
       it 'responds with :unprocessable_entity' do
-        post '/api/v1/users.sign_up',
+        post '/v1/users.sign_up',
              attributes_for(:invalid_user)
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -15,19 +19,19 @@ RSpec.describe V1::UsersAPI, type: :request do
 
     context 'with valid attributes' do
       it 'responds with :ok' do
-        post '/api/v1/users.sign_up',
+        post '/v1/users.sign_up',
              attributes_for(:user)
       end
 
       it 'createds a new user' do
         expect do
-          post '/api/v1/users.sign_up',
+          post '/v1/users.sign_up',
                attributes_for(:user)
         end.to change(User, :count).by(1)
       end
 
       it 'returns the created user' do
-        post '/api/v1/users.sign_up',
+        post '/v1/users.sign_up',
              attributes_for(:user)
         expect(response.body).to match_json_expression(
           {
@@ -41,20 +45,20 @@ RSpec.describe V1::UsersAPI, type: :request do
   describe 'GET user.info' do
     context 'when NOT authenticated' do
       it 'responds with :unauthorized' do
-        get '/api/v1/user.info'
+        get '/v1/user.info'
         expect(response).to have_http_status(:unauthorized)
       end
     end
 
     context 'when authenticated' do
       it 'responds with :ok' do
-        get '/api/v1/user.info',
+        get '/v1/user.info',
             access_token: access_token
         expect(response).to have_http_status(:ok)
       end
 
       it 'returns current user' do
-        get '/api/v1/user.info',
+        get '/v1/user.info',
             access_token: access_token
         expect(response.body).to match_json_expression(
           {
@@ -68,7 +72,7 @@ RSpec.describe V1::UsersAPI, type: :request do
   describe 'POST user.update' do
     context 'when NOT authenticated' do
       it 'responds with :unauthorized' do
-        post '/api/v1/user.update'
+        post '/v1/user.update'
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -76,7 +80,7 @@ RSpec.describe V1::UsersAPI, type: :request do
     context 'when authenticated' do
       context 'with INVALID attributes' do
         it 'responds with :unprocessable_entity' do
-          post '/api/v1/user.update',
+          post '/v1/user.update',
                attributes_for(:invalid_user).merge(
                  access_token: access_token)
           expect(response).to have_http_status(:unprocessable_entity)
@@ -85,14 +89,14 @@ RSpec.describe V1::UsersAPI, type: :request do
 
       context 'with valid attributes' do
         it 'responds with :ok' do
-          post '/api/v1/user.update',
+          post '/v1/user.update',
                attributes_for(:user).merge(
                  access_token: access_token)
           expect(response).to have_http_status(:ok)
         end
 
         it 'returns current user' do
-          post '/api/v1/user.update',
+          post '/v1/user.update',
                attributes_for(:user).merge(
                  access_token: access_token)
           expect(response.body).to match_json_expression(
@@ -108,7 +112,7 @@ RSpec.describe V1::UsersAPI, type: :request do
   describe 'POST user.change_password' do
     context 'when NOT authenticated' do
       it 'responds with :unauthorized' do
-        post '/api/v1/user.change_password'
+        post '/v1/user.change_password'
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -118,7 +122,7 @@ RSpec.describe V1::UsersAPI, type: :request do
 
       context 'with INCORRECT password' do
         it 'responds with :forbidden' do
-          post '/api/v1/user.change_password',
+          post '/v1/user.change_password',
                { password: user.password + '_',
                  new_password: new_password }.merge(
                    access_token: access_token)
@@ -128,7 +132,7 @@ RSpec.describe V1::UsersAPI, type: :request do
 
       context 'with correct password' do
         it 'responds with :ok' do
-          post '/api/v1/user.change_password',
+          post '/v1/user.change_password',
                { password: user.password,
                  new_password: new_password }.merge(
                    access_token: access_token)
@@ -136,7 +140,7 @@ RSpec.describe V1::UsersAPI, type: :request do
         end
 
         it 'updates password for current user' do
-          post '/api/v1/user.change_password',
+          post '/v1/user.change_password',
                { password: user.password,
                  new_password: new_password }.merge(
                    access_token: access_token)
@@ -144,7 +148,7 @@ RSpec.describe V1::UsersAPI, type: :request do
         end
 
         it 'revokes all access tokens of current user' do
-          post '/api/v1/user.change_password',
+          post '/v1/user.change_password',
                { password: user.password,
                  new_password: new_password }.merge(
                    access_token: access_token)
@@ -152,7 +156,7 @@ RSpec.describe V1::UsersAPI, type: :request do
         end
 
         it 'returns current user' do
-          post '/api/v1/user.change_password',
+          post '/v1/user.change_password',
                { password: user.password,
                  new_password: new_password }.merge(
                    access_token: access_token)

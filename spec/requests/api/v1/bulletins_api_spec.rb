@@ -6,10 +6,14 @@ RSpec.describe V1::BulletinsAPI, type: :request do
   let(:bulletin) { create(:bulletin) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id).token }
 
+  before do
+    host! 'api.lvh.me'
+  end
+
   describe 'GET bulletins.list' do
     context 'when NOT authenticated' do
       it 'responds with :unauthorized' do
-        get '/api/v1/bulletins.list'
+        get '/v1/bulletins.list'
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -18,7 +22,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
       context 'given :group_id parameter' do
         context 'for a NON-existing group' do
           it 'responds with :not_found' do
-            get '/api/v1/bulletins.list',
+            get '/v1/bulletins.list',
                 group_id: 0,
                 access_token: access_token
             expect(response).to have_http_status(:not_found)
@@ -28,7 +32,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
         context 'for an existing group' do
           context 'when current user is NOT a member of the group' do
             it 'responds with :forbidden' do
-              get '/api/v1/bulletins.list',
+              get '/v1/bulletins.list',
                   group_id: group.to_param,
                   access_token: access_token
               expect(response).to have_http_status(:forbidden)
@@ -41,7 +45,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
             end
 
             it 'responds with :ok' do
-              get '/api/v1/bulletins.list',
+              get '/v1/bulletins.list',
                   group_id: group.to_param,
                   access_token: access_token
               expect(response).to have_http_status(:ok)
@@ -49,7 +53,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
 
             it 'returns bulletins of the group' do
               bulletin = create(:bulletin, group: group)
-              get '/api/v1/bulletins.list',
+              get '/v1/bulletins.list',
                   group_id: group.to_param,
                   access_token: access_token
               expect(response.body).to match_json_expression(
@@ -66,14 +70,14 @@ RSpec.describe V1::BulletinsAPI, type: :request do
 
       context 'given NO :group_id parameter' do
         it 'responds with :ok' do
-          get '/api/v1/bulletins.list',
+          get '/v1/bulletins.list',
               access_token: access_token
           expect(response).to have_http_status(:ok)
         end
 
         it 'returns bulletins of groups current user joined' do
           create(:membership, group: bulletin.group, user: user)
-          get '/api/v1/bulletins.list',
+          get '/v1/bulletins.list',
               access_token: access_token
           expect(response.body).to match_json_expression(
             [
@@ -90,7 +94,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
   describe 'POST bulletins.create' do
     context 'when NOT authenticated' do
       it 'responds with :unauthorized' do
-        post '/api/v1/bulletins.create'
+        post '/v1/bulletins.create'
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -98,7 +102,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
     context 'when authenticated' do
       context 'for a NON-existing group' do
         it 'responds with :not_found' do
-          post '/api/v1/bulletins.create',
+          post '/v1/bulletins.create',
                group_id: 0,
                access_token: access_token
           expect(response).to have_http_status(:not_found)
@@ -112,7 +116,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
           end
 
           it 'responds with :forbidden' do
-            post '/api/v1/bulletins.create',
+            post '/v1/bulletins.create',
                  group_id: group.to_param,
                  access_token: access_token
             expect(response).to have_http_status(:forbidden)
@@ -126,7 +130,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
 
           context 'with INVALID attributes' do
             it 'responds with :unprocessable_entity' do
-              post '/api/v1/bulletins.create',
+              post '/v1/bulletins.create',
                    attributes_for(:invalid_bulletin).merge(
                      group_id: group.to_param,
                      access_token: access_token)
@@ -136,7 +140,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
 
           context 'with valid attributes' do
             it 'responds with :ok' do
-              post '/api/v1/bulletins.create',
+              post '/v1/bulletins.create',
                    attributes_for(:bulletin).merge(
                      group_id: group.to_param,
                      access_token: access_token)
@@ -145,7 +149,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
 
             it 'creates a new bulletin' do
               expect do
-                post '/api/v1/bulletins.create',
+                post '/v1/bulletins.create',
                      attributes_for(:bulletin).merge(
                        group_id: group.to_param,
                        access_token: access_token)
@@ -153,7 +157,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
             end
 
             it 'returns the created bulletin' do
-              post '/api/v1/bulletins.create',
+              post '/v1/bulletins.create',
                    attributes_for(:bulletin).merge(
                      group_id: group.to_param,
                      access_token: access_token)
@@ -171,7 +175,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
   describe 'POST bulletins.stamp' do
     context 'when NOT authenticated' do
       it 'responds with :unauthorized' do
-        post '/api/v1/bulletins.stamp'
+        post '/v1/bulletins.stamp'
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -179,7 +183,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
     context 'when authenticated' do
       context 'for a NON-existing bulletin' do
         it 'responds with :not_found' do
-          post '/api/v1/bulletins.stamp',
+          post '/v1/bulletins.stamp',
                id: 0,
                symbol: :check,
                access_token: access_token
@@ -190,7 +194,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
       context 'for an existing bulletin' do
         context 'when current user is NOT a member of bulletin.group' do
           it 'responds with :forbidden' do
-            post '/api/v1/bulletins.stamp',
+            post '/v1/bulletins.stamp',
                  id: bulletin.to_param,
                  symbol: :check,
                  access_token: access_token
@@ -209,7 +213,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
             end
 
             it 'responds with :ok' do
-              post '/api/v1/bulletins.stamp',
+              post '/v1/bulletins.stamp',
                    id: bulletin.to_param,
                    symbol: :check,
                    access_token: access_token
@@ -218,7 +222,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
 
             it 'does not create a new stamp' do
               expect do
-                post '/api/v1/bulletins.stamp',
+                post '/v1/bulletins.stamp',
                      id: bulletin.to_param,
                      symbol: :check,
                      access_token: access_token
@@ -226,7 +230,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
             end
 
             it 'returns the bulletin' do
-              post '/api/v1/bulletins.stamp',
+              post '/v1/bulletins.stamp',
                    id: bulletin.to_param,
                    symbol: :check,
                    access_token: access_token
@@ -241,7 +245,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
 
           context 'when current user has not stamped the bulletin' do
             it 'responds with :ok' do
-              post '/api/v1/bulletins.stamp',
+              post '/v1/bulletins.stamp',
                    id: bulletin.to_param,
                    symbol: :check,
                    access_token: access_token
@@ -250,7 +254,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
 
             it 'creates a new stamp' do
               expect do
-                post '/api/v1/bulletins.stamp',
+                post '/v1/bulletins.stamp',
                      id: bulletin.to_param,
                      symbol: :check,
                      access_token: access_token
@@ -258,7 +262,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
             end
 
             it 'returns the stamped bulletin' do
-              post '/api/v1/bulletins.stamp',
+              post '/v1/bulletins.stamp',
                    id: bulletin.to_param,
                    symbol: :check,
                    access_token: access_token
