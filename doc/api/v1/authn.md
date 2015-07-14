@@ -31,7 +31,7 @@ $ curl https://api.youtiao.im/v1?access_token=:OAUTH_TOKEN
 ### Sent Using Form Data
 
 ```
-$ curl -X POST -H "Authorization: Bearer :OAUTH_TOKEN" -F token=:OAUTH_TOKEN https://youtiao.im
+$ curl -X POST -H "Authorization: Bearer :OAUTH_TOKEN" -F token=:OAUTH_TOKEN https://youtiao.im/oauth/revoke
 ```
 
 ### Sent Using JSON Body
