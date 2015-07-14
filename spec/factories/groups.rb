@@ -18,6 +18,6 @@ FactoryGirl.define do
   end
 
   factory :invalid_group, parent: :group, class: Group do
-    name nil
+    name 'a'
   end
 end

@@ -36,6 +36,13 @@ class User < ActiveRecord::Base
             length: { minimum: 2, maximum: 32 },
             format: %r{\A(?!.*?[\\\/:\*\?\/"<>\|@#])[[:print:]]+\z}
 
+  before_validation :generate_name, on: :create
+
+  def generate_name
+    return if email.nil? || !name.nil?
+    self.name = email.split('@').first
+  end
+
   def self.current
     RequestStore.store[:current_user]
   end

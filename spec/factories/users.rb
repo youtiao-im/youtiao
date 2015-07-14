@@ -27,6 +27,6 @@ FactoryGirl.define do
   end
 
   factory :invalid_user, parent: :user, class: User do
-    name nil
+    name 'a'
   end
 end

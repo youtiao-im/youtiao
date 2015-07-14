@@ -8,7 +8,7 @@ module V1
     params do
       requires :email, type: String
       requires :password, type: String
-      requires :name, type: String
+      optional :name, type: String
     end
     post 'users.sign_up' do
       safe_params = ActionController::Parameters.new(params).permit(

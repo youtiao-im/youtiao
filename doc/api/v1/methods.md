@@ -63,7 +63,7 @@ POST /users.sign_up
 | ---------- | -------- | ----------- |
 | `email`    | `string` | **Required**. Email of user. |
 | `password` | `string` | **Required**. Password of user. |
-| `name`     | `string` | **Required**. Name of user. |
+| `name`     | `string` | **Optional**. Name of user. |
 
 #### Response
 
