@@ -103,6 +103,9 @@ gem 'qiniu'
 # Push notification service
 gem 'jpush'
 
+# Better console
+gem 'pry-rails'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -114,7 +117,6 @@ end
 
 group :development do
   gem 'guard-rspec'
-  gem 'pry-rails'
   gem 'better_errors'
   gem 'annotate'
   gem 'quiet_assets'
@@ -125,4 +127,5 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'capistrano-rails-console'
 end
