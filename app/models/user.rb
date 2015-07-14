@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   def generate_name
     return if email.nil? || !name.nil?
-    self.name = email.split('@').first
+    self.name = email.split('@').first.to_url
   end
 
   def self.current
