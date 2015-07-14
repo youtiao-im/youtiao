@@ -2,12 +2,13 @@
 
 Unless additionally specified, all API requires authentication.
 
+
 ## Acquire OAuth2 Access Token
 
 ### OAuth2 Password Grant Flow
 
 ```
-POST https://youtiao.im/oauth/token?grant_type=password&username=:email&password=:password
+$ curl -X POST -d "grant_type=password&username=:email&password=:password" https://youtiao.im/oauth/token
 ```
 
 
