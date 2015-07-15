@@ -11,15 +11,7 @@ module V1
     end
 
     params do
-      requires :id, type: String
-    end
-    get 'groups.info' do
-      group = Group.find(params[:id])
-      present group, with: Entities::GroupEntity
-    end
-
-    params do
-      optional :name, type: String
+      requires :name, type: String
       optional :code, type: String
     end
     post 'groups.create' do
@@ -67,6 +59,16 @@ module V1
         # it's ok, ignore it
       end
       present group, with: Entities::GroupEntity
+    end
+
+    params do
+      requires :id, type: String
+    end
+    post 'groups.leave' do
+      group = Group.find(params[:id])
+      authorize group, :not_admin?
+      group.memberships.find_by_user_id(User.current.id).try(:destroy)
+      {}
     end
   end
 end

@@ -24,7 +24,7 @@ RSpec.describe V1::GroupsAPI, type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'returns groups current user joined' do
+      it 'returns groups current user in' do
         create(:membership, group: group, user: user)
         get '/v1/groups.list',
             access_token: access_token
@@ -208,7 +208,7 @@ RSpec.describe V1::GroupsAPI, type: :request do
       end
 
       context 'for an existing group' do
-        context 'when current user has ALREADY joined the group' do
+        context 'when current user is ALREADY in the group' do
           before do
             create(:membership, group: group, user: user)
           end
@@ -241,7 +241,7 @@ RSpec.describe V1::GroupsAPI, type: :request do
           end
         end
 
-        context 'when current user has not joined the group' do
+        context 'when current user is not in the group' do
           it 'responds with :ok' do
             post '/v1/groups.join',
                  code: group.code,
@@ -267,6 +267,95 @@ RSpec.describe V1::GroupsAPI, type: :request do
                 id: group.to_param,
                 current_membership: Hash
               }.ignore_extra_keys!)
+          end
+        end
+      end
+    end
+  end
+
+  describe 'POST groups.leave' do
+    context 'when NOT authenticated' do
+      it 'responds with :unauthorized' do
+        post '/v1/groups.leave'
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when authenticated' do
+      context 'for a NON-existing group' do
+        it 'responds with :not_found' do
+          post '/v1/groups.leave',
+               id: 0,
+               access_token: access_token
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context 'for an existing group' do
+        context 'when current user is NOT in the group' do
+          it 'responds with :ok' do
+            post '/v1/groups.leave',
+                 id: group.to_param,
+                 access_token: access_token
+            expect(response).to have_http_status(:ok)
+          end
+
+          it 'does not destroy any membership' do
+            expect do
+              post '/v1/groups.leave',
+                   id: group.to_param,
+                   access_token: access_token
+            end.to_not change(Membership, :count)
+          end
+
+          it 'returns nothing' do
+            post '/v1/groups.leave',
+                 id: group.to_param,
+                 access_token: access_token
+            expect(response.body).to match_json_expression({})
+          end
+        end
+
+        context 'when current user is in the group' do
+          context 'when current user is NOT a member of the group' do
+            before do
+              create(:admin_membership, group: group, user: user)
+            end
+
+            it 'responds with :forbidden' do
+              post '/v1/groups.leave',
+                   id: group.to_param,
+                   access_token: access_token
+              expect(response).to have_http_status(:forbidden)
+            end
+          end
+
+          context 'when current user is a member of the group' do
+            before do
+              create(:membership, group: group, user: user)
+            end
+
+            it 'responds with :ok' do
+              post '/v1/groups.leave',
+                   id: group.to_param,
+                   access_token: access_token
+              expect(response).to have_http_status(:ok)
+            end
+
+            it 'destroys a membership' do
+              expect do
+                post '/v1/groups.leave',
+                     id: group.to_param,
+                     access_token: access_token
+              end.to change(Membership, :count).by(-1)
+            end
+
+            it 'returns nothing' do
+              post '/v1/groups.leave',
+                   id: group.to_param,
+                   access_token: access_token
+              expect(response.body).to match_json_expression({})
+            end
           end
         end
       end

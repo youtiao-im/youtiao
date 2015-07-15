@@ -13,7 +13,7 @@ module V1
     end
     get 'stamps.list' do
       bulletin = Bulletin.find(params[:bulletin_id])
-      authorize bulletin.group, :admin?
+      authorize bulletin.group, :show?
       scope = bulletin.stamps
       scope = scope.where(symbol: params[:symbols]) unless params[:symbols].nil?
       scope = scope.before_id(params[:before_id]) unless params[:before_id].nil?

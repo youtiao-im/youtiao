@@ -19,6 +19,7 @@
 | [groups.create](#groupscreate) | Creates a group. |
 | [groups.update](#groupsupdate) | Updates a group. |
 | [groups.join](#groupsjoin)     | Joins a group. |
+| [groups.leave](#groupsleave)   | Leaves a group. |
 
 ### memberships
 
@@ -237,6 +238,10 @@ POST /groups.create
 POST /groups.update
 ```
 
+#### Authorization
+
+The user should be an administrator of the group.
+
 #### Parameters
 
 | Name   | Type     | Description |
@@ -275,6 +280,8 @@ POST /groups.update
 POST /groups.join
 ```
 
+If the user is already in the group, this method will still succeed.
+
 #### Parameters
 
 | Name   | Type     | Description |
@@ -305,11 +312,40 @@ POST /groups.join
 ```
 
 
+### groups.leave
+
+```
+POST /groups.leave
+```
+
+If the user is not in the group, this method will still succeed.
+
+#### Authorization
+
+The user should NOT be an administrator of the group.
+
+#### Parameters
+
+| Name   | Type     | Description |
+| ------ | -------- | ----------- |
+| `id`   | `string` | **Required**. Id of the group. |
+
+#### Response
+
+```json
+{}
+```
+
+
 ### memberships.list
 
 ```
 GET /memberships.list
 ```
+
+#### Authorization
+
+The user should be in the group.
 
 #### Parameters
 
@@ -350,6 +386,10 @@ GET /memberships.list
 ```
 GET /bulletins.list
 ```
+
+#### Authorization
+
+The user should be in the group if a `group_id` is specified.
 
 #### Parameters
 
@@ -415,6 +455,10 @@ GET /bulletins.list
 POST /bulletins.create
 ```
 
+#### Authorization
+
+The user should be an administrator of the group.
+
 #### Parameters
 
 | Name       | Type      | Description |
@@ -474,6 +518,10 @@ POST /bulletins.create
 ```
 POST /bulletins.stamp
 ```
+
+#### Authorization
+
+The user should be in the group the bulletin belongs to.
 
 #### Parameters
 
@@ -543,6 +591,10 @@ POST /bulletins.stamp
 GET /stamps.list
 ```
 
+#### Authorization
+
+The user should be in the group the bulletin belongs to.
+
 #### Parameters
 
 | Name          | Type       | Description |
@@ -586,6 +638,10 @@ GET /stamps.list
 GET /comments.list
 ```
 
+#### Authorization
+
+The user should be in the group the bulletin belongs to.
+
 #### Parameters
 
 | Name          | Type      | Description |
@@ -627,6 +683,10 @@ GET /comments.list
 ```
 GET /comments.create
 ```
+
+#### Authorization
+
+The user should be in the group the bulletin belongs to.
 
 #### Parameters
 

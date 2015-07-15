@@ -28,11 +28,7 @@ RSpec.describe V1::StampsAPI, type: :request do
       end
 
       context 'for an existing bulletin' do
-        context 'when current user is NOT an admin of bulletin.group' do
-          before do
-            create(:membership, group: bulletin.group, user: user)
-          end
-
+        context 'when current user is NOT a member of bulletin.group' do
           it 'responds with :forbidden' do
             get '/v1/stamps.list',
                 bulletin_id: bulletin.to_param,
@@ -41,9 +37,9 @@ RSpec.describe V1::StampsAPI, type: :request do
           end
         end
 
-        context 'when current user is an admin of bulletin.group' do
+        context 'when current user is a member of bulletin.group' do
           before do
-            create(:admin_membership, group: bulletin.group, user: user)
+            create(:membership, group: bulletin.group, user: user)
           end
 
           it 'responds with :ok' do

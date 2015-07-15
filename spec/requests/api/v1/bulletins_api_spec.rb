@@ -75,7 +75,7 @@ RSpec.describe V1::BulletinsAPI, type: :request do
           expect(response).to have_http_status(:ok)
         end
 
-        it 'returns bulletins of groups current user joined' do
+        it 'returns bulletins of groups current user in' do
           create(:membership, group: bulletin.group, user: user)
           get '/v1/bulletins.list',
               access_token: access_token

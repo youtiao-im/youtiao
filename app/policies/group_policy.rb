@@ -1,20 +1,13 @@
 class GroupPolicy < ApplicationPolicy
   def show?
-    # TODO: to model?
-    Membership.where(group: record, user: user).exists?
-  end
-
-  def create?
-    true
+    record.memberships.exists?(user: user)
   end
 
   def admin?
-    Membership.where(group: record, user: user, role: [:owner, :admin]).exists?
+    record.memberships.exists?(user: user, role: [:owner, :admin])
   end
 
-  class Scope < Scope
-    def resolve
-      scope
-    end
+  def not_admin?
+    !admin?
   end
 end
