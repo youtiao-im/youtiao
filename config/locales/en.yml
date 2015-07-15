@@ -1,41 +1,9 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  youtiao: "Youtiao"
-  home: "Home"
-  about: "About"
-  help: "Help"
-  android: "Android"
-  ios: "iOS"
-
+  about: 'About'
   home_page:
-    intro_title: "Youtiao: Born to Notify"
-    intro_body: "Youtiao helps you sending notices to groups of people, and collect their feedbacks easily."
-    first_feature_title: "Focus, to be effective"
-    first_feature_body: "Youtiao focuses on notices only, making sure they don't get flooded with unrelated stuffs."
-    second_feature_title: "Simple, to be easy"
-    second_feature_body: "Still counting '+1' in the chat history? Still wondering whether everyone copies your messages? Youtiao solves them all with a simple, intuitive feedback mechanism."
-    third_feature_title: "Join, not invite"
-    third_feature_body: "Group members would help themselves joining your group, using a group code chosen freely by you."
-
+    intro_body: 'Youtiao helps you sending notices to groups of people, and collect their feedbacks easily.'
+    intro_title: 'Youtiao: Born to Notify'
   notifications:
     bulletin_stamped: "%{name} stamped [%{symbol}] on your bulletin"
+  youtiao: 'Youtiao'

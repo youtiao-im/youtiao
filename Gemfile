@@ -121,6 +121,7 @@ group :development do
   gem 'annotate'
   gem 'quiet_assets'
   gem 'rubocop'
+  gem 'i18n-tasks'
   gem 'codeclimate-test-reporter'
 
   gem 'capistrano-rvm'

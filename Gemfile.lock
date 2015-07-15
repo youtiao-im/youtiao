@@ -121,6 +121,10 @@ GEM
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
       railties (~> 4.0)
+    easy_translate (0.5.0)
+      json
+      thread
+      thread_safe
     enumerize (0.11.0)
       activesupport (>= 3.2)
     equalizer (0.0.11)
@@ -171,9 +175,18 @@ GEM
     hashids (1.0.2)
     hashie (3.4.2)
     high_voltage (2.3.0)
+    highline (1.7.2)
     hitimes (1.2.2)
     http_accept_language (2.0.5)
     i18n (0.7.0)
+    i18n-tasks (0.8.5)
+      activesupport
+      easy_translate (>= 0.5.0)
+      erubis
+      highline
+      i18n
+      term-ansicolor
+      terminal-table (>= 1.5.1)
     ice_nine (0.11.1)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -360,14 +373,19 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     stringex (2.5.2)
+    term-ansicolor (1.3.2)
+      tins (~> 1.0)
+    terminal-table (1.5.2)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
+    thread (0.2.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
+    tins (1.5.4)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -428,6 +446,7 @@ DEPENDENCIES
   hashids
   high_voltage
   http_accept_language
+  i18n-tasks
   jbuilder (~> 2.0)
   jpush
   jquery-rails
