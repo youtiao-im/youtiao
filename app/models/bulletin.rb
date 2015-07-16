@@ -24,7 +24,7 @@ class Bulletin < ActiveRecord::Base
   validates :text,
             presence: true,
             length: { maximum: 512 },
-            format: /\A[[:print:]]+\z/
+            format: /\A[[[:print:]]\n\r\t]+\z/
 
   scope :before_id, -> (id) { where('bulletins.id<?', id) }
 end
