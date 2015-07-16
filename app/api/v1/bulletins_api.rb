@@ -49,13 +49,16 @@ module V1
     post 'bulletins.stamp' do
       bulletin = Bulletin.find(params[:id])
       authorize bulletin.group, :show?
-      Stamp.destroy_all(bulletin: bulletin, created_by: User.current)
-      stamp = Stamp.new(symbol: params[:symbol])
-      stamp.bulletin = bulletin
-      stamp.created_by = User.current
-      stamp.save!
-      # BulletinStampedNotificationWorker.perform_async(bulletin.id, User.current.id, params[:symbol])
-      bulletin.reload
+      stamp = bulletin.stamps.find_by_created_by_id(User.current.id)
+      unless stamp.try(:symbol) == params[:symbol]
+        stamp.try(:destroy)
+        stamp = Stamp.new(symbol: params[:symbol])
+        stamp.bulletin = bulletin
+        stamp.created_by = User.current
+        stamp.save!
+        # BulletinStampedNotificationWorker.perform_async(bulletin.id, User.current.id, params[:symbol])
+        bulletin.reload
+      end
       present bulletin, with: Entities::BulletinEntity
     end
   end
