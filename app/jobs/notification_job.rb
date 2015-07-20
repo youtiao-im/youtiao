@@ -2,7 +2,7 @@ class NotificationJob
   include SuckerPunch::Job
 
   def perform(aliases, badge, text)
-    return if Rails.env == 'test'
+    return if Rails.env.test?
     app_key = "#{ENV['JPUSH_APP_KEY']}"
     master_secret = "#{ENV['JPUSH_MASTER_SECRET']}"
     client = JPush::JPushClient.new(app_key, master_secret)

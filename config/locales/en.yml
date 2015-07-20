@@ -4,6 +4,4 @@ en:
   home_page:
     intro_body: 'Youtiao helps you sending notices to groups of people, and collect their feedbacks easily.'
     intro_title: 'Youtiao: Born to Notify'
-  notifications:
-    bulletin_stamped: "%{name} stamped [%{symbol}] on your bulletin"
   youtiao: 'Youtiao'

@@ -4,6 +4,4 @@ zh-CN:
   home_page:
     intro_body: '有条能帮助您群发通知信息，并快速收集他们的反馈。'
     intro_title: '有条：为通知而生'
-  notifications:
-    bulletin_stamped: "%{name} 标记了 [%{symbol}]"
   youtiao: '有条'
