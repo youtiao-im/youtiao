@@ -1,3 +1,2 @@
-Qiniu.establish_connection!(
-  access_key: 'tn3fJ2I8kQF2yDY3Jrmturu0hNYXiX7P6gBk87NY',
-  secret_key: 'ZQUzC2WM5VE877tBdDKN3JblEdNacoeYFDsMpp-v')
+Qiniu.establish_connection!(access_key: "#{ENV['QINIU_ACCESS_KEY']}",
+                            secret_key: "#{ENV['QINIU_SECRET_KEY']}")

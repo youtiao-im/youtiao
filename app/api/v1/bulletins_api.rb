@@ -38,7 +38,7 @@ module V1
       bulletin.group = group
       bulletin.created_by = User.current
       bulletin.save!
-      # BulletinCreatedNotificationWorker.perform_async(bulletin.id)
+      Notifications::BulletinCreatedWorker.perform_async(bulletin.id)
       present bulletin, with: Entities::BulletinEntity
     end
 
@@ -56,7 +56,8 @@ module V1
         stamp.bulletin = bulletin
         stamp.created_by = User.current
         stamp.save!
-        # BulletinStampedNotificationWorker.perform_async(bulletin.id, User.current.id, params[:symbol])
+        Notifications::BulletinStampedWorker.perform_async(
+          bulletin.id, User.current.id, params[:symbol])
         bulletin.reload
       end
       present bulletin, with: Entities::BulletinEntity
