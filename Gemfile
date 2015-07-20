@@ -104,13 +104,13 @@ gem 'jpush'
 
 # Better console
 gem 'pry-rails'
+gem 'awesome_print'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda-matchers'
-  gem 'awesome_print'
   gem 'json_expressions'
 end
 
