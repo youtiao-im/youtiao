@@ -81,8 +81,7 @@ gem 'doorkeeper'
 gem 'wine_bouncer'
 
 # Background work
-gem 'sinatra', require: nil
-gem 'sidekiq'
+gem 'sucker_punch'
 
 # Id obfuscate
 gem 'hashids'
@@ -128,6 +127,5 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
-  gem 'capistrano-sidekiq'
   gem 'capistrano-rails-console'
 end

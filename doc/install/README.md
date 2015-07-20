@@ -108,7 +108,7 @@ bower --version
 ```shell
 mkdir -p ~/youtiao/shared/
 
-# add values for SECRET_KEY_BASE, DATABASE_HOST, DATABASE_PASSWORD, REDIS_URL, HASHIDS_SALT, JPUSH_APP_KEY, JPUSH_MASTER_SECRET
+# add values for SECRET_KEY_BASE, DATABASE_HOST, DATABASE_PASSWORD, HASHIDS_SALT, JPUSH_APP_KEY, JPUSH_MASTER_SECRET
 vim ~/youtiao/shared/.env
 ```
 

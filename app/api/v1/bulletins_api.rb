@@ -38,7 +38,12 @@ module V1
       bulletin.group = group
       bulletin.created_by = User.current
       bulletin.save!
-      Notifications::BulletinCreatedWorker.perform_async(bulletin.id)
+
+      user_ids = bulletin.group.memberships.pluck(:user_id)
+      alert_text = "#{bulletin.created_by.name}: #{bulletin.text}".truncate(48)
+      encrypted_user_ids = user_ids.map { |user_id| User.encrypt_id(user_id) }
+      NotificationJob.new.async.perform(encrypted_user_ids, '+1', alert_text)
+
       present bulletin, with: Entities::BulletinEntity
     end
 
@@ -56,8 +61,13 @@ module V1
         stamp.bulletin = bulletin
         stamp.created_by = User.current
         stamp.save!
-        Notifications::BulletinStampedWorker.perform_async(
-          bulletin.id, User.current.id, params[:symbol])
+
+        unless User.current.id == bulletin.created_by_id
+          alert_text = "#{User.current.name}: #{stamp.symbol}".truncate(48)
+          encrypted_user_ids = [User.encrypt_id(bulletin.created_by_id)]
+          NotificationJob.new.async.perform(encrypted_user_ids, '+0', alert_text)
+        end
+
         bulletin.reload
       end
       present bulletin, with: Entities::BulletinEntity
