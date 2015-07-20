@@ -12,7 +12,6 @@ module V1
       optional :limit, type: Integer, default: 25, values: 1..500
     end
     get 'bulletins.list' do
-      ap 'is this working?'
       if params.key?(:group_id)
         group = Group.find(params[:group_id])
         authorize group, :show?
