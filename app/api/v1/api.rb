@@ -55,6 +55,10 @@ module V1
       error!({ error: error }, 422)
     end
 
+    rescue_from Exception do
+      error!({ error: :internal_server_error }, 500)
+    end
+
     mount V1::UsersAPI
     mount V1::GroupsAPI
     mount V1::MembershipsAPI
