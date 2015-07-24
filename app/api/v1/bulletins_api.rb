@@ -39,7 +39,7 @@ module V1
       bulletin.created_by = User.current
       bulletin.save!
 
-      user_ids = bulletin.group.memberships.pluck(:user_id)
+      user_ids = bulletin.group.memberships.pluck(:user_id) - [User.current.id]
       alert_text = "#{bulletin.created_by.name}: #{bulletin.text}".truncate(48)
       encrypted_user_ids = user_ids.map { |user_id| User.encrypt_id(user_id) }
       NotificationJob.new.async.perform(encrypted_user_ids, '+1', alert_text)
