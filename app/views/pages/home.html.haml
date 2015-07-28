@@ -4,6 +4,6 @@
       .row
         .eight.wide.column.center.aligned
           %h1= t 'home_page.intro_title'
-          %p= t 'home_page.intro_body'
+          %h3= t 'home_page.intro_body'
         .six.wide.column
-          %img.ui.large.image{ src: 'https://slack.global.ssl.fastly.net/d390/img/landing/header_phone.png' }
+          = image_tag 'screen.png', alt: 'screen shot', class: 'ui large image'
