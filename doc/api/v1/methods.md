@@ -23,9 +23,11 @@
 
 ### memberships
 
-| Method                               | Description |
-| ------------------------------------ | ----------- |
-| [memberships.list](#membershipslist) | Lists memberships of a group. |
+| Method                                     | Description |
+| ------------------------------------------ | ----------- |
+| [memberships.list](#membershipslist)       | Lists memberships of a group. |
+| [memberships.promote](#membershipspromote) | Promote a member to admin. |
+| [memberships.demote](#membershipsdemote)   | Demote an admin to member. |
 
 ### bulletins
 
@@ -326,9 +328,9 @@ The user should NOT be an administrator of the group.
 
 #### Parameters
 
-| Name   | Type     | Description |
-| ------ | -------- | ----------- |
-| `id`   | `string` | **Required**. Id of the group. |
+| Name | Type     | Description |
+| ---- | -------- | ----------- |
+| `id` | `string` | **Required**. Id of the group. |
 
 #### Response
 
@@ -349,9 +351,9 @@ The user should be in the group.
 
 #### Parameters
 
-| Name        | Type       | Description |
-| ----------- | ---------- | ----------- |
-| `group_id`  | `string`   | **Required**. Scopes memberships of this group. |
+| Name       | Type     | Description |
+| ---------- | -------- | ----------- |
+| `group_id` | `string` | **Required**. Scopes memberships of this group. |
 
 #### Response
 
@@ -378,6 +380,88 @@ The user should be in the group.
     },
     ...
 ]
+```
+
+
+### memberships.promote
+
+```
+POST /memberships.promote
+```
+
+#### Authorization
+
+The user should be the owner of the group, and the target membership should not be the owner of the group.
+
+#### Parameters
+
+| Name | Type     | Description |
+| ---- | -------- | ----------- |
+| `id` | `string` | **Required**. Id of the membership. |
+
+#### Response
+
+```json
+{
+    "id": "3246856d",
+    "type": "Membership",
+    "created_at": "1435548611.800355",
+    "updated_at": "1435548611.800355",
+    "role": "admin",
+    "group_id": "8e2d94da",
+    "user_id": "d658b98a",
+    "user": {
+        "id": "d658b98a",
+        "type": "User",
+        "created_at": "1435548611.627708",
+        "updated_at": "1435548611.627708",
+        "email": "robin@straw-hat.org",
+        "name": "robin",
+        "avatar_id": null,
+        "avatar": null
+    }
+}
+```
+
+
+### memberships.demote
+
+```
+POST /memberships.demote
+```
+
+#### Authorization
+
+The user should be the owner of the group, and the target membership should not be the owner of the group.
+
+#### Parameters
+
+| Name | Type     | Description |
+| ---- | -------- | ----------- |
+| `id` | `string` | **Required**. Id of the membership. |
+
+#### Response
+
+```json
+{
+    "id": "3246856d",
+    "type": "Membership",
+    "created_at": "1435548611.800355",
+    "updated_at": "1435548611.800355",
+    "role": "member",
+    "group_id": "8e2d94da",
+    "user_id": "d658b98a",
+    "user": {
+        "id": "d658b98a",
+        "type": "User",
+        "created_at": "1435548611.627708",
+        "updated_at": "1435548611.627708",
+        "email": "robin@straw-hat.org",
+        "name": "robin",
+        "avatar_id": null,
+        "avatar": null
+    }
+}
 ```
 
 
@@ -461,10 +545,10 @@ The user should be an administrator of the group.
 
 #### Parameters
 
-| Name       | Type      | Description |
-| ---------- | --------- | ----------- |
-| `group_id` | `string`  | **Required**. Group id of the bulletin. |
-| `text`     | `string`  | **Required**. Text of the bulletin. |
+| Name       | Type     | Description |
+| ---------- | -------- | ----------- |
+| `group_id` | `string` | **Required**. Group id of the bulletin. |
+| `text`     | `string` | **Required**. Text of the bulletin. |
 
 #### Response
 
@@ -525,10 +609,10 @@ The user should be in the group the bulletin belongs to.
 
 #### Parameters
 
-| Name     | Type      | Description |
-| -------- | --------- | ----------- |
-| `id`     | `string`  | **Required**. Id of the bulletin. |
-| `symbol` | `string`  | **Required**. Symbol of the stamp. |
+| Name     | Type     | Description |
+| -------- | -------- | ----------- |
+| `id`     | `string` | **Required**. Id of the bulletin. |
+| `symbol` | `string` | **Required**. Symbol of the stamp. |
 
 #### Response
 
@@ -690,10 +774,10 @@ The user should be in the group the bulletin belongs to.
 
 #### Parameters
 
-| Name          | Type      | Description |
-| ------------- | --------- | ----------- |
-| `bulletin_id` | `string`  | **Required**. Bulletin id of the comment. |
-| `text`        | `string`  | **Required**. Text of the comment. |
+| Name          | Type     | Description |
+| ------------- | -------- | ----------- |
+| `bulletin_id` | `string` | **Required**. Bulletin id of the comment. |
+| `text`        | `string` | **Required**. Text of the comment. |
 
 #### Response
 
