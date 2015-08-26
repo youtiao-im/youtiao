@@ -49,7 +49,7 @@ module V1
 
     params do
       requires :id, type: String
-      requires :symbol, type: Symbol, values: [:check, :cross]
+      requires :symbol, type: Symbol, values: [:check, :cross, :eye]
     end
     post 'bulletins.stamp' do
       bulletin = Bulletin.find(params[:id])
@@ -62,11 +62,11 @@ module V1
         stamp.created_by = User.current
         stamp.save!
 
-        unless User.current.id == bulletin.created_by_id
-          alert_text = "#{User.current.name}: #{stamp.symbol}".truncate(48)
-          encrypted_user_ids = [User.encrypt_id(bulletin.created_by_id)]
-          NotificationJob.new.async.perform(encrypted_user_ids, '+0', alert_text)
-        end
+        # unless User.current.id == bulletin.created_by_id
+        #   alert_text = "#{User.current.name}: #{stamp.symbol}".truncate(48)
+        #   encrypted_user_ids = [User.encrypt_id(bulletin.created_by_id)]
+        #   NotificationJob.new.async.perform(encrypted_user_ids, '+0', alert_text)
+        # end
 
         bulletin.reload
       end
