@@ -7,7 +7,7 @@ module V1
 
     params do
       requires :bulletin_id, type: String
-      optional :symbols, type: Array[Symbol], values: [:check, :cross]
+      optional :symbols, type: Array[Symbol], values: [:check, :cross, :eye]
       optional :before_id, type: String
       optional :limit, type: Integer, default: 25, values: 1..500
     end

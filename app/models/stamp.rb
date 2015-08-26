@@ -17,7 +17,7 @@ class Stamp < ActiveRecord::Base
   validates :symbol, presence: true
 
   extend Enumerize
-  enumerize :symbol, in: [:check, :cross], predicates: true
+  enumerize :symbol, in: [:check, :cross, :eye], predicates: true
 
   counter_culture :bulletin, column_name: (lambda do |model|
     "#{model.symbol.pluralize}_count"
